@@ -2,7 +2,7 @@ import React from 'react'
 
 function Home() {
   return (
-    <div>Home!!1</div>
+    <div>Home | estoy en el router</div>
   )
 }
 
