@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react"
 
 function Home() {
-  return (
-    <div>Home | estoy en el router</div>
-  )
+  return <div>Home | estoy en el router</div>
 }
 
 export default Home
