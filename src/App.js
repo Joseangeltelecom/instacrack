@@ -4,11 +4,15 @@ import { Route, Routes } from "react-router-dom"
 import Login from "./pages/Login"
 import Home from "./pages/Home"
 import Register from "./pages/Register"
+import Navbar from "./pages/Navbar"
 
 function App() {
   return (
     <div className="App">
-      <h1>NO ESTOY EN EL ROUTER</h1>
+      <Navbar />
+      <br />
+      <br />
+      <br />
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
