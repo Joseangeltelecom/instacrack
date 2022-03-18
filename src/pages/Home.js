@@ -1,7 +1,12 @@
-import React from "react"
+import React from "react";
+import { PostPreview } from "../componentes/home/PostPreview";
 
 function Home() {
-  return <div>Home | estoy en el router</div>
+  return (
+    <>
+      <PostPreview />
+    </>
+  );
 }
 
-export default Home
+export default Home;
