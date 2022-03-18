@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom"
+import { NavLink } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -10,7 +10,7 @@ function Navbar() {
 
         <NavLink
           to="/home"
-          activeClassName="active"
+          activeclasscame="active"
           className="btn btn-light fw-bold rounded-pill m-2"
         >
           Home
@@ -18,14 +18,14 @@ function Navbar() {
 
         <NavLink
           to="/register"
-          activeClassName="active"
+          activeclassname="active"
           className="btn btn-light fw-bold rounded-pill m-2"
         >
           Register
         </NavLink>
       </div>
     </nav>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;
