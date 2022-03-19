@@ -26,11 +26,11 @@
 }
 /* ------------------------------ */
 
-.glider-contain {
+.carrusel .glider-contain {
   /* background-color: blueviolet; */
   width: 90%;
 }
 
-.glider-slide {
+.glider-track .glider-slide {
   min-width: 107px;
 }
