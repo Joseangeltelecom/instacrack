@@ -1,0 +1,21 @@
+.carrusel {
+  width: 100%;
+  background-color: pink;
+  height: 20%;
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.image-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.image-container img {
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+  border: 2px solid #6bd125;
+  padding: 3px;
+}
