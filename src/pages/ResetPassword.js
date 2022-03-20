@@ -102,8 +102,12 @@ function ResetPassword() {
             Enviar correo
           </Button>
         </Form>
-        <div>
-          <Link to="">Volver al inicio de sesión</Link>
+        <div
+          style={{
+            marginBottom: "20px",
+          }}
+        >
+          <Link to="/">Volver al inicio de sesión</Link>
         </div>
       </div>
     </div>

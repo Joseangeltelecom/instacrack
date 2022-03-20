@@ -128,7 +128,14 @@ function Login() {
             Iniciar Sesión con Google
           </a>
           <br />
-          <Link to="/reset">¿Olvidaste tu Contraseña?</Link>
+
+          <div
+            style={{
+              marginBottom: "20px",
+            }}
+          >
+            <Link to="/reset">¿Olvidaste tu Contraseña?</Link>
+          </div>
         </Form>
       </div>
       <div
