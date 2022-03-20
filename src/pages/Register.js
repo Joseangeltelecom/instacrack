@@ -1,16 +1,39 @@
-import React from "react"
+import React, { useState } from "react"
 import { Form, Input, Button } from "antd"
 import { Link, useNavigate } from "react-router-dom"
+import { useAuth } from "../context/AuthContext"
 
 function Register() {
+  const [error, setError] = useState("")
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  })
+  const { signup, loginWithGoogle, resetPassword } = useAuth()
+
   let navigate = useNavigate()
-  const onFinish = (values) => {
-    console.log("Success:", values)
-    navigate("/home")
+
+  const handleSubmit = async (e) => {
+    setError("")
+    try {
+      await signup(user.email, user.password)
+      navigate("/home")
+    } catch (error) {
+      setError(error.message)
+    }
   }
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo)
+    setError(errorInfo)
+  }
+
+  const handleGoogleSignin = async () => {
+    try {
+      await loginWithGoogle()
+      navigate("/home")
+    } catch (error) {
+      setError(error.message)
+    }
   }
 
   return (
@@ -59,6 +82,7 @@ function Register() {
           }}
         >
           <Button
+            onClick={handleGoogleSignin}
             style={{
               width: "100%",
               fontWeight: "bold",
@@ -72,6 +96,7 @@ function Register() {
         <hr />
 
         <Form
+          onSubmit={handleSubmit}
           name="basic"
           labelCol={{
             span: 8,
@@ -82,73 +107,36 @@ function Register() {
           initialValues={{
             remember: true,
           }}
-          onFinish={onFinish}
+          onFinish={handleSubmit}
           onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
-          <Form.Item
+          <p className="text-danger">{error}</p>
+          <Input
+            type="email"
+            className="mb-2"
+            size="large"
+            placeholder="Ingresa tu correo"
+            onChange={(e) => setUser({ ...user, email: e.target.value })}
             name="email"
-            rules={[
-              {
-                required: true,
-                message: "Email",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            name="fullname"
-            rules={[
-              {
-                required: true,
-                message: "Nombre Completo",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            name="username"
-            rules={[
-              {
-                required: true,
-                message: "Nombre de usuario",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
+          ></Input>
+          <Input.Password
+            type="password"
+            className="mb-2"
+            size="large"
             name="password"
-            rules={[
-              {
-                required: true,
-                message: "Password",
-              },
-            ]}
-          >
-            <Input.Password />
-          </Form.Item>
-
-          <Form.Item
-            wrapperCol={{
-              offset: 0,
-              span: 0,
+            placeholder="Ingresa tu contraseña"
+            onChange={(e) => setUser({ ...user, password: e.target.value })}
+          />
+          <Button
+            style={{
+              width: "100%",
             }}
+            type="primary"
+            htmlType="submit"
           >
-            <Button
-              style={{
-                width: "100%",
-              }}
-              type="primary"
-              htmlType="submit"
-            >
-              Registrate
-            </Button>
-          </Form.Item>
-
+            Registrate
+          </Button>
           <p
             style={{
               color: "#8E8E8E",

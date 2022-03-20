@@ -1,16 +1,43 @@
-import React from "react"
+import React, { useState } from "react"
 import { Form, Input, Button } from "antd"
 import { Link, useNavigate } from "react-router-dom"
+import { useAuth } from "../context/AuthContext"
+
+import { LockOutlined, UserOutlined } from "@ant-design/icons"
 
 function Login() {
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  })
+  const { login, loginWithGoogle, resetPassword } = useAuth()
+  const [error, setError] = useState("")
   let navigate = useNavigate()
-  const onFinish = (values) => {
-    console.log("Success:", values)
-    navigate("/home")
+
+  const handleSubmit = async (e) => {
+    setError("")
+    try {
+      await login(user.email, user.password)
+      navigate("/home")
+    } catch (error) {
+      setError(error.message)
+    }
+  }
+
+  const handleChange = ({ target: { value, name } }) =>
+    setUser({ ...user, [name]: value })
+
+  const handleGoogleSignin = async () => {
+    try {
+      await loginWithGoogle()
+      navigate("/home")
+    } catch (error) {
+      setError(error.message)
+    }
   }
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo)
+    setError(errorInfo)
   }
 
   return (
@@ -43,6 +70,8 @@ function Login() {
           <h1 style={{ fontFamily: "Lobster" }}>Instacrack</h1>
         </div>
 
+        <p className="text-danger">{error}</p>
+
         <Form
           name="basic"
           labelCol={{
@@ -54,71 +83,52 @@ function Login() {
           initialValues={{
             remember: true,
           }}
-          onFinish={onFinish}
+          onFinish={handleSubmit}
           onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
-          <Form.Item
-            name="username"
-            rules={[
-              {
-                required: true,
-                message: "Please input your username!",
-                placeholder: "hola",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
+          <Input
+            className="mb-2"
+            size="large"
+            placeholder="Ingresa tu correo"
+            prefix={<UserOutlined />}
+            onChange={handleChange}
+            name="email"
+          ></Input>
 
-          <Form.Item
+          <Input.Password
+            className="mb-2"
+            size="large"
+            prefix={<LockOutlined />}
             name="password"
-            rules={[
-              {
-                required: true,
-                message: "Please input your password!",
-              },
-            ]}
-          >
-            <Input.Password />
-          </Form.Item>
+            onChange={handleChange}
+            placeholder="Ingresa tu contraseña"
+          />
 
-          <Form.Item
-            wrapperCol={{
-              offset: 0,
-              span: 0,
+          <Button
+            style={{
+              width: "100%",
             }}
+            type="primary"
+            htmlType="submit"
           >
-            <Button
-              style={{
-                width: "100%",
-              }}
-              type="primary"
-              htmlType="submit"
-            >
-              Iniciar sesión
-            </Button>
-          </Form.Item>
+            Iniciar sesión
+          </Button>
+
           <hr />
-          <Form.Item
-            name="remember"
-            valuePropName="checked"
-            wrapperCol={{
-              offset: 0,
-              span: 0,
+
+          <a
+            onClick={handleGoogleSignin}
+            style={{
+              marginBottom: "15px",
+              color: "#385189",
+              fontWeight: "bold",
             }}
           >
-            <div
-              style={{
-                marginBottom: "15px",
-                color: "#385189",
-                fontWeight: "bold",
-              }}
-            >
-              Iniciar Sesión con Google
-            </div>
-            <div>¿Olvidaste tu Contraseña?</div>
-          </Form.Item>
+            Iniciar Sesión con Google
+          </a>
+          <br />
+          <Link to="/reset">¿Olvidaste tu Contraseña?</Link>
         </Form>
       </div>
       <div
