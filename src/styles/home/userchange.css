@@ -1,0 +1,39 @@
+.container-userchange {
+  /* background-color: blueviolet; */
+  height: 107px;
+  margin-top: 15px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  margin-left: 30px;
+}
+
+.image-container-userchange img {
+  height: 65px;
+  width: 65px;
+  border-radius: 50%;
+  border: 1px solid gray;
+  padding: 2px;
+}
+
+.username-container {
+  /* background-color: yellow; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 10px;
+  line-height: 18px;
+}
+
+.username-gray {
+  color: gray;
+  opacity: 0.5;
+}
+
+.change-user {
+  /* background-color: blue; */
+  width: 50%;
+  display: flex;
+  justify-content: end;
+}
