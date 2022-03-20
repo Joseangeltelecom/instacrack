@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/instacrack/static/js/runtime~main.ea5bc109.js"
   },
   {
-    "revision": "fced54ea33e18add7ee153292a5978ee",
+    "revision": "1e502b30538b61175cc0e840a5fa7d93",
     "url": "/instacrack/index.html"
   }
 ];
