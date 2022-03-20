@@ -145,29 +145,19 @@ function Register() {
               type="primary"
               htmlType="submit"
             >
-              Iniciar sesión
+              Registrate
             </Button>
           </Form.Item>
-          <hr />
-          <Form.Item
-            name="google"
-            valuePropName="checked"
-            wrapperCol={{
-              offset: 0,
-              span: 0,
+
+          <p
+            style={{
+              color: "#8E8E8E",
+              fontSize: "13px",
             }}
           >
-            <div
-              style={{
-                marginBottom: "15px",
-                color: "#385189",
-                fontWeight: "bold",
-              }}
-            >
-              Iniciar Sesión con Google
-            </div>
-            <div>¿Olvidaste tu Contraseña?</div>
-          </Form.Item>
+            Al registrarte, aceptas nuestras Condiciones, la Política de datos y
+            la Política de cookies.
+          </p>
         </Form>
       </div>
       <div
