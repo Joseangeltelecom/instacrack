@@ -1,0 +1,48 @@
+.container {
+  /* background-color: blue; */
+  margin-top: 28px;
+  width: 100%;
+  padding: 0;
+  border: 1px solid #d1811b;
+}
+
+.header {
+  width: 100%;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  /* background-color: white; */
+}
+
+.header a {
+  margin-left: 15px;
+}
+
+.header img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.post-photo {
+  width: 100%;
+  height: auto;
+}
+
+.post-photo img {
+  width: 100%;
+  height: auto;
+}
+
+.likes {
+  padding: 10px;
+  width: 100%;
+}
+
+.likes-count {
+  margin-left: 10px;
+}
+
+.comment-post-user {
+  padding-left: 15px;
+}
