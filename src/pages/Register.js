@@ -189,7 +189,7 @@ function Register() {
             padding: 0,
           }}
         >
-          ¿No tienes una cuenta?
+          ¿Tienes una cuenta?
         </p>
         &nbsp;
         <Link

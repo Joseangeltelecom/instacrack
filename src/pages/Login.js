@@ -149,7 +149,7 @@ function Login() {
             color: "#00A2F8",
           }}
         >
-          Inicia sesión
+          Regístrate
         </Link>
       </div>
     </div>
