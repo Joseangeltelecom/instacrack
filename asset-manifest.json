@@ -1,15 +1,15 @@
 {
-  "main.css": "/instacrack/static/css/main.7bf9727e.chunk.css",
-  "main.js": "/instacrack/static/js/main.a3ea58fd.chunk.js",
-  "main.js.map": "/instacrack/static/js/main.a3ea58fd.chunk.js.map",
+  "main.css": "/instacrack/static/css/main.20841c48.chunk.css",
+  "main.js": "/instacrack/static/js/main.3b8e814c.chunk.js",
+  "main.js.map": "/instacrack/static/js/main.3b8e814c.chunk.js.map",
   "static/css/1.a3d4a54b.chunk.css": "/instacrack/static/css/1.a3d4a54b.chunk.css",
-  "static/js/1.77610aaf.chunk.js": "/instacrack/static/js/1.77610aaf.chunk.js",
-  "static/js/1.77610aaf.chunk.js.map": "/instacrack/static/js/1.77610aaf.chunk.js.map",
+  "static/js/1.4e796347.chunk.js": "/instacrack/static/js/1.4e796347.chunk.js",
+  "static/js/1.4e796347.chunk.js.map": "/instacrack/static/js/1.4e796347.chunk.js.map",
   "runtime~main.js": "/instacrack/static/js/runtime~main.ea5bc109.js",
   "runtime~main.js.map": "/instacrack/static/js/runtime~main.ea5bc109.js.map",
-  "static/css/main.7bf9727e.chunk.css.map": "/instacrack/static/css/main.7bf9727e.chunk.css.map",
+  "static/css/main.20841c48.chunk.css.map": "/instacrack/static/css/main.20841c48.chunk.css.map",
   "static/css/1.a3d4a54b.chunk.css.map": "/instacrack/static/css/1.a3d4a54b.chunk.css.map",
   "index.html": "/instacrack/index.html",
-  "precache-manifest.653625610c73d5613e7a8276f4aa86e9.js": "/instacrack/precache-manifest.653625610c73d5613e7a8276f4aa86e9.js",
+  "precache-manifest.c7d1f71455a223f5d441b65b7dadb99a.js": "/instacrack/precache-manifest.c7d1f71455a223f5d441b65b7dadb99a.js",
   "service-worker.js": "/instacrack/service-worker.js"
 }
