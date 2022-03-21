@@ -18,6 +18,7 @@ import {
   UserOutlined,
 } from "@ant-design/icons"
 import "../styles/navbar/navbar.css"
+import { ModalChangeUser } from "./Profile/ModalChangeUser"
 
 function Navbar() {
   const { logout, user } = useAuth()
@@ -57,14 +58,7 @@ function Navbar() {
       </Menu.Item>
       <Menu.Item>
         <SyncOutlined />
-        <a
-          className="ms-2"
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.aliyun.com"
-        >
-          Cambiar Cuenta
-        </a>
+        <ModalChangeUser />
       </Menu.Item>
       <Menu.Item className="border-top">
         <a onClick={handleLogout}>Salir</a>
