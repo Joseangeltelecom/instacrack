@@ -14,6 +14,7 @@ import {
   SearchOutlined,
   SendOutlined,
 } from "@ant-design/icons"
+import "../styles/navbar/navbar.css"
 
 function Navbar() {
   const { logout, user } = useAuth()
@@ -27,9 +28,16 @@ function Navbar() {
     }
   }
 
+  const style = {
+    // Adding media query..
+    "@media (max-width: 600px)": {
+      display: "none",
+    },
+  }
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark  fixed-top">
-      <div className="container-fluid">
+      <div className="container-fluid d-flex justify-content-evenly border-bottom">
         {/* <Button
           onClick={handleLogout}
           className="btn btn-light fw-bold rounded-pill m-2"
@@ -43,26 +51,25 @@ function Navbar() {
         </div>
         <div>
           <div clasName="form">
-            {/* <input
-              type="text"
-              clasName="form-control form-input"
-              placeholder="Search anything..."
-              prefix={<FontAwesomeIcon icon={solid("magnifying-glass")} />}
-            /> */}
-            <Input
-              clasName="form-control form-input bg-dark"
-              allowClear
-              type="text"
-              placeholder="Search anything..."
-              prefix={<SearchOutlined />}
-            />
+            <div style={{ width: "230px" }} className="d-none d-sm-block">
+              <Input
+                className="w-100"
+                allowClear
+                type="text"
+                prefix={<SearchOutlined />}
+              />
+            </div>
           </div>
         </div>
-        <div>
-          <HomeFilled />
-          <SendOutlined />
-          <PlusCircleOutlined />
-          <HeartOutlined />
+        <div clasName="d-flex flex-row justify-content-evenly">
+          <HomeFilled style={{ fontSize: "26px" }} />
+          <SendOutlined
+            className="ms-4"
+            style={{ fontSize: "26px" }}
+            rotate={-25}
+          />
+          <PlusCircleOutlined className="ms-4" style={{ fontSize: "26px" }} />
+          <HeartOutlined className="ms-4" style={{ fontSize: "26px" }} />
         </div>
       </div>
     </nav>
