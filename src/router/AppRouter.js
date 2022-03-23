@@ -1,12 +1,13 @@
-import React from "react"
-import { Route, Routes } from "react-router-dom"
-import Chat from "../pages/Chat"
-import Home from "../pages/Home"
-import Login from "../pages/Login"
-import { Profile } from "../pages/Profile"
-import Register from "../pages/Register"
-import ResetPassword from "../pages/ResetPassword"
-import ProtectedRoute from "./ProtectedRoute"
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import { PostSaved } from "../pages/PostSaved";
+import Chat from "../pages/Chat";
+import Home from "../pages/Home";
+import Login from "../pages/Login";
+import { Profile } from "../pages/Profile";
+import Register from "../pages/Register";
+import ResetPassword from "../pages/ResetPassword";
+import ProtectedRoute from "./ProtectedRoute";
 
 export const AppRouter = () => {
   return (
@@ -23,7 +24,8 @@ export const AppRouter = () => {
         }
       />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/postsaved" element={<PostSaved />} />
       <Route path="/chat" element={<Chat />} />
     </Routes>
-  )
-}
+  );
+};

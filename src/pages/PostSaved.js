@@ -1,13 +1,11 @@
 import React from "react";
 import { HeaderProfile } from "../componentes/Profile/HeaderProfile";
 import { NavbarProfile } from "../componentes/Profile/NavbarProfile";
-import { PostProfile } from "../componentes/Profile/PostProfile";
 
-export const Profile = () => {
+export const PostSaved = () => {
   return (
     <div
       style={{
-        // backgroundColor: "green",
         height: "100vh",
         width: "100vw",
         margin: "0",
@@ -16,9 +14,18 @@ export const Profile = () => {
       }}
     >
       <HeaderProfile />
-
       <NavbarProfile />
-      <PostProfile />
+      <div class="row justify-content-center">
+        <div
+          class="col-8"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <h1 style={{ color: "rgb(255, 0, 0, 0.5)" }}>COMING SOON</h1>
+        </div>
+      </div>
     </div>
   );
 };
