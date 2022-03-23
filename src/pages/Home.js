@@ -6,9 +6,13 @@ import Navbar from "../componentes/Navbar"
 import { db } from "../firebase"
 import "../styles/home/home.css"
 import { collection, getDocs } from "firebase/firestore"
+import { useAuth } from "../context/AuthContext"
 
 function Home() {
   const [postPreview, setPostPreview] = useState([])
+
+  const { user } = useAuth()
+  console.log(user)
 
   useEffect(() => {
     const PostFunction = async () => {

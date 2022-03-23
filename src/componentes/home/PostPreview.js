@@ -6,8 +6,6 @@ import { useAuth } from "../../context/AuthContext"
 export const PostPreview = (props) => {
   const { user } = useAuth()
 
-  console.log(props)
-
   return (
     <>
       <div className="container">

@@ -23,6 +23,7 @@ import { ModalChangeUser } from "./Profile/ModalChangeUser"
 function Navbar() {
   const { logout, user } = useAuth()
 
+
   const handleLogout = async () => {
     try {
       await logout()

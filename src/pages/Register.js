@@ -8,6 +8,7 @@ function Register() {
   const [user, setUser] = useState({
     email: "",
     password: "",
+    username: "",
   })
   const { signup, loginWithGoogle, resetPassword } = useAuth()
 
@@ -16,7 +17,7 @@ function Register() {
   const handleSubmit = async (e) => {
     setError("")
     try {
-      await signup(user.email, user.password)
+      await signup(user.email, user.password, user.username)
       navigate("/home")
     } catch (error) {
       setError(error.message)
@@ -119,6 +120,14 @@ function Register() {
             placeholder="Ingresa tu correo"
             onChange={(e) => setUser({ ...user, email: e.target.value })}
             name="email"
+          ></Input>
+          <Input
+            type="text"
+            className="mb-2"
+            size="large"
+            placeholder="Ingresa tu username"
+            onChange={(e) => setUser({ ...user, username: e.target.value })}
+            name="username"
           ></Input>
           <Input.Password
             type="password"
