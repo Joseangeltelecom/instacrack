@@ -9,7 +9,8 @@ import {
   signInWithPopup,
   sendPasswordResetEmail,
 } from "firebase/auth"
-import { auth } from "../firebase"
+import { auth, db } from "../firebase"
+import { doc, getDoc, setDoc } from "firebase/firestore"
 
 const authContext = createContext()
 
@@ -21,10 +22,23 @@ export const useAuth = () => {
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
+  const [username, setUsername] = useState(null)
   const [loading, setLoading] = useState(true)
 
-  const signup = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password)
+  useEffect(() => {
+    const unsubuscribe = onAuthStateChanged(auth, async (currentUser) => {
+      //   console.log(currentUser.uid)
+      setLoading(false)
+
+      setUser(currentUser)
+    })
+    return () => unsubuscribe() // Cuando el componente es desmontado que deje de escuchar.
+  }, [])
+
+  const signup = async (email, password, username) => {
+    const { user } = await createUserWithEmailAndPassword(auth, email, password)
+    const userRef = doc(db, "users", user.uid)
+    setDoc(userRef, { username: username }, { merge: true })
   }
 
   const login = (email, password) => {
@@ -40,14 +54,7 @@ export function AuthProvider({ children }) {
 
   const resetPassword = async (email) => sendPasswordResetEmail(auth, email)
 
-  useEffect(() => {
-    const unsubuscribe = onAuthStateChanged(auth, (currentUser) => {
-      //   console.log(currentUser.uid)
-      setUser(currentUser)
-      setLoading(false)
-    })
-    return () => unsubuscribe() // Cuando el componente es desmontado que deje de escuchar.
-  }, [])
+  console.log("username", user)
 
   return (
     <authContext.Provider

@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { PostSaved } from "../pages/PostSaved";
@@ -8,12 +9,28 @@ import { Profile } from "../pages/Profile";
 import Register from "../pages/Register";
 import ResetPassword from "../pages/ResetPassword";
 import ProtectedRoute from "./ProtectedRoute";
+import PublicRoute from "./PublicRoute"
+
 
 export const AppRouter = () => {
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/register" element={<Register />} />
+      <Route
+        path="/"
+        element={
+          <PublicRoute>
+            <Login />
+          </PublicRoute>
+        }
+      />
+      <Route
+        path="/register"
+        element={
+          <PublicRoute>
+            <Register />
+          </PublicRoute>
+        }
+      />
       <Route path="/reset" element={<ResetPassword />} />
       <Route
         path="/home"
@@ -23,9 +40,26 @@ export const AppRouter = () => {
           </ProtectedRoute>
         }
       />
-      <Route path="/profile" element={<Profile />} />
+          
       <Route path="/postsaved" element={<PostSaved />} />
-      <Route path="/chat" element={<Chat />} />
+
+      <Route
+        path="/profile"
+        element={
+          <PublicRoute>
+            <Profile />
+          </PublicRoute>
+        }
+      />
+      <Route
+        path="/chat"
+        element={
+          <PublicRoute>
+            <Chat />
+          </PublicRoute>
+        }
+      />
+      <Route path="*" element={<div>404 element not found</div>} />
     </Routes>
   );
 };
