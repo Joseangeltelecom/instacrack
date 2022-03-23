@@ -36,4 +36,5 @@
   width: 50%;
   display: flex;
   justify-content: end;
+  font-weight: bold;
 }

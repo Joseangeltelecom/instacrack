@@ -2,21 +2,22 @@ import React from "react"
 import "../../styles/home/postpreview.css"
 import { HeartOutlined } from "@ant-design/icons"
 import { useAuth } from "../../context/AuthContext"
+import { Link } from "react-router-dom"
 
 export const PostPreview = (props) => {
   const { user } = useAuth()
-
+  console.log(user)
   return (
     <>
       <div className="container">
         <div className="header">
-          <a href="#">
+          <Link to="/profile">
             <img src={props.imageProfileUrl} />
-          </a>
+          </Link>
 
-          <a>
-            <b>{user.email}</b>
-          </a>
+          <Link style={{ color: "black" }} to="/profile">
+            <b>{user.extrainfo.username}</b>
+          </Link>
         </div>
         <img className="post-photo" src={props.imagePostUrl} />
         <div className="likes">

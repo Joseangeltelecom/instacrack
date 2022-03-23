@@ -9,6 +9,7 @@ function Register() {
     email: "",
     password: "",
     username: "",
+    fullname: "",
   })
   const { signup, loginWithGoogle, resetPassword } = useAuth()
 
@@ -17,7 +18,7 @@ function Register() {
   const handleSubmit = async (e) => {
     setError("")
     try {
-      await signup(user.email, user.password, user.username)
+      await signup(user.email, user.password, user.username, user.fullname)
       navigate("/home")
     } catch (error) {
       setError(error.message)
@@ -128,6 +129,14 @@ function Register() {
             placeholder="Ingresa tu username"
             onChange={(e) => setUser({ ...user, username: e.target.value })}
             name="username"
+          ></Input>
+          <Input
+            type="text"
+            className="mb-2"
+            size="large"
+            placeholder="Ingresa tu fullname"
+            onChange={(e) => setUser({ ...user, fullname: e.target.value })}
+            name="fullname"
           ></Input>
           <Input.Password
             type="password"

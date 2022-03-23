@@ -1,16 +1,14 @@
-
-import React from "react";
-import { Route, Routes } from "react-router-dom";
-import { PostSaved } from "../pages/PostSaved";
-import Chat from "../pages/Chat";
-import Home from "../pages/Home";
-import Login from "../pages/Login";
-import { Profile } from "../pages/Profile";
-import Register from "../pages/Register";
-import ResetPassword from "../pages/ResetPassword";
-import ProtectedRoute from "./ProtectedRoute";
+import React from "react"
+import { Route, Routes } from "react-router-dom"
+import { PostSaved } from "../pages/PostSaved"
+import Chat from "../pages/Chat"
+import Home from "../pages/Home"
+import Login from "../pages/Login"
+import { Profile } from "../pages/Profile"
+import Register from "../pages/Register"
+import ResetPassword from "../pages/ResetPassword"
+import ProtectedRoute from "./ProtectedRoute"
 import PublicRoute from "./PublicRoute"
-
 
 export const AppRouter = () => {
   return (
@@ -40,15 +38,15 @@ export const AppRouter = () => {
           </ProtectedRoute>
         }
       />
-          
+
       <Route path="/postsaved" element={<PostSaved />} />
 
       <Route
         path="/profile"
         element={
-          <PublicRoute>
-            <Profile />
-          </PublicRoute>
+          // <PublicRoute>
+          <Profile />
+          /* </PublicRoute> */
         }
       />
       <Route
@@ -61,5 +59,5 @@ export const AppRouter = () => {
       />
       <Route path="*" element={<div>404 element not found</div>} />
     </Routes>
-  );
-};
+  )
+}

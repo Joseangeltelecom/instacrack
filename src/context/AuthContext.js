@@ -22,23 +22,12 @@ export const useAuth = () => {
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
-  const [username, setUsername] = useState(null)
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    const unsubuscribe = onAuthStateChanged(auth, async (currentUser) => {
-      //   console.log(currentUser.uid)
-      setLoading(false)
-
-      setUser(currentUser)
-    })
-    return () => unsubuscribe() // Cuando el componente es desmontado que deje de escuchar.
-  }, [])
-
-  const signup = async (email, password, username) => {
+  const signup = async (email, password, username, fullname) => {
     const { user } = await createUserWithEmailAndPassword(auth, email, password)
     const userRef = doc(db, "users", user.uid)
-    setDoc(userRef, { username: username }, { merge: true })
+    setDoc(userRef, { username: username, fullname: fullname }, { merge: true })
   }
 
   const login = (email, password) => {
@@ -50,11 +39,26 @@ export function AuthProvider({ children }) {
     return signInWithPopup(auth, googleProvider)
   }
 
-  const logout = () => signOut(auth)
+  const logout = () => {
+    signOut(auth)
+    setUser(null)
+  }
 
   const resetPassword = async (email) => sendPasswordResetEmail(auth, email)
 
-  console.log("username", user)
+  useEffect(() => {
+    const unsubuscribe = onAuthStateChanged(auth, async (currentUser) => {
+      //   console.log(currentUser.uid)
+
+      setLoading(false)
+      if (currentUser) {
+        const docRef = doc(db, "users", currentUser.uid)
+        const docSnap = await getDoc(docRef)
+        setUser({ currentUser, extrainfo: docSnap.data() })
+      }
+    })
+    return () => unsubuscribe() // Cuando el componente es desmontado que deje de escuchar.
+  }, [])
 
   return (
     <authContext.Provider

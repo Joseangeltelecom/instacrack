@@ -1,6 +1,7 @@
-import React from "react";
-import { HeaderProfile } from "../componentes/Profile/HeaderProfile";
-import { NavbarProfile } from "../componentes/Profile/NavbarProfile";
+import React from "react"
+import Navbar from "../componentes/Navbar"
+import { HeaderProfile } from "../componentes/Profile/HeaderProfile"
+import { NavbarProfile } from "../componentes/Profile/NavbarProfile"
 
 export const PostSaved = () => {
   return (
@@ -13,6 +14,7 @@ export const PostSaved = () => {
         overflowX: "hidden",
       }}
     >
+      <Navbar />
       <HeaderProfile />
       <NavbarProfile />
       <div class="row justify-content-center">
@@ -27,5 +29,5 @@ export const PostSaved = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

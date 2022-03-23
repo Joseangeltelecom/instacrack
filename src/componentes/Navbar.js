@@ -19,10 +19,10 @@ import {
 } from "@ant-design/icons"
 import "../styles/navbar/navbar.css"
 import { ModalChangeUser } from "./Profile/ModalChangeUser"
+import { Link } from "react-router-dom"
 
 function Navbar() {
   const { logout, user } = useAuth()
-
 
   const handleLogout = async () => {
     try {
@@ -36,29 +36,19 @@ function Navbar() {
     <Menu style={{ width: "200px" }}>
       <Menu.Item>
         <UserOutlined />
-        <a
-          className="ms-2"
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.antgroup.com"
-        >
+        <Link to="/profile" className="ms-2">
           Perfil
-        </a>
+        </Link>
       </Menu.Item>
       <Menu.Item>
         <BookOutlined />
-        <a
-          className="ms-2"
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.antgroup.com"
-        >
+        <Link to="/postsaved" className="ms-2">
           Guardado
-        </a>
+        </Link>
       </Menu.Item>
       <Menu.Item>
         <SyncOutlined />
-        <ModalChangeUser />
+        <ModalChangeUser name="Cambiar de Cuenta" />
       </Menu.Item>
       <Menu.Item className="border-top">
         <a onClick={handleLogout}>Salir</a>
@@ -67,8 +57,8 @@ function Navbar() {
   )
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark  fixed-top">
-      <div className="container-fluid d-flex justify-content-evenly border-bottom">
+    <nav className="navbar navbar-expand-lg navbar-dark fixed-top bg-white border-bottom">
+      <div className="container-fluid d-flex justify-content-evenly">
         {/* <Button
           onClick={handleLogout}
           className="btn btn-light fw-bold rounded-pill m-2"
@@ -97,7 +87,10 @@ function Navbar() {
           </div>
         </div>
         <div clasName="d-flex flex-row justify-content-evenly">
-          <HomeFilled style={{ fontSize: "26px" }} />
+          <Link to="/home" style={{ color: "black" }}>
+            <HomeFilled style={{ fontSize: "26px" }} />
+          </Link>
+
           <SendOutlined
             className="ms-4"
             style={{ fontSize: "26px" }}

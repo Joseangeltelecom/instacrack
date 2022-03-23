@@ -29,7 +29,7 @@ function MyVerticallyCenteredModal(props) {
       </Modal.Header>
 
       <Modal.Body className="d-flex justify-content-between">
-        <p>{user.email}</p>
+        <p>{user.extrainfo.username}</p>
         <div className="ms-5">
           <CheckCircleFilled />
         </div>
@@ -189,7 +189,7 @@ export function ModalChangeSession(props) {
   )
 }
 
-export function ModalChangeUser() {
+export function ModalChangeUser(props) {
   const [modalShow, setModalShow] = React.useState(false)
   const [modalShow2, setModalShow2] = React.useState(false)
 
@@ -200,7 +200,7 @@ export function ModalChangeUser() {
   return (
     <>
       <a className="ms-2" variant="primary" onClick={() => setModalShow(true)}>
-        Cambiar de cuenta
+        {props.name}
       </a>
       <MyVerticallyCenteredModal
         show={modalShow}

@@ -12,7 +12,6 @@ function Home() {
   const [postPreview, setPostPreview] = useState([])
 
   const { user } = useAuth()
-  console.log(user)
 
   useEffect(() => {
     const PostFunction = async () => {

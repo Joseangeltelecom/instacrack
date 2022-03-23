@@ -1,7 +1,8 @@
-import React from "react";
-import { HeaderProfile } from "../componentes/Profile/HeaderProfile";
-import { NavbarProfile } from "../componentes/Profile/NavbarProfile";
-import { PostProfile } from "../componentes/Profile/PostProfile";
+import React from "react"
+import Navbar from "../componentes/Navbar"
+import { HeaderProfile } from "../componentes/Profile/HeaderProfile"
+import { NavbarProfile } from "../componentes/Profile/NavbarProfile"
+import { PostProfile } from "../componentes/Profile/PostProfile"
 
 export const Profile = () => {
   return (
@@ -15,10 +16,11 @@ export const Profile = () => {
         overflowX: "hidden",
       }}
     >
+      <Navbar />
       <HeaderProfile />
 
       <NavbarProfile />
       <PostProfile />
     </div>
-  );
-};
+  )
+}

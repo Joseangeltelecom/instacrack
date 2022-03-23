@@ -1,6 +1,8 @@
-import React from "react";
+import React from "react"
+import { useAuth } from "../../context/AuthContext"
 
 export const HeaderProfile = () => {
+  const { user } = useAuth()
   return (
     <div class="row justify-content-center" style={{ width: "100vw" }}>
       <div
@@ -25,7 +27,7 @@ export const HeaderProfile = () => {
         class="col-6"
         style={{ borderBottom: "2px solid rgba(0, 0, 0, 0.2)" }}
       >
-        <h2 style={{ fontWeight: "lighter" }}>tupapitengen</h2>
+        <h2 style={{ fontWeight: "lighter" }}>{user.extrainfo.username}</h2>
         <div class="row" style={{ fontSize: "16px" }}>
           <div class="col-3">
             <b>10 </b> publicaciones
@@ -38,7 +40,7 @@ export const HeaderProfile = () => {
           </div>
         </div>
         <p style={{ marginTop: "15px", fontSize: "16px" }}>
-          <b>Tengen Uzui</b>
+          <b>{user.extrainfo.fullname}</b>
         </p>
         <div style={{ fontSize: "16px" }}>
           <p>
@@ -48,5 +50,5 @@ export const HeaderProfile = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
