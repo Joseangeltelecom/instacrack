@@ -98,18 +98,25 @@ function Navbar() {
           />
           <PlusCircleOutlined className="ms-4" style={{ fontSize: "26px" }} />
           <HeartOutlined className="ms-4" style={{ fontSize: "26px" }} />
-          <Dropdown overlay={menu} placement="bottomRight" arrow>
-            <img
-              style={{
-                height: "35px",
-                width: "35px",
-                "border-radius": "50%",
-                padding: "2px",
-                marginLeft: "25px",
-              }}
-              src="https://elcomercio.pe/resizer/1AdR3_S-R4ZELHQ6WkNRGhkZhdc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BH5EJQD2ZZF5XGJM2AHNJW7HUI.jpg"
-            />
-          </Dropdown>
+          <a>
+            <Dropdown
+              trigger="click"
+              overlay={menu}
+              placement="bottomRight"
+              arrow
+            >
+              <img
+                style={{
+                  height: "35px",
+                  width: "35px",
+                  "border-radius": "50%",
+                  padding: "2px",
+                  marginLeft: "25px",
+                }}
+                src="https://elcomercio.pe/resizer/1AdR3_S-R4ZELHQ6WkNRGhkZhdc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BH5EJQD2ZZF5XGJM2AHNJW7HUI.jpg"
+              />
+            </Dropdown>
+          </a>
         </div>
       </div>
     </nav>
