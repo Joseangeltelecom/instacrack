@@ -1,0 +1,11 @@
+.selected {
+  color: black;
+}
+
+.navlink {
+  color: gray;
+}
+
+.navlink:hover {
+  color: gray;
+}
