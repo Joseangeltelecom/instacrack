@@ -1,12 +1,12 @@
-import React from "react"
-import { useAuth } from "../context/AuthContext"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import {
-  solid,
-  regular,
-  brands,
-} from "@fortawesome/fontawesome-svg-core/import.macro" // <-- import styles to be used
-import { Form, Input, Button, Dropdown, Menu } from "antd"
+import React from "react";
+import { useAuth } from "../context/AuthContext";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import {
+//   solid,
+//   regular,
+//   brands,
+// } from "@fortawesome/fontawesome-svg-core/import.macro"; // <-- import styles to be used
+import { Form, Input, Button, Dropdown, Menu } from "antd";
 import {
   BookOutlined,
   HeartOutlined,
@@ -16,21 +16,21 @@ import {
   SendOutlined,
   SyncOutlined,
   UserOutlined,
-} from "@ant-design/icons"
-import "../styles/navbar/navbar.css"
-import { ModalChangeUser } from "./Profile/ModalChangeUser"
-import { Link } from "react-router-dom"
+} from "@ant-design/icons";
+import "../styles/navbar/navbar.css";
+import { ModalChangeUser } from "./Profile/ModalChangeUser";
+import { Link } from "react-router-dom";
 
 function Navbar() {
-  const { logout, user } = useAuth()
+  const { logout, user } = useAuth();
 
   const handleLogout = async () => {
     try {
-      await logout()
+      await logout();
     } catch (error) {
-      console.error(error.message)
+      console.error(error.message);
     }
-  }
+  };
 
   const menu = (
     <Menu style={{ width: "200px" }}>
@@ -54,7 +54,7 @@ function Navbar() {
         <a onClick={handleLogout}>Salir</a>
       </Menu.Item>
     </Menu>
-  )
+  );
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark fixed-top bg-white border-bottom">
@@ -120,7 +120,7 @@ function Navbar() {
         </div>
       </div>
     </nav>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;

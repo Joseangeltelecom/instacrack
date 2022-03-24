@@ -1,11 +1,13 @@
 .selected {
-  color: black;
+  color: blue;
+  font-weight: bold;
 }
 
 .navlink {
   color: gray;
+  margin-left: 5px;
 }
 
 .navlink:hover {
-  color: gray;
+  color: black;
 }

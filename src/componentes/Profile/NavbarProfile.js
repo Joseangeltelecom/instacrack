@@ -1,3 +1,4 @@
+import { FolderOutlined, TableOutlined } from "@ant-design/icons";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "../../styles/navbarprofile.css";
@@ -14,9 +15,11 @@ export const NavbarProfile = () => {
           style={{
             display: "flex",
             justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          <NavLink to="/profile" activeClassName="selected" className="navlink">
+          <TableOutlined style={{ color: "gray" }} />
+          <NavLink to="/profile" className="navlink">
             PUBLICACIONES
           </NavLink>
         </div>
@@ -25,13 +28,11 @@ export const NavbarProfile = () => {
           style={{
             display: "flex",
             justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          <NavLink
-            to="/postsaved"
-            activeClassName="selected"
-            className="navlink"
-          >
+          <FolderOutlined />
+          <NavLink to="/postsaved" className="navlink">
             GUARDADO
           </NavLink>
         </div>

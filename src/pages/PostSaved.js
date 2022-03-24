@@ -1,7 +1,7 @@
-import React from "react"
-import Navbar from "../componentes/Navbar"
-import { HeaderProfile } from "../componentes/Profile/HeaderProfile"
-import { NavbarProfile } from "../componentes/Profile/NavbarProfile"
+import React from "react";
+import Navbar from "../componentes/Navbar";
+import { HeaderProfile } from "../componentes/Profile/HeaderProfile";
+import { NavbarProfile } from "../componentes/Profile/NavbarProfile";
 
 export const PostSaved = () => {
   return (
@@ -10,7 +10,7 @@ export const PostSaved = () => {
         height: "100vh",
         width: "100vw",
         margin: "0",
-        padding: "70px 0px 0px 0px",
+        padding: "90px 0px 0px 0px",
         overflowX: "hidden",
       }}
     >
@@ -29,5 +29,5 @@ export const PostSaved = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
