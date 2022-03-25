@@ -71,7 +71,7 @@ function Navbar() {
           <h2 style={{ fontFamily: "Lobster" }}>Instacrack</h2>
         </div>
         <div>
-          <div clasName="form">
+          <div className="form">
             <div
               style={{ width: "230px", height: "35px", background: "gray" }}
               className="d-none d-sm-block rounded"
@@ -86,7 +86,7 @@ function Navbar() {
             </div>
           </div>
         </div>
-        <div clasName="d-flex flex-row justify-content-evenly">
+        <div className="d-flex flex-row justify-content-evenly">
           <Link to="/home" style={{ color: "black" }}>
             <HomeFilled style={{ fontSize: "26px" }} />
           </Link>
