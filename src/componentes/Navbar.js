@@ -91,11 +91,14 @@ function Navbar() {
             <HomeFilled style={{ fontSize: "26px" }} />
           </Link>
 
-          <SendOutlined
-            className="ms-4"
-            style={{ fontSize: "26px" }}
-            rotate={-25}
-          />
+          <Link to="/chat" style={{ color: "black" }}>
+            <SendOutlined
+              className="ms-4"
+              style={{ fontSize: "26px" }}
+              rotate={-25}
+            />
+          </Link>
+
           <PlusCircleOutlined className="ms-4" style={{ fontSize: "26px" }} />
           <HeartOutlined className="ms-4" style={{ fontSize: "26px" }} />
           <a>

@@ -1,14 +1,14 @@
-import React from "react"
-import { Route, Routes } from "react-router-dom"
-import { PostSaved } from "../pages/PostSaved"
-import Chat from "../pages/Chat"
-import Home from "../pages/Home"
-import Login from "../pages/Login"
-import { Profile } from "../pages/Profile"
-import Register from "../pages/Register"
-import ResetPassword from "../pages/ResetPassword"
-import ProtectedRoute from "./ProtectedRoute"
-import PublicRoute from "./PublicRoute"
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import { PostSaved } from "../pages/PostSaved";
+import Chat from "../pages/Chat";
+import Home from "../pages/Home";
+import Login from "../pages/Login";
+import { Profile } from "../pages/Profile";
+import Register from "../pages/Register";
+import ResetPassword from "../pages/ResetPassword";
+import ProtectedRoute from "./ProtectedRoute";
+import PublicRoute from "./PublicRoute";
 
 export const AppRouter = () => {
   return (
@@ -52,12 +52,12 @@ export const AppRouter = () => {
       <Route
         path="/chat"
         element={
-          <PublicRoute>
-            <Chat />
-          </PublicRoute>
+          // <PublicRoute>
+          <Chat />
+          // </PublicRoute>
         }
       />
       <Route path="*" element={<div>404 element not found</div>} />
     </Routes>
-  )
-}
+  );
+};
