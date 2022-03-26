@@ -51,9 +51,9 @@ export const AppRouter = () => {
       <Route
         path="/chat"
         element={
-          // <PublicRoute>
-          <Chat />
-          // </PublicRoute>
+          <ProtectedRoute>
+            <Chat />
+          </ProtectedRoute>
         }
       />
       <Route path="*" element={<div>Eror 404 resource not found</div>} />

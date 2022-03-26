@@ -6,7 +6,7 @@ import { useAuth } from "../context/AuthContext"
 //   regular,
 //   brands,
 // } from "@fortawesome/fontawesome-svg-core/import.macro"; // <-- import styles to be used
-import { Form, Input, Button, Dropdown, Menu } from "antd";
+import { Form, Input, Button, Dropdown, Menu } from "antd"
 import {
   BookOutlined,
   HeartOutlined,
@@ -23,15 +23,15 @@ import { Link } from "react-router-dom"
 import { AddPostModal } from "./addPost/AddPostModal"
 
 function Navbar() {
-  const { logout, user } = useAuth();
+  const { logout, user } = useAuth()
 
   const handleLogout = async () => {
     try {
-      await logout();
+      await logout()
     } catch (error) {
-      console.error(error.message);
+      console.error(error.message)
     }
-  };
+  }
 
   const menu = (
     <Menu style={{ width: "200px" }}>
@@ -55,7 +55,7 @@ function Navbar() {
         <a onClick={handleLogout}>Salir</a>
       </Menu.Item>
     </Menu>
-  );
+  )
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark fixed-top bg-white border-bottom">
@@ -92,14 +92,15 @@ function Navbar() {
             <HomeFilled style={{ fontSize: "26px" }} />
           </Link>
 
-          <SendOutlined
-            className="ms-4"
-            style={{ fontSize: "26px" }}
-            rotate={-25}
-          />
+          <Link to="/chat" style={{ color: "black" }}>
+            <SendOutlined
+              className="ms-4"
+              style={{ fontSize: "26px" }}
+              rotate={-25}
+            />
+          </Link>
           <a>
             <AddPostModal />
-            
           </a>
           <HeartOutlined className="ms-4" style={{ fontSize: "26px" }} />
           <a>
@@ -124,7 +125,7 @@ function Navbar() {
         </div>
       </div>
     </nav>
-  );
+  )
 }
 
-export default Navbar;
+export default Navbar

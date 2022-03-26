@@ -1,24 +1,24 @@
-import { DownOutlined } from "@ant-design/icons";
-import React, { useEffect, useState } from "react";
-import Navbar from "../componentes/Navbar";
-import { ModalChangeUser } from "../componentes/Profile/ModalChangeUser";
-import { useAuth } from "../context/AuthContext";
-import { Input } from "antd";
-import { collection, getDocs, onSnapshot } from "firebase/firestore";
-import { db } from "../firebase";
+import { DownOutlined } from "@ant-design/icons"
+import React, { useEffect, useState } from "react"
+import Navbar from "../componentes/Navbar"
+import { ModalChangeUser } from "../componentes/Profile/ModalChangeUser"
+import { useAuth } from "../context/AuthContext"
+import { Input } from "antd"
+import { collection, getDocs, onSnapshot } from "firebase/firestore"
+import { db } from "../firebase"
 
-const { TextArea } = Input;
+const { TextArea } = Input
 
 function Chat() {
-  const { user } = useAuth();
-  const [users, setUsers] = useState([]);
-  console.log(user);
+  const { user } = useAuth()
+  const [users, setUsers] = useState([])
+  console.log(user)
 
   const filterUsers = users.filter((u) => {
-    return u.id !== user.currentUser.uid;
-  });
+    return u.id !== user.currentUser.uid
+  })
 
-  console.log(filterUsers);
+  console.log(filterUsers)
 
   useEffect(() => {
     const addUsersFriends = onSnapshot(collection(db, "users"), (snapshot) =>
@@ -28,11 +28,11 @@ function Chat() {
           user: doc.data(),
         }))
       )
-    );
-    return () => addUsersFriends();
-  }, []);
+    )
+    return () => addUsersFriends()
+  }, [])
 
-  console.log(users);
+  console.log(users)
 
   return (
     <div
@@ -191,7 +191,7 @@ function Chat() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Chat;
+export default Chat
