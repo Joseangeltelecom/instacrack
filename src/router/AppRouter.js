@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react"
 import { Route, Routes } from "react-router-dom"
 import { PostSaved } from "../pages/PostSaved"
@@ -11,6 +12,19 @@ import ProtectedRoute from "./ProtectedRoute"
 import PublicRoute from "./PublicRoute"
 import { useAuth } from "../context/AuthContext"
 import { Spin } from "antd"
+=======
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import { PostSaved } from "../pages/PostSaved";
+import Chat from "../pages/Chat";
+import Home from "../pages/Home";
+import Login from "../pages/Login";
+import { Profile } from "../pages/Profile";
+import Register from "../pages/Register";
+import ResetPassword from "../pages/ResetPassword";
+import ProtectedRoute from "./ProtectedRoute";
+import PublicRoute from "./PublicRoute";
+>>>>>>> ee8cbf71b5790d8e3f5363ae83df0ba1e2b3d14d
 
 export const AppRouter = () => {
   const { user } = useAuth()
@@ -55,12 +69,12 @@ export const AppRouter = () => {
       <Route
         path="/chat"
         element={
-          <PublicRoute>
-            <Chat />
-          </PublicRoute>
+          // <PublicRoute>
+          <Chat />
+          // </PublicRoute>
         }
       />
       <Route path="*" element={<div>Eror 404 resource not found</div>} />
     </Routes>
-  )
-}
+  );
+};

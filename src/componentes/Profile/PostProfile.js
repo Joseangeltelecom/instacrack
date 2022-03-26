@@ -19,28 +19,28 @@ export const PostProfile = () => {
           flexWrap: "wrap",
         }}
       >
-        <a href="">
+        <a href="" style={{ margin: "12px" }}>
           <img
             src="http://c.files.bbci.co.uk/48DD/production/_107435681_perro1.jpg"
-            style={{ width: "270px", height: "270px", margin: "12px" }}
+            style={{ width: "270px", height: "270px" }}
           />
         </a>
-        <a href="">
+        <a href="" style={{ margin: "12px" }}>
           <img
             src="http://c.files.bbci.co.uk/48DD/production/_107435681_perro1.jpg"
-            style={{ width: "270px", height: "270px", margin: "12px" }}
+            style={{ width: "270px", height: "270px" }}
           />
         </a>
-        <a href="">
+        <a href="" style={{ margin: "12px" }}>
           <img
             src="http://c.files.bbci.co.uk/48DD/production/_107435681_perro1.jpg"
-            style={{ width: "270px", height: "270px", margin: "12px" }}
+            style={{ width: "270px", height: "270px" }}
           />
         </a>
-        <a href="">
+        <a href="" style={{ margin: "12px" }}>
           <img
             src="http://c.files.bbci.co.uk/48DD/production/_107435681_perro1.jpg"
-            style={{ width: "270px", height: "270px", margin: "12px" }}
+            style={{ width: "270px", height: "270px" }}
           />
         </a>
       </div>
