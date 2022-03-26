@@ -112,7 +112,7 @@ function Navbar() {
                 style={{
                   height: "35px",
                   width: "35px",
-                  "border-radius": "50%",
+                  borderRadius: "50%",
                   padding: "2px",
                   marginLeft: "25px",
                 }}

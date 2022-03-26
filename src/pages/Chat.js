@@ -3,29 +3,31 @@ import React from "react";
 import Navbar from "../componentes/Navbar";
 import { ModalChangeUser } from "../componentes/Profile/ModalChangeUser";
 import { useAuth } from "../context/AuthContext";
+import { Input } from "antd";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase";
+
+const { TextArea } = Input;
 
 function Chat() {
   const { user } = useAuth();
 
-  const friends = [
-    {
-      userName: "Krilin23",
-      profileImage:
-        "https://pbs.twimg.com/profile_images/1495762569130295300/adqfHmdl_400x400.jpg",
-    },
-    {
-      userName: "goku",
-      profileImage:
-        "https://elcomercio.pe/resizer/pfVziOV4X8Vu9nwknDc-oNItlB8=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/6Y2EDIISGFGVFANEVDCR5LCG34.jpg",
-    },
-    {
-      userName: "Vegeta",
-      profileImage:
-        "http://pm1.narvii.com/6596/8140f88dad609e7be2925cca0bcaa3b7219bdfe4_00.jpg",
-    },
-  ];
+  const usuarios = collection(db, "users");
+  getDocs(usuarios)
+    .then((snapshot) => {
+      snapshot.docs.forEach((doc) => {
+        users.push({
+          ...doc.data(),
+          id: doc.id,
+        });
+      });
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
 
-  console.log(friends);
+  let users = [];
+  console.log(users);
   return (
     <div
       style={{
@@ -100,8 +102,9 @@ function Chat() {
             paddingTop: "10px",
           }}
         >
-          {friends.map((friend) => (
+          {users.map((friend) => (
             <div
+              key={friend.id}
               style={{
                 padding: "10px",
                 paddingLeft: "20px",
@@ -113,14 +116,14 @@ function Chat() {
             >
               <a href="">
                 <img
-                  src={friend.profileImage}
+                  src="https://previews.123rf.com/images/ylivdesign/ylivdesign1506/ylivdesign150604022/41529412-ic%C3%B4ne-d-utilisateur-grey-en-cercle-sur-blanc-fond-d%C3%A9grad%C3%A9.jpg"
                   alt="fondo-jean-2"
                   border="0"
                   style={{ height: "60px", width: "60px", borderRadius: "50%" }}
                 />
               </a>
               <a href="" style={{ color: "black", marginLeft: "10px" }}>
-                {friend.userName}
+                {friend.username}
               </a>
             </div>
           ))}
@@ -130,10 +133,53 @@ function Chat() {
           style={{
             border: "1px solid rgb(0,0,0,0.2)",
             height: "455px",
-            overflowY: "scroll",
+            padding: "0",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
           }}
         >
-          Chat
+          <div
+            style={{
+              backgroundColor: "orange",
+              maxHeight: "85%",
+              height: "auto",
+            }}
+          >
+            Chat
+          </div>
+          <div
+            style={{
+              backgroundColor: "pink",
+              minHeight: "15%",
+              height: "auto",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "10px",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                height: "auto",
+                width: "90%",
+                backgroundColor: "white",
+                borderRadius: "1.5rem",
+                border: "1px solid rgb(0,0,0,0.5)",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <TextArea
+                placeholder="Escribe tu mensaje aqui..."
+                autoSize
+                rows={1}
+                bordered={false}
+                style={{ width: "90%" }}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
