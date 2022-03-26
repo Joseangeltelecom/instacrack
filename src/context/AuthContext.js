@@ -48,13 +48,13 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const unsubuscribe = onAuthStateChanged(auth, async (currentUser) => {
-      //   console.log(currentUser.uid)
-
-      setLoading(false)
       if (currentUser) {
         const docRef = doc(db, "users", currentUser.uid)
         const docSnap = await getDoc(docRef)
         setUser({ currentUser, extrainfo: docSnap.data() })
+        setLoading(false)
+      } else {
+        setUser(null)
       }
     })
     return () => unsubuscribe() // Cuando el componente es desmontado que deje de escuchar.

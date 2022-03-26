@@ -1,38 +1,30 @@
-import React, { useEffect, useState } from "react";
-import { PostPreview } from "../componentes/home/PostPreview";
-import SliderFriends from "../componentes/home/SliderFriends";
-import { UserChange } from "../componentes/home/UserChange";
-import Navbar from "../componentes/Navbar";
-import { db } from "../firebase";
-import "../styles/home/home.css";
-import { collection, getDocs } from "firebase/firestore";
-import { useAuth } from "../context/AuthContext";
+import React, { useEffect, useState } from "react"
+import { PostPreview } from "../componentes/home/PostPreview"
+import SliderFriends from "../componentes/home/SliderFriends"
+import { UserChange } from "../componentes/home/UserChange"
+import Navbar from "../componentes/Navbar"
+import { db } from "../firebase"
+import "../styles/home/home.css"
+import { collection, onSnapshot } from "firebase/firestore"
+import { useAuth } from "../context/AuthContext"
 
 function Home() {
-  const [postPreview, setPostPreview] = useState([]);
+  const [postPreview, setPostPreview] = useState([])
+  const { user } = useAuth()
 
-  console.log(postPreview);
-
-  const { user } = useAuth();
+  console.log("user.displayName", user.currentUser)
 
   useEffect(() => {
-    const PostFunction = async () => {
-      const array = [];
-      const querySnapshot = await getDocs(collection(db, "postPreview"));
-      querySnapshot.forEach((doc) => {
-        array.push(doc);
-        setPostPreview(
-          array.map((d) => {
-            return {
-              id: d.id,
-              post: d.data(),
-            };
-          })
-        );
-      });
-    };
-    PostFunction();
-  }, []);
+    const unsubuscribe = onSnapshot(collection(db, "postPreview"), (snapshot) =>
+      setPostPreview(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          post: doc.data(),
+        }))
+      )
+    )
+    return () => unsubuscribe()
+  }, [])
 
   return (
     <div className="home-container">
@@ -43,7 +35,6 @@ function Home() {
           <PostPreview key={id} {...post} />
         ))}
       </div>
-
       <div>
         <UserChange />
       </div>

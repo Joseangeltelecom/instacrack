@@ -6,6 +6,8 @@ import { ModalChangeUser } from "../Profile/ModalChangeUser"
 
 export const UserChange = () => {
   const { user } = useAuth()
+  console.log("user google", user)
+  console.log(user)
   return (
     <div className="container-userchange">
       <Link to="/profile">
@@ -15,10 +17,12 @@ export const UserChange = () => {
       </Link>
       <div className="username-container">
         <Link to="/profile" style={{ color: "black" }}>
-          {<b>{user.extrainfo.username}</b>}
+          {user.extrainfo
+            ? user.extrainfo.username
+            : user.currentUser.displayName}
         </Link>
         <span className="username-gray">
-          <b>{user.extrainfo.fullname}</b>
+          {user.extrainfo ? user.extrainfo.fullname : ""}
         </span>
       </div>
       <div className="change-user">

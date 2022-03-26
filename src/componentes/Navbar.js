@@ -1,6 +1,6 @@
 import React from "react";
 import { useAuth } from "../context/AuthContext";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 // import {
 //   solid,
 //   regular,
@@ -20,6 +20,7 @@ import {
 import "../styles/navbar/navbar.css";
 import { ModalChangeUser } from "./Profile/ModalChangeUser";
 import { Link } from "react-router-dom";
+import { AddPostModal } from "./addPost/AddPostModal";
 
 function Navbar() {
   const { logout, user } = useAuth();
@@ -91,15 +92,14 @@ function Navbar() {
             <HomeFilled style={{ fontSize: "26px" }} />
           </Link>
 
-          <Link to="/chat" style={{ color: "black" }}>
-            <SendOutlined
-              className="ms-4"
-              style={{ fontSize: "26px" }}
-              rotate={-25}
-            />
-          </Link>
-
-          <PlusCircleOutlined className="ms-4" style={{ fontSize: "26px" }} />
+          <SendOutlined
+            className="ms-4"
+            style={{ fontSize: "26px" }}
+            rotate={-25}
+          />
+          <a>
+            <AddPostModal />
+          </a>
           <HeartOutlined className="ms-4" style={{ fontSize: "26px" }} />
           <a>
             <Dropdown
