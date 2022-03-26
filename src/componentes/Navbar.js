@@ -1,23 +1,12 @@
-<<<<<<< HEAD
 import React from "react"
 import { useAuth } from "../context/AuthContext"
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-=======
-import React from "react";
-import { useAuth } from "../context/AuthContext";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
->>>>>>> ee8cbf71b5790d8e3f5363ae83df0ba1e2b3d14d
 // import {
 //   solid,
 //   regular,
 //   brands,
-<<<<<<< HEAD
-// } from "@fortawesome/fontawesome-svg-core/import.macro" // <-- import styles to be used
-import { Input, Button, Dropdown, Menu } from "antd"
-=======
 // } from "@fortawesome/fontawesome-svg-core/import.macro"; // <-- import styles to be used
 import { Form, Input, Button, Dropdown, Menu } from "antd";
->>>>>>> ee8cbf71b5790d8e3f5363ae83df0ba1e2b3d14d
 import {
   BookOutlined,
   HeartOutlined,
@@ -27,18 +16,11 @@ import {
   SendOutlined,
   SyncOutlined,
   UserOutlined,
-<<<<<<< HEAD
 } from "@ant-design/icons"
 import "../styles/navbar/navbar.css"
 import { ModalChangeUser } from "./Profile/ModalChangeUser"
 import { Link } from "react-router-dom"
 import { AddPostModal } from "./addPost/AddPostModal"
-=======
-} from "@ant-design/icons";
-import "../styles/navbar/navbar.css";
-import { ModalChangeUser } from "./Profile/ModalChangeUser";
-import { Link } from "react-router-dom";
->>>>>>> ee8cbf71b5790d8e3f5363ae83df0ba1e2b3d14d
 
 function Navbar() {
   const { logout, user } = useAuth();
@@ -110,7 +92,6 @@ function Navbar() {
             <HomeFilled style={{ fontSize: "26px" }} />
           </Link>
 
-<<<<<<< HEAD
           <SendOutlined
             className="ms-4"
             style={{ fontSize: "26px" }}
@@ -120,17 +101,6 @@ function Navbar() {
             <AddPostModal />
             
           </a>
-=======
-          <Link to="/chat" style={{ color: "black" }}>
-            <SendOutlined
-              className="ms-4"
-              style={{ fontSize: "26px" }}
-              rotate={-25}
-            />
-          </Link>
-
-          <PlusCircleOutlined className="ms-4" style={{ fontSize: "26px" }} />
->>>>>>> ee8cbf71b5790d8e3f5363ae83df0ba1e2b3d14d
           <HeartOutlined className="ms-4" style={{ fontSize: "26px" }} />
           <a>
             <Dropdown

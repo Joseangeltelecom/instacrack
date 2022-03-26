@@ -77,9 +77,45 @@ function ImageUpload(props) {
         value={caption}
       />
       <input type="file" onChange={handleChange} />
+      {image && (
+        <div style={styles.preview}>
+          <img
+            src={URL.createObjectURL(image)}
+            style={styles.image}
+            alt="Thumb"
+          />
+          {/* <button onClick={removeSelectedImage} style={styles.delete}>
+            Remove This Image
+          </button> */}
+        </div>
+      )}
       <Button onClick={handleUpload}>Upload</Button>
     </div>
   )
 }
 
 export default ImageUpload
+
+// Just some styles
+const styles = {
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingTop: 50,
+  },
+  preview: {
+    marginTop: 50,
+    display: "flex",
+    flexDirection: "column",
+  },
+  image: { maxWidth: "100%", maxHeight: 320 },
+  delete: {
+    cursor: "pointer",
+    padding: 15,
+    background: "red",
+    color: "white",
+    border: "none",
+  },
+}
