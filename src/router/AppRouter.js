@@ -9,9 +9,10 @@ import Register from "../pages/Register";
 import ResetPassword from "../pages/ResetPassword";
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
+import { useAuth } from "../context/AuthContext";
 
 export const AppRouter = () => {
-  const { user } = useAuth()
+  const { user } = useAuth();
 
   return (
     <Routes>

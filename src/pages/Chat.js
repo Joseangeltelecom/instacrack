@@ -1,33 +1,39 @@
 import { DownOutlined } from "@ant-design/icons";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../componentes/Navbar";
 import { ModalChangeUser } from "../componentes/Profile/ModalChangeUser";
 import { useAuth } from "../context/AuthContext";
 import { Input } from "antd";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
 
 const { TextArea } = Input;
 
 function Chat() {
   const { user } = useAuth();
+  const [users, setUsers] = useState([]);
+  console.log(user);
 
-  const usuarios = collection(db, "users");
-  getDocs(usuarios)
-    .then((snapshot) => {
-      snapshot.docs.forEach((doc) => {
-        users.push({
-          ...doc.data(),
+  const filterUsers = users.filter((u) => {
+    return u.id !== user.currentUser.uid;
+  });
+
+  console.log(filterUsers);
+
+  useEffect(() => {
+    const addUsersFriends = onSnapshot(collection(db, "users"), (snapshot) =>
+      setUsers(
+        snapshot.docs.map((doc) => ({
           id: doc.id,
-        });
-      });
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
+          user: doc.data(),
+        }))
+      )
+    );
+    return () => addUsersFriends();
+  }, []);
 
-  let users = [];
   console.log(users);
+
   return (
     <div
       style={{
@@ -60,7 +66,9 @@ function Chat() {
                   fontSize: "16px",
                 }}
               >
-                {user.extrainfo.username}
+                {user.extrainfo
+                  ? user.extrainfo.username
+                  : user.currentUser.displayName}
               </b>
             }
           />
@@ -102,7 +110,7 @@ function Chat() {
             paddingTop: "10px",
           }}
         >
-          {users.map((friend) => (
+          {filterUsers.map((friend) => (
             <div
               key={friend.id}
               style={{
@@ -123,7 +131,7 @@ function Chat() {
                 />
               </a>
               <a href="" style={{ color: "black", marginLeft: "10px" }}>
-                {friend.username}
+                {friend.user.username}
               </a>
             </div>
           ))}
@@ -141,7 +149,7 @@ function Chat() {
         >
           <div
             style={{
-              backgroundColor: "orange",
+              // backgroundColor: "orange",
               maxHeight: "85%",
               height: "auto",
             }}
@@ -150,7 +158,7 @@ function Chat() {
           </div>
           <div
             style={{
-              backgroundColor: "pink",
+              // backgroundColor: "pink",
               minHeight: "15%",
               height: "auto",
               display: "flex",
