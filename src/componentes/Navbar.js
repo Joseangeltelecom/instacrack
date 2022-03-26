@@ -1,12 +1,12 @@
 import React from "react"
 import { useAuth } from "../context/AuthContext"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import {
-  solid,
-  regular,
-  brands,
-} from "@fortawesome/fontawesome-svg-core/import.macro" // <-- import styles to be used
-import { Form, Input, Button, Dropdown, Menu } from "antd"
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+// import {
+//   solid,
+//   regular,
+//   brands,
+// } from "@fortawesome/fontawesome-svg-core/import.macro" // <-- import styles to be used
+import { Input, Button, Dropdown, Menu } from "antd"
 import {
   BookOutlined,
   HeartOutlined,
@@ -20,6 +20,7 @@ import {
 import "../styles/navbar/navbar.css"
 import { ModalChangeUser } from "./Profile/ModalChangeUser"
 import { Link } from "react-router-dom"
+import { AddPostModal } from "./addPost/AddPostModal"
 
 function Navbar() {
   const { logout, user } = useAuth()
@@ -96,7 +97,10 @@ function Navbar() {
             style={{ fontSize: "26px" }}
             rotate={-25}
           />
-          <PlusCircleOutlined className="ms-4" style={{ fontSize: "26px" }} />
+          <a>
+            <AddPostModal />
+            
+          </a>
           <HeartOutlined className="ms-4" style={{ fontSize: "26px" }} />
           <a>
             <Dropdown

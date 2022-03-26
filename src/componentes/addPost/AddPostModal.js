@@ -1,19 +1,24 @@
 import { Modal } from "react-bootstrap"
 import React, { useState } from "react"
-import { useAuth } from "../../context/AuthContext"
+
 import {
   CheckCircleFilled,
   LockOutlined,
+  PlusCircleOutlined,
   UserOutlined,
 } from "@ant-design/icons"
 import { Link, useNavigate } from "react-router-dom"
 import { Button, Form, Input } from "antd"
+import { useAuth } from "../../context/AuthContext"
+import { FileUploadComponent } from "./FileUploadComponent"
+import ImageUpload from "./ImageUpload"
 
 function MyVerticallyCenteredModal(props) {
   const handleClose = () => {
     props.onHide(false)
     props.setModalShow2(true)
   }
+
   const { user } = useAuth()
   return (
     <Modal
@@ -29,14 +34,8 @@ function MyVerticallyCenteredModal(props) {
       </Modal.Header>
 
       <Modal.Body className="d-flex justify-content-between">
-        <p>
-          {user.extrainfo
-            ? user.extrainfo.username
-            : user.currentUser.displayName}
-        </p>
-        <div className="ms-5">
-          <CheckCircleFilled />
-        </div>
+        {/* <FileUploadComponent /> */}
+        {user ? <ImageUpload handleClose={props.onHide} /> : null}
       </Modal.Body>
       <Modal.Footer
         style={{ background: "0597f6" }}
@@ -49,6 +48,7 @@ function MyVerticallyCenteredModal(props) {
     </Modal>
   )
 }
+
 export function ModalChangeSession(props) {
   const [user, setUser] = useState({
     email: "",
@@ -193,7 +193,7 @@ export function ModalChangeSession(props) {
   )
 }
 
-export function ModalChangeUser(props) {
+export function AddPostModal() {
   const [modalShow, setModalShow] = React.useState(false)
   const [modalShow2, setModalShow2] = React.useState(false)
 
@@ -203,8 +203,12 @@ export function ModalChangeUser(props) {
 
   return (
     <>
-      <a className="ms-2" variant="primary" onClick={() => setModalShow(true)}>
-        {props.name}
+      <a
+        className="ms-2"
+        variant="primary"
+        onClick={() => setModalShow(true)} //true
+      >
+        <PlusCircleOutlined className="ms-4" style={{ fontSize: "26px" }} />
       </a>
       <MyVerticallyCenteredModal
         show={modalShow}

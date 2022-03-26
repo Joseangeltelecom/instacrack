@@ -9,8 +9,12 @@ import Register from "../pages/Register"
 import ResetPassword from "../pages/ResetPassword"
 import ProtectedRoute from "./ProtectedRoute"
 import PublicRoute from "./PublicRoute"
+import { useAuth } from "../context/AuthContext"
+import { Spin } from "antd"
 
 export const AppRouter = () => {
+  const { user } = useAuth()
+
   return (
     <Routes>
       <Route
@@ -38,15 +42,14 @@ export const AppRouter = () => {
           </ProtectedRoute>
         }
       />
-
+      )
       <Route path="/postsaved" element={<PostSaved />} />
-
       <Route
         path="/profile"
         element={
-          // <PublicRoute>
-          <Profile />
-          /* </PublicRoute> */
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
         }
       />
       <Route
@@ -57,7 +60,7 @@ export const AppRouter = () => {
           </PublicRoute>
         }
       />
-      <Route path="*" element={<div>404 element not found</div>} />
+      <Route path="*" element={<div>Eror 404 resource not found</div>} />
     </Routes>
   )
 }
