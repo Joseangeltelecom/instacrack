@@ -39,7 +39,7 @@ function Home() {
         <UserChange />
       </div>
     </div>
-  );
+  )
 }
 
-export default Home;
+export default Home

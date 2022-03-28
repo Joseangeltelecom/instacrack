@@ -12,7 +12,12 @@ export const UserChange = () => {
     <div className="container-userchange">
       <Link to="/profile">
         <div className="image-container-userchange">
-          <img src="https://elcomercio.pe/resizer/1AdR3_S-R4ZELHQ6WkNRGhkZhdc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BH5EJQD2ZZF5XGJM2AHNJW7HUI.jpg" />
+          <img
+            src={
+              user.currentUser.photoURL ||
+              "https://elcomercio.pe/resizer/1AdR3_S-R4ZELHQ6WkNRGhkZhdc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BH5EJQD2ZZF5XGJM2AHNJW7HUI.jpg"
+            }
+          />
         </div>
       </Link>
       <div className="username-container">

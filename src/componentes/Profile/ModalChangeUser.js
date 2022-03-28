@@ -29,13 +29,23 @@ function MyVerticallyCenteredModal(props) {
       </Modal.Header>
 
       <Modal.Body className="d-flex justify-content-between">
-        <p>
+        <Link to="/profile">
+          <div className="image-container-userchange">
+            <img
+              src={
+                user.currentUser.photoURL ||
+                "https://elcomercio.pe/resizer/1AdR3_S-R4ZELHQ6WkNRGhkZhdc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BH5EJQD2ZZF5XGJM2AHNJW7HUI.jpg"
+              }
+            />
+          </div>
+        </Link>
+        <p className="mt-3">
           {user.extrainfo
             ? user.extrainfo.username
             : user.currentUser.displayName}
         </p>
-        <div className="ms-5">
-          <CheckCircleFilled />
+        <div className="ms-5 mt-3">
+          <CheckCircleFilled height="20px" width="20px" color="#0095F6" />
         </div>
       </Modal.Body>
       <Modal.Footer

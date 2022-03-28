@@ -15,7 +15,10 @@ export const HeaderProfile = () => {
         }}
       >
         <img
-          src={user.currentUser.photoURL}
+          src={
+            user.currentUser.photoURL ||
+            "https://elcomercio.pe/resizer/1AdR3_S-R4ZELHQ6WkNRGhkZhdc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BH5EJQD2ZZF5XGJM2AHNJW7HUI.jpg"
+          }
           style={{
             width: "155px",
             height: "155px",
