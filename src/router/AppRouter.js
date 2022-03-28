@@ -7,20 +7,16 @@ import Login from "../pages/Login"
 import { Profile } from "../pages/Profile"
 import Register from "../pages/Register"
 import ResetPassword from "../pages/ResetPassword"
-import ProtectedRoute from "./ProtectedRoute"
+
 import PublicRoute from "./PublicRoute"
+import ProtectedRoute from "./ProtectedRoute"
+import { useAuth } from "../context/AuthContext"
 
 export const AppRouter = () => {
+  const { user } = useAuth()
   return (
     <Routes>
-      <Route
-        path="/"
-        element={
-          <PublicRoute>
-            <Login />
-          </PublicRoute>
-        }
-      />
+      <Route path="/" element={<Login />} />
       <Route
         path="/register"
         element={
