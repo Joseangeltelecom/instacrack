@@ -1,10 +1,31 @@
-import React from "react";
-import "../../styles/home/sliderfriends.css";
-import "antd/dist/antd.css";
-import Glider from "react-glider";
-import "glider-js/glider.min.css";
+import React, { useEffect, useState } from "react"
+import "../../styles/home/sliderfriends.css"
+import "antd/dist/antd.css"
+import Glider from "react-glider"
+import "glider-js/glider.min.css"
+import { collection, onSnapshot } from "firebase/firestore"
+import { useAuth } from "../../context/AuthContext"
+import { db } from "../../firebase"
 
 function SliderFriends() {
+  const [users, setUsers] = useState([])
+  const { user } = useAuth()
+  const filterUsers = users.filter((u) => {
+    return u.id !== user.currentUser.uid
+  })
+
+  useEffect(() => {
+    const addUsersFriends = onSnapshot(collection(db, "users"), (snapshot) =>
+      setUsers(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          user: doc.data(),
+        }))
+      )
+    )
+    return () => addUsersFriends()
+  }, [])
+
   return (
     <>
       <div className="carrusel">
@@ -14,112 +35,27 @@ function SliderFriends() {
           slidesToScroll={3}
           scrollLock
           duration={3}
+          className="d-flex border-none"
         >
-          <div className="image-container">
-            <a href="#">
-              <img
-                src="https://elcomercio.pe/resizer/1AdR3_S-R4ZELHQ6WkNRGhkZhdc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BH5EJQD2ZZF5XGJM2AHNJW7HUI.jpg"
-                alt="Tengen Uzui bien papi"
-              />
-            </a>
-            <span>tupapitengen</span>
-          </div>
-
-          <div className="image-container">
-            <a href="#">
-              <img
-                src="https://elcomercio.pe/resizer/1AdR3_S-R4ZELHQ6WkNRGhkZhdc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BH5EJQD2ZZF5XGJM2AHNJW7HUI.jpg"
-                alt="Tengen Uzui bien papi"
-              />
-            </a>
-            <span>tupapitengen</span>
-          </div>
-
-          <div className="image-container">
-            <a href="#">
-              <img
-                src="https://elcomercio.pe/resizer/1AdR3_S-R4ZELHQ6WkNRGhkZhdc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BH5EJQD2ZZF5XGJM2AHNJW7HUI.jpg"
-                alt="Tengen Uzui bien papi"
-              />
-            </a>
-            <span>tupapitengen</span>
-          </div>
-
-          <div className="image-container">
-            <a href="#">
-              <img
-                src="https://elcomercio.pe/resizer/1AdR3_S-R4ZELHQ6WkNRGhkZhdc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BH5EJQD2ZZF5XGJM2AHNJW7HUI.jpg"
-                alt="Tengen Uzui bien papi"
-              />
-            </a>
-            <span>tupapitengen</span>
-          </div>
-
-          <div className="image-container">
-            <a href="#">
-              <img
-                src="https://elcomercio.pe/resizer/1AdR3_S-R4ZELHQ6WkNRGhkZhdc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BH5EJQD2ZZF5XGJM2AHNJW7HUI.jpg"
-                alt="Tengen Uzui bien papi"
-              />
-            </a>
-            <span>tupapitengen</span>
-          </div>
-
-          <div className="image-container">
-            <a href="#">
-              <img
-                src="https://elcomercio.pe/resizer/1AdR3_S-R4ZELHQ6WkNRGhkZhdc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BH5EJQD2ZZF5XGJM2AHNJW7HUI.jpg"
-                alt="Tengen Uzui bien papi"
-              />
-            </a>
-            <span>tupapitengen</span>
-          </div>
-
-          <div className="image-container">
-            <a href="#">
-              <img
-                src="https://elcomercio.pe/resizer/1AdR3_S-R4ZELHQ6WkNRGhkZhdc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BH5EJQD2ZZF5XGJM2AHNJW7HUI.jpg"
-                alt="Tengen Uzui bien papi"
-              />
-            </a>
-            <span>tupapitengen</span>
-          </div>
-
-          <div className="image-container">
-            <a href="#">
-              <img
-                src="https://elcomercio.pe/resizer/1AdR3_S-R4ZELHQ6WkNRGhkZhdc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BH5EJQD2ZZF5XGJM2AHNJW7HUI.jpg"
-                alt="Tengen Uzui bien papi"
-              />
-            </a>
-            <span>tupapitengen</span>
-          </div>
-
-          <div className="image-container">
-            <a href="#">
-              <img
-                src="https://elcomercio.pe/resizer/1AdR3_S-R4ZELHQ6WkNRGhkZhdc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BH5EJQD2ZZF5XGJM2AHNJW7HUI.jpg"
-                alt="Tengen Uzui bien papi"
-              />
-            </a>
-            <span>tupapitengen</span>
-          </div>
-
-          <div className="image-container">
-            <a href="#">
-              <img
-                src="https://elcomercio.pe/resizer/1AdR3_S-R4ZELHQ6WkNRGhkZhdc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BH5EJQD2ZZF5XGJM2AHNJW7HUI.jpg"
-                alt="Tengen Uzui bien papi"
-              />
-            </a>
-            <span>tupapitengen</span>
-          </div>
+          {filterUsers.map((friend) => {
+            return (
+              <div className="image-container">
+                <a href="#">
+                  <img
+                    src={friend.user.imgProfile}
+                    alt="Tengen Uzui bien papi"
+                  />
+                </a>
+                <span>{friend.user.username}</span>
+              </div>
+            )
+          })}
         </Glider>
       </div>
 
       <div className="carrusel-indicators"></div>
     </>
-  );
+  )
 }
 
-export default SliderFriends;
+export default SliderFriends

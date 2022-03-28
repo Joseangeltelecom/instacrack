@@ -4,7 +4,7 @@ import Navbar from "../componentes/Navbar"
 import { ModalChangeUser } from "../componentes/Profile/ModalChangeUser"
 import { useAuth } from "../context/AuthContext"
 import { Input } from "antd"
-import { collection, getDocs, onSnapshot } from "firebase/firestore"
+import { collection, onSnapshot } from "firebase/firestore"
 import { db } from "../firebase"
 
 const { TextArea } = Input
@@ -12,13 +12,10 @@ const { TextArea } = Input
 function Chat() {
   const { user } = useAuth()
   const [users, setUsers] = useState([])
-  console.log(user)
 
   const filterUsers = users.filter((u) => {
     return u.id !== user.currentUser.uid
   })
-
-  console.log(filterUsers)
 
   useEffect(() => {
     const addUsersFriends = onSnapshot(collection(db, "users"), (snapshot) =>
@@ -31,8 +28,6 @@ function Chat() {
     )
     return () => addUsersFriends()
   }, [])
-
-  console.log(users)
 
   return (
     <div
