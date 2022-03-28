@@ -124,7 +124,7 @@ function Chat() {
             >
               <a href="">
                 <img
-                  src="https://previews.123rf.com/images/ylivdesign/ylivdesign1506/ylivdesign150604022/41529412-ic%C3%B4ne-d-utilisateur-grey-en-cercle-sur-blanc-fond-d%C3%A9grad%C3%A9.jpg"
+                  src={friend.user.imgProfile}
                   alt="fondo-jean-2"
                   border="0"
                   style={{ height: "60px", width: "60px", borderRadius: "50%" }}

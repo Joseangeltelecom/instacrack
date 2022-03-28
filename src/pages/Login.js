@@ -19,6 +19,7 @@ function Login() {
     try {
       await login(user.email, user.password)
       navigate("/home")
+      navigate("/home")
     } catch (error) {
       setError(error.message)
     }

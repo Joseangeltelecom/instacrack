@@ -20,7 +20,9 @@ export default function PublicRoute({ children }) {
       </div>
     )
 
-  if (user) return <Navigate to="/home" />
+  if (user) {
+    return <Navigate to="/home" />
+  }
 
   return <>{children}</>
 }

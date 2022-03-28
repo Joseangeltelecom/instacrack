@@ -16,7 +16,14 @@ export const AppRouter = () => {
   const { user } = useAuth()
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
+      <Route
+        path="/"
+        element={
+          <PublicRoute>
+            <Login />
+          </PublicRoute>
+        }
+      />
       <Route
         path="/register"
         element={

@@ -27,16 +27,34 @@ export function AuthProvider({ children }) {
   const signup = async (email, password, username, fullname) => {
     const { user } = await createUserWithEmailAndPassword(auth, email, password)
     const userRef = doc(db, "users", user.uid)
-    setDoc(userRef, { username: username, fullname: fullname }, { merge: true })
+    setDoc(
+      userRef,
+      {
+        username: username,
+        fullname: fullname,
+        imgProfile:
+          "https://elcomercio.pe/resizer/1AdR3_S-R4ZELHQ6WkNRGhkZhdc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BH5EJQD2ZZF5XGJM2AHNJW7HUI.jpg",
+      },
+      { merge: true }
+    )
   }
-
   const login = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password)
   }
 
-  const loginWithGoogle = () => {
+  const loginWithGoogle = async () => {
     const googleProvider = new GoogleAuthProvider()
-    return signInWithPopup(auth, googleProvider)
+    const { user } = await signInWithPopup(auth, googleProvider)
+    const userRef = doc(db, "users", user.uid)
+    setDoc(
+      userRef,
+      {
+        username: user.displayName,
+        fullname: user.displayName,
+        imgProfile: user.photoURL,
+      },
+      { merge: true }
+    )
   }
 
   const logout = () => {
@@ -55,6 +73,7 @@ export function AuthProvider({ children }) {
         setLoading(false)
       } else {
         setUser(null)
+        setLoading(false)
       }
     })
     return () => unsubuscribe() // Cuando el componente es desmontado que deje de escuchar.
@@ -68,6 +87,7 @@ export function AuthProvider({ children }) {
         user,
         logout,
         loading,
+        setLoading,
         loginWithGoogle,
         resetPassword,
       }}
