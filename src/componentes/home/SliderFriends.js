@@ -39,7 +39,7 @@ function SliderFriends() {
           slidesToScroll={3}
           scrollLock
           duration={3}
-          // className="d-flex"
+          className="d-flex"
         >
           {filterUsers.map((friend) => {
             return (
