@@ -22,9 +22,7 @@ export const UserChange = () => {
       </Link>
       <div className="username-container">
         <Link to="/profile" style={{ color: "black" }}>
-          {user.extrainfo
-            ? user.extrainfo.username
-            : user.currentUser.displayName}
+          {user.extrainfo ? user.extrainfo.username : ""}
         </Link>
         <span className="username-gray">
           {user.extrainfo ? user.extrainfo.fullname : ""}

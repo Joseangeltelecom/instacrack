@@ -6,6 +6,7 @@ import "glider-js/glider.min.css"
 import { collection, onSnapshot } from "firebase/firestore"
 import { useAuth } from "../../context/AuthContext"
 import { db } from "../../firebase"
+import { Link, useParams } from "react-router-dom"
 
 function SliderFriends() {
   const [users, setUsers] = useState([])
@@ -13,6 +14,9 @@ function SliderFriends() {
   const filterUsers = users.filter((u) => {
     return u.id !== user.currentUser.uid
   })
+
+  const params = useParams()
+  console.log(params)
 
   useEffect(() => {
     const addUsersFriends = onSnapshot(collection(db, "users"), (snapshot) =>
@@ -35,18 +39,19 @@ function SliderFriends() {
           slidesToScroll={3}
           scrollLock
           duration={3}
-          className="d-flex border-none"
+          // className="d-flex"
         >
           {filterUsers.map((friend) => {
             return (
               <div className="image-container">
-                <a href="#">
+                <Link to={`/profile/${friend.user.username}`} href="#">
                   <img
                     src={friend.user.imgProfile}
                     alt="Tengen Uzui bien papi"
                   />
-                </a>
-                <span>{friend.user.username}</span>
+
+                  <span>{friend.user.username}</span>
+                </Link>
               </div>
             )
           })}

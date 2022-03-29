@@ -1,6 +1,6 @@
 import React from "react"
 
-export const PostProfile = (props) => {
+export const PostProfileOthers = (props) => {
   return (
     <div
       class="row justify-content-center"
@@ -20,10 +20,12 @@ export const PostProfile = (props) => {
         }}
       >
         <a href="" style={{ margin: "12px" }}>
-          <img
-            src={props.imagePostUrl}
-            style={{ width: "270px", height: "270px" }}
-          />
+          {props.imagePostUrl && (
+            <img
+              src={props.imagePostUrl}
+              style={{ width: "270px", height: "270px" }}
+            />
+          )}
         </a>
       </div>
     </div>

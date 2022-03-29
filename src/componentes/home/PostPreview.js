@@ -11,11 +11,11 @@ export const PostPreview = (props) => {
     <>
       <div className="container">
         <div className="header">
-          <Link to="/profile">
+          <Link to={`/profile/${props.username}`}>
             <img src={props.imgProfile} />
           </Link>
 
-          <Link style={{ color: "black" }} to="/profile">
+          <Link style={{ color: "black" }} to={`/profile/${props.username}`}>
             <b>{props.username}</b>
           </Link>
         </div>

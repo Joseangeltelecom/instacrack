@@ -1,9 +1,11 @@
 import { FolderOutlined, TableOutlined } from "@ant-design/icons"
 import React from "react"
-import { NavLink } from "react-router-dom"
+import { NavLink, useParams } from "react-router-dom"
 import "../../styles/navbarprofile.css"
 
-export const NavbarProfile = () => {
+export const NavbarProfileOthers = () => {
+  const { username } = useParams()
+  console.log(" username ", username)
   return (
     <>
       <div
@@ -19,7 +21,7 @@ export const NavbarProfile = () => {
           }}
         >
           <TableOutlined style={{ color: "gray" }} />
-          <NavLink to="/profile" className="navlink">
+          <NavLink to={`/profile/${username}`} className="navlink">
             PUBLICACIONES
           </NavLink>
         </div>

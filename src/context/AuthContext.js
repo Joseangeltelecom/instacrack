@@ -50,7 +50,7 @@ export function AuthProvider({ children }) {
       userRef,
       {
         username: user.displayName,
-        fullname: user.displayName,
+        fullname: null,
         imgProfile: user.photoURL,
       },
       { merge: true }

@@ -11,6 +11,7 @@ import ResetPassword from "../pages/ResetPassword"
 import PublicRoute from "./PublicRoute"
 import ProtectedRoute from "./ProtectedRoute"
 import { useAuth } from "../context/AuthContext"
+import { ProfileOthers } from "../componentes/profileOhers/ProfileOthers"
 
 export const AppRouter = () => {
   const { user } = useAuth()
@@ -48,6 +49,15 @@ export const AppRouter = () => {
         element={
           <ProtectedRoute>
             <Profile />
+          </ProtectedRoute>
+        }
+      />
+      ProfileOthers
+      <Route
+        path="/profile/:username"
+        element={
+          <ProtectedRoute>
+            <ProfileOthers />
           </ProtectedRoute>
         }
       />
