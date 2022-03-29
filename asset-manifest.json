@@ -1,7 +1,7 @@
 {
   "main.css": "/instacrack/static/css/main.07da08d2.chunk.css",
-  "main.js": "/instacrack/static/js/main.846cbdb2.chunk.js",
-  "main.js.map": "/instacrack/static/js/main.846cbdb2.chunk.js.map",
+  "main.js": "/instacrack/static/js/main.faae0b1f.chunk.js",
+  "main.js.map": "/instacrack/static/js/main.faae0b1f.chunk.js.map",
   "static/css/1.d1c38f8f.chunk.css": "/instacrack/static/css/1.d1c38f8f.chunk.css",
   "static/js/1.6166a4e9.chunk.js": "/instacrack/static/js/1.6166a4e9.chunk.js",
   "static/js/1.6166a4e9.chunk.js.map": "/instacrack/static/js/1.6166a4e9.chunk.js.map",
@@ -10,6 +10,6 @@
   "static/css/main.07da08d2.chunk.css.map": "/instacrack/static/css/main.07da08d2.chunk.css.map",
   "static/css/1.d1c38f8f.chunk.css.map": "/instacrack/static/css/1.d1c38f8f.chunk.css.map",
   "index.html": "/instacrack/index.html",
-  "precache-manifest.526d5573699a870bb1ad22e8311e5453.js": "/instacrack/precache-manifest.526d5573699a870bb1ad22e8311e5453.js",
+  "precache-manifest.ffa54dceb265d6e7298a96da1f20d163.js": "/instacrack/precache-manifest.ffa54dceb265d6e7298a96da1f20d163.js",
   "service-worker.js": "/instacrack/service-worker.js"
 }
