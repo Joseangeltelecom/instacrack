@@ -5,3 +5,35 @@
   flex-direction: column;
   background: #fafafa;
 }
+
+.amigos-chat:hover {
+  background-color: #efefef;
+}
+
+.chat-div-user {
+  max-width: 45%;
+  background-color: #efefef;
+  text-align: right;
+  margin: 5px 0 0 52%;
+  padding: 5px 8px;
+  height: auto;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+}
+
+.chat-div-sender {
+  max-width: 45%;
+  border: 1px solid rgb(0, 0, 0, 0.1);
+  text-align: left;
+  margin: 5px 0 0 3%;
+  padding: 5px 8px;
+  height: auto;
+  border-radius: 0.5rem;
+  word-wrap: break-word;
+}
+
+#chat-info {
+  font-size: 10px;
+}
