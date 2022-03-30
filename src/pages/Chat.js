@@ -225,7 +225,7 @@ function Chat() {
                         {c.from} on
                         <span>
                           {" "}
-                          <Moment format="MMMM DD, YYYY HH:mm">{c.time}</Moment>
+                          {/* <Moment format="MMMM DD, YYYY HH:mm">{c.time}</Moment> */}
                         </span>
                       </b>
                       <br />
@@ -238,7 +238,7 @@ function Chat() {
                       <b>
                         {c.from} on{" "}
                         <span>
-                          <Moment format="MMMM DD, YYYY HH:mm">{c.time}</Moment>
+                          {/* <Moment format="MMMM DD, YYYY HH:mm">{c.time}</Moment> */}
                         </span>
                       </b>
                       <br />
