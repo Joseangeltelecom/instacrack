@@ -11,7 +11,6 @@ import {
   collection,
   getDocs,
   onSnapshot,
-  orderBy,
   query,
 } from "firebase/firestore";
 import { db } from "../firebase";
