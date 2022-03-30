@@ -10,6 +10,7 @@ import { useAuth } from "../context/AuthContext"
 
 function Home() {
   const [postPreview, setPostPreview] = useState([])
+
   const { user } = useAuth()
 
   console.log("user.displayName", user.currentUser)
@@ -32,7 +33,7 @@ function Home() {
       <div className="post">
         <SliderFriends />
         {postPreview.map(({ id, post }) => (
-          <PostPreview key={id} {...post} />
+          <PostPreview key={id} post={post} postId={id} />
         ))}
       </div>
       <div>
