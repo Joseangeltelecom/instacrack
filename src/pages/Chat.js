@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react"
 import { DownOutlined, SendOutlined } from "@ant-design/icons"
-// import Moment from "react-moment"
+import moment from "moment"
 import { Button, Input } from "antd"
 import Navbar from "../componentes/Navbar"
 import { ModalChangeUser } from "../componentes/Profile/ModalChangeUser"
@@ -222,11 +222,7 @@ function Chat() {
                   <div className="chat-div-user" key={c.time}>
                     <div id="chat-info">
                       <b>
-                        {c.from} on
-                        <span>
-                          {" "}
-                          {/* <Moment format="MMMM DD, YYYY HH:mm">{c.time}</Moment> */}
-                        </span>
+                        {c.from} on <span>{moment(c.time).format("lll")}</span>
                       </b>
                       <br />
                     </div>
@@ -236,10 +232,7 @@ function Chat() {
                   <div className="chat-div-sender" key={c.time}>
                     <div id="chat-info">
                       <b>
-                        {c.from} on{" "}
-                        <span>
-                          {/* <Moment format="MMMM DD, YYYY HH:mm">{c.time}</Moment> */}
-                        </span>
+                        {c.from} on <span>{moment(c.time).format("lll")}</span>
                       </b>
                       <br />
                     </div>
