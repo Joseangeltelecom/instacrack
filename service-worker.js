@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/instacrack/precache-manifest.9446aca944521eebabdaacc607677573.js"
+  "/instacrack/precache-manifest.27d45b70622bbec408ed0eeb54eec62f.js"
 );
 
 workbox.clientsClaim();
