@@ -5,7 +5,7 @@ import { UserChange } from "../componentes/home/UserChange"
 import Navbar from "../componentes/Navbar"
 import { db } from "../firebase"
 import "../styles/home/home.css"
-import { collection, onSnapshot } from "firebase/firestore"
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore"
 import { useAuth } from "../context/AuthContext"
 
 function Home() {
@@ -13,10 +13,12 @@ function Home() {
 
   const { user } = useAuth()
 
-  console.log("user.displayName", user.currentUser)
-
   useEffect(() => {
-    const unsubuscribe = onSnapshot(collection(db, "postPreview"), (snapshot) =>
+    const recentMessagesQuery = query(
+      collection(db, "postPreview"),
+      orderBy("timestamp", "desc")
+    )
+    const unsubuscribe = onSnapshot(recentMessagesQuery, (snapshot) =>
       setPostPreview(
         snapshot.docs.map((doc) => ({
           id: doc.id,

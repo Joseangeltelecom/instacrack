@@ -79,3 +79,12 @@
   width: 30%;
   text-align: center;
 }
+
+.like {
+  border: none;
+  background-color: transparent;
+}
+
+.liked {
+  color: #fb3958;
+}
