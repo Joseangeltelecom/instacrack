@@ -11,7 +11,6 @@ import {
   collection,
   getDocs,
   onSnapshot,
-  orderBy,
   query,
 } from "firebase/firestore"
 import { db } from "../firebase"
@@ -271,7 +270,18 @@ function Chat() {
                 }}
                 onSubmit={handleSubmit}
               >
-                <TextArea
+                {/* <TextArea
+                  placeholder="Escribe tu mensaje aqui..."
+                  autoSize
+                  rows={1}
+                  bordered={false}
+                  value={messageToSave}
+                  onChange={(e) => {
+                    setMessageToSave(e.target.value)
+                  }}
+                  style={{ width: "90%" }}
+                /> */}
+                <textarea
                   placeholder="Escribe tu mensaje aqui..."
                   autoSize
                   rows={1}
@@ -282,8 +292,8 @@ function Chat() {
                   }}
                   style={{ width: "90%" }}
                 />
-                <Button
-                  type="default"
+                {/* <button
+                  type="submit"
                   shape="circle"
                   icon={
                     <SendOutlined
@@ -293,7 +303,8 @@ function Chat() {
                     />
                   }
                   htmlType="submit"
-                />
+                /> */}
+                <input type="submit" value="Submit" />
               </form>
             </div>
           </div>

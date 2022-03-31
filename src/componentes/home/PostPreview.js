@@ -6,10 +6,13 @@ import { db } from "../../firebase"
 import {
   addDoc,
   collection,
+  deleteDoc,
+  doc,
   onSnapshot,
   orderBy,
   query,
   serverTimestamp,
+  setDoc,
 } from "firebase/firestore"
 import { Button } from "antd"
 
@@ -42,6 +45,25 @@ export const PostPreview = (props) => {
     }
   }, [props.postId])
 
+  // Retriving Likes:
+  useEffect(() => {
+    if (props.postId) {
+      const recentMessagesQuery = query(
+        collection(db, "postPreview", props.postId, "likes")
+      )
+      onSnapshot(recentMessagesQuery, (snapshot) => {
+        if (snapshot.docs.some((like) => like.id === user.currentUser.uid))
+          setLiked(true)
+        setLikes(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+        )
+      })
+    }
+  }, [props.postId])
+
   // Adding a comment:
   const postComment = (e) => {
     e.preventDefault()
@@ -63,11 +85,24 @@ export const PostPreview = (props) => {
     )
   }
 
-  // Giving a like:
+  // Handling Like / dislike:
   const handleLike = (e) => {
-    const likeRef = collection(db, "postPreview", props.postId, "likes")
-    addDoc(likeRef, { like: user.currentUser.uid }, { merge: true })
-    setLiked(true)
+    if (liked) {
+      deleteDoc(
+        doc(db, "postPreview", props.postId, "likes", user.currentUser.uid)
+      )
+      setLiked(false)
+    } else {
+      const likeRef = doc(
+        db,
+        "postPreview",
+        props.postId,
+        "likes",
+        user.currentUser.uid
+      )
+      setDoc(likeRef, { like: user.currentUser.uid }, { merge: true })
+      setLiked(true)
+    }
   }
 
   return (
@@ -87,13 +122,6 @@ export const PostPreview = (props) => {
         </div>
         <img className="post-photo" src={props.post.imagePostUrl} />
 
-        {/* <div className="likes">
-          <HeartOutlined onClick={handleLike} style={{ fontSize: "30px" }} />
-          <span className="likes-count">
-            <b>{props.post.likes}</b>
-          </span>
-        </div> */}
-
         <button className="like" onClick={handleLike}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -108,6 +136,7 @@ export const PostPreview = (props) => {
 
           <span className="px-2">{likes.length}</span>
         </button>
+
         <div className="comment-post-user">
           <span>
             <b>{props.post.username}</b> {props.post.caption}
