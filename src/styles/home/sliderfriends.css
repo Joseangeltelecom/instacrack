@@ -1,19 +1,16 @@
 .carrusel {
   width: 100%;
-  /* background-color: pink; */
-  /* height: 120px; */
+  background-color: pink;
+  height: 120px;
   margin-top: 15px;
   display: flex;
   align-items: center;
+  justify-content: center;
   border: 1px solid #d1811b;
 }
 
-.image-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0;
-  padding: 4px;
+/* .glider-track {
+  width: auto;
 }
 
 .image-container img {
@@ -23,15 +20,69 @@
   border: 2px solid #6bd125;
   padding: 3px;
   margin: 0;
-}
+} */
 
 /* ------------------------------ */
 
-.carrusel .glider-contain {
-  /* background-color: blueviolet; */
+/* .glider-contain {
+  background-color: blueviolet;
   width: 90%;
+  display: flex;
+  overflow-x: hidden;
+} */
+
+/* .glider-track .glider-slide {
+  min-width: 107px;
+  background-color: aqua;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 4px;
+}  */
+
+/* .carrusel .glider-contain {
+  width: 90%;
+  height: 120px;
+  background-color: blueviolet;
+  display: flex;
+  align-items: center;
+} */
+
+/* .glider {
+  height: 100%;
+  display: flex;
+  align-items: center;
+} */
+
+/* .glider .glider-track {
+  height: 100px;
+  background-color: aqua;
+  width: 300px;
+  display: flex;
+} */
+
+/* .glider .glider-slide {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+} */
+
+.imagen {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  border: 2px solid #6bd125;
+  padding: 3px;
+  margin: 0;
 }
 
-.glider-track .glider-slide {
-  min-width: 107px;
+.container-friend {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
