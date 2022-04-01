@@ -18,24 +18,25 @@ import { Link, useParams } from "react-router-dom"
 
 const { TextArea } = Input
 
-function Chat() {
+export function ChatByPerson() {
   const { user } = useAuth()
   const [users, setUsers] = useState([])
   const [chatData, setChatData] = useState([])
   const [messageToSave, setMessageToSave] = useState("")
   const chatRef = useRef()
 
-  const { username } = useParams()
-
   const filterUsers = users.filter((u) => {
     return u.id !== user.currentUser.uid
   })
-  // const filteredData = chatData.filter((d) => {
-  //   return d.from === user.currentUser.uid && d.from === username
-  // })
 
-  console.log("chatData", chatData)
+  const { username } = useParams()
 
+  const filteredData = chatData.filter((d) => {
+    return d.from === username
+  })
+
+  console.log("filteredData", filteredData)
+  // && d.from === username
   useEffect(() => {
     const addUsersFriends = onSnapshot(collection(db, "users"), (snapshot) =>
       setUsers(
@@ -196,7 +197,6 @@ function Chat() {
                   border="0"
                   style={{ height: "60px", width: "60px", borderRadius: "50%" }}
                 />
-
                 <span href="" style={{ color: "black", marginLeft: "10px" }}>
                   {friend.user.username}
                 </span>
@@ -223,7 +223,7 @@ function Chat() {
             }}
           >
             {/* Usuario chat */}
-            {/* {filteredData
+            {filteredData
               .sort((a, b) => a.time - b.time)
               .map((c) =>
                 c.from === user.extrainfo.username ? (
@@ -247,7 +247,7 @@ function Chat() {
                     {c.message}
                   </div>
                 )
-              )} */}
+              )}
           </div>
           <div
             style={{
@@ -322,5 +322,3 @@ function Chat() {
     </div>
   )
 }
-
-export default Chat

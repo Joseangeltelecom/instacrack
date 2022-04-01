@@ -12,6 +12,7 @@ import PublicRoute from "./PublicRoute"
 import ProtectedRoute from "./ProtectedRoute"
 import { useAuth } from "../context/AuthContext"
 import { ProfileOthers } from "../componentes/profileOhers/ProfileOthers"
+import { ChatByPerson } from "../pages/ChatByPerson"
 
 export const AppRouter = () => {
   const { user } = useAuth()
@@ -52,7 +53,6 @@ export const AppRouter = () => {
           </ProtectedRoute>
         }
       />
-      ProfileOthers
       <Route
         path="/profile/:username"
         element={
@@ -66,6 +66,14 @@ export const AppRouter = () => {
         element={
           <ProtectedRoute>
             <Chat />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/chat/:username"
+        element={
+          <ProtectedRoute>
+            <ChatByPerson />
           </ProtectedRoute>
         }
       />
