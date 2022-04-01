@@ -1,32 +1,32 @@
-import React, { useEffect, useRef, useState } from "react"
-import { DownOutlined, SendOutlined } from "@ant-design/icons"
-import moment from "moment"
-import { Button, Input } from "antd"
-import Navbar from "../componentes/Navbar"
-import { ModalChangeUser } from "../componentes/Profile/ModalChangeUser"
-import { useAuth } from "../context/AuthContext"
-import "../styles/app.css"
+import React, { useEffect, useRef, useState } from "react";
+import { DownOutlined, SendOutlined } from "@ant-design/icons";
+import moment from "moment";
+import { Button, Input } from "antd";
+import Navbar from "../componentes/Navbar";
+import { ModalChangeUser } from "../componentes/Profile/ModalChangeUser";
+import { useAuth } from "../context/AuthContext";
+import "../styles/app.css";
 import {
   addDoc,
   collection,
   getDocs,
   onSnapshot,
   query,
-} from "firebase/firestore"
-import { db } from "../firebase"
+} from "firebase/firestore";
+import { db } from "../firebase";
 
-const { TextArea } = Input
+const { TextArea } = Input;
 
 function Chat() {
-  const { user } = useAuth()
-  const [users, setUsers] = useState([])
-  const [chatData, setChatData] = useState([])
-  const [messageToSave, setMessageToSave] = useState("")
-  const chatRef = useRef()
+  const { user } = useAuth();
+  const [users, setUsers] = useState([]);
+  const [chatData, setChatData] = useState([]);
+  const [messageToSave, setMessageToSave] = useState("");
+  const chatRef = useRef();
 
   const filterUsers = users.filter((u) => {
-    return u.id !== user.currentUser.uid
-  })
+    return u.id !== user.currentUser.uid;
+  });
 
   useEffect(() => {
     const addUsersFriends = onSnapshot(collection(db, "users"), (snapshot) =>
@@ -36,61 +36,61 @@ function Chat() {
           user: doc.data(),
         }))
       )
-    )
+    );
 
-    getChatHistory()
-    return () => addUsersFriends()
-  }, [])
+    getChatHistory();
+    return () => addUsersFriends();
+  }, []);
 
   // MENSAJES
   // saving message
   const sendMessage = async (from, message) => {
     try {
-      if (message === "") return
+      if (message === "") return;
       const docRef = await addDoc(collection(db, "ChatDevApp"), {
         from: from,
         time: Date.now(),
         message: message,
-      })
+      });
     } catch (error) {
-      console.error("error sending message", error)
+      console.error("error sending message", error);
     }
-  }
+  };
 
   const getChatHistory = async () => {
     try {
-      const querySnapshot = await getDocs(collection(db, "ChatDevApp"))
-      let tempChatData = []
+      const querySnapshot = await getDocs(collection(db, "ChatDevApp"));
+      let tempChatData = [];
       querySnapshot.forEach((doc) => {
         if (doc.exists()) {
-          tempChatData.push({ id: doc.id, ...doc.data() })
+          tempChatData.push({ id: doc.id, ...doc.data() });
         }
-      })
-      setChatData([...tempChatData])
+      });
+      setChatData([...tempChatData]);
     } catch (error) {
-      console.log("error al obtener mensaje", error)
+      console.log("error al obtener mensaje", error);
     }
-  }
+  };
 
   const updateChatHistory = () => {
-    const q = query(collection(db, "ChatDevApp"))
+    const q = query(collection(db, "ChatDevApp"));
     onSnapshot(q, (querySnapshot) => {
-      let tempChatData = []
+      let tempChatData = [];
       querySnapshot.forEach((doc) => {
-        tempChatData.push({ id: doc.id, ...doc.data() })
-        setChatData([...tempChatData])
-      })
-      chatRef.current.scrollTop = chatRef.current.scrollHeight
-    })
-  }
+        tempChatData.push({ id: doc.id, ...doc.data() });
+        setChatData([...tempChatData]);
+      });
+      chatRef.current.scrollTop = chatRef.current.scrollHeight;
+    });
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    const userName = user.extrainfo.username
-    setMessageToSave("")
-    await sendMessage(userName, messageToSave)
-    updateChatHistory()
-  }
+    e.preventDefault();
+    const userName = user.extrainfo.username;
+    setMessageToSave("");
+    await sendMessage(userName, messageToSave);
+    updateChatHistory();
+  };
 
   return (
     <div
@@ -288,7 +288,7 @@ function Chat() {
                   bordered={false}
                   value={messageToSave}
                   onChange={(e) => {
-                    setMessageToSave(e.target.value)
+                    setMessageToSave(e.target.value);
                   }}
                   style={{ width: "90%" }}
                 />
@@ -311,7 +311,7 @@ function Chat() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Chat
+export default Chat;
