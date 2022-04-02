@@ -20,3 +20,15 @@
 .post::-webkit-scrollbar {
   display: none;
 }
+
+.user_status {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.online {
+  background: #34eb52;
+}
+.offline {
+  background: red;
+}

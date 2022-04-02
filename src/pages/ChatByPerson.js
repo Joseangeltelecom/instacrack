@@ -25,6 +25,7 @@ export function ChatByPerson() {
   const [messageToSave, setMessageToSave] = useState("")
   const chatRef = useRef()
 
+  console.log("user", user)
   const filterUsers = users.filter((u) => {
     return u.id !== user.currentUser.uid
   })
@@ -200,6 +201,11 @@ export function ChatByPerson() {
                 <span href="" style={{ color: "black", marginLeft: "10px" }}>
                   {friend.user.username}
                 </span>
+                <div
+                  className={`user_status ${
+                    friend.user.isOnline ? "online" : "offline"
+                  }`}
+                ></div>
               </Link>
             </div>
           ))}

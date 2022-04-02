@@ -200,6 +200,11 @@ function Chat() {
                 <span href="" style={{ color: "black", marginLeft: "10px" }}>
                   {friend.user.username}
                 </span>
+                <div
+                  className={`user_status ${
+                    friend.user.isOnline ? "online" : "offline"
+                  }`}
+                ></div>
               </Link>
             </div>
           ))}

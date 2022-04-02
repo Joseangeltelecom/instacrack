@@ -10,7 +10,7 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth"
 import { auth, db } from "../firebase"
-import { doc, getDoc, setDoc } from "firebase/firestore"
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore"
 
 const authContext = createContext()
 
@@ -30,6 +30,7 @@ export function AuthProvider({ children }) {
     setDoc(
       userRef,
       {
+        isOnline: true,
         username: username,
         fullname: fullname,
         imgProfile:
@@ -49,6 +50,7 @@ export function AuthProvider({ children }) {
     setDoc(
       userRef,
       {
+        isOnline: true,
         username: user.displayName,
         fullname: null,
         imgProfile: user.photoURL,
@@ -57,7 +59,10 @@ export function AuthProvider({ children }) {
     )
   }
 
-  const logout = () => {
+  const logout = async () => {
+    await updateDoc(doc(db, "users", user.currentUser.uid), {
+      isOnline: false,
+    })
     signOut(auth)
     setUser(null)
   }
