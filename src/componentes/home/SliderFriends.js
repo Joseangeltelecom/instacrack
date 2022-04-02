@@ -31,7 +31,7 @@ function SliderFriends() {
   const slideshow = useRef(null);
 
   const next = () => {
-    if (slideshow.current.children.length > 5) {
+    if (slideshow.current.children.length > 6) {
       const primerElemento = slideshow.current.children[0];
       const segundoElemento = slideshow.current.children[1];
       slideshow.current.style.transition = `600ms ease-out all`;
@@ -48,11 +48,26 @@ function SliderFriends() {
       };
 
       slideshow.current.addEventListener("transitionend", transition);
+    } else if (slideshow.current.children.length == 6) {
+      const primerElemento = slideshow.current.children[0];
+      slideshow.current.style.transition = `600ms ease-out all`;
+      const tamanioSlide = slideshow.current.children[0].offsetWidth;
+
+      slideshow.current.style.transform = `translateX(-${tamanioSlide}px)`;
+
+      const transition = () => {
+        slideshow.current.style.transition = "none";
+        slideshow.current.style.transform = `translateX(0)`;
+        slideshow.current.appendChild(primerElemento);
+        slideshow.current.removeEventListener("transitionend", transition);
+      };
+
+      slideshow.current.addEventListener("transitionend", transition);
     }
   };
 
   const prev = () => {
-    if (slideshow.current.children.length > 5) {
+    if (slideshow.current.children.length > 6) {
       const index1 = slideshow.current.children.length - 1;
       const index2 = slideshow.current.children.length - 2;
       const ultimoElemento1 = slideshow.current.children[index1];
@@ -69,6 +84,22 @@ function SliderFriends() {
       slideshow.current.style.transition = "none";
       const tamanioSlide = slideshow.current.children[0].offsetWidth;
       slideshow.current.style.transform = `translateX(-${tamanioSlide * 2}px)`;
+
+      setTimeout(() => {
+        slideshow.current.style.transition = `600ms ease-out all`;
+        slideshow.current.style.transform = `translateX(0)`;
+      }, 30);
+    } else if (slideshow.current.children.length == 6) {
+      const index1 = slideshow.current.children.length - 1;
+      const ultimoElemento1 = slideshow.current.children[index1];
+      slideshow.current.insertBefore(
+        ultimoElemento1,
+        slideshow.current.firstChild
+      );
+
+      slideshow.current.style.transition = "none";
+      const tamanioSlide = slideshow.current.children[0].offsetWidth;
+      slideshow.current.style.transform = `translateX(-${tamanioSlide}px)`;
 
       setTimeout(() => {
         slideshow.current.style.transition = `600ms ease-out all`;
