@@ -126,42 +126,45 @@ export function Chat2() {
   }
 
   return (
-    <div className="home_container">
-      <div className="users_container">
-        {users.map((user) => (
-          <User
-            key={user.uid}
-            user={user}
-            selectUser={selectUser}
-            user1={user1}
-            chat={chat}
-          />
-        ))}
-      </div>
-      <div className="messages_container">
-        {chat ? (
-          <>
-            <div className="messages_user">
-              <h3>{chat.name}</h3>
-            </div>
-            <div className="messages">
-              {msgs.length
-                ? msgs.map((msg, i) => (
-                    <Message key={i} msg={msg} user1={user1} />
-                  ))
-                : null}
-            </div>
-            <MessageForm
-              handleSubmit={handleSubmit}
-              text={text}
-              setText={setText}
-              setImg={setImg}
+    <>
+      <Navbar />
+      <div className="home_container">
+        <div className="users_container">
+          {users.map((user) => (
+            <User
+              key={user.uid}
+              user={user}
+              selectUser={selectUser}
+              user1={user1}
+              chat={chat}
             />
-          </>
-        ) : (
-          <h3 className="no_conv">Select a user to start conversation</h3>
-        )}
+          ))}
+        </div>
+        <div className="messages_container">
+          {chat ? (
+            <>
+              <div className="messages_user">
+                <h3>{chat.name}</h3>
+              </div>
+              <div className="messages">
+                {msgs.length
+                  ? msgs.map((msg, i) => (
+                      <Message key={i} msg={msg} user1={user1} />
+                    ))
+                  : null}
+              </div>
+              <MessageForm
+                handleSubmit={handleSubmit}
+                text={text}
+                setText={setText}
+                setImg={setImg}
+              />
+            </>
+          ) : (
+            <h3 className="no_conv">Select a user to start conversation</h3>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   )
 }
