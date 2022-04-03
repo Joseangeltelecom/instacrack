@@ -25,19 +25,12 @@ export function ChatByPerson() {
   const [messageToSave, setMessageToSave] = useState("")
   const chatRef = useRef()
 
-  console.log("user", user)
   const filterUsers = users.filter((u) => {
     return u.id !== user.currentUser.uid
   })
 
-  const { username } = useParams()
+  const { uid } = useParams()
 
-  const filteredData = chatData.filter((d) => {
-    return d.from === username
-  })
-
-  console.log("filteredData", filteredData)
-  // && d.from === username
   useEffect(() => {
     const addUsersFriends = onSnapshot(collection(db, "users"), (snapshot) =>
       setUsers(
@@ -55,10 +48,15 @@ export function ChatByPerson() {
   // MENSAJES
   // saving message
   const sendMessage = async (from, message) => {
+    const id =
+      user.currentUser.uid > uid
+        ? `${user.currentUser.uid + uid}`
+        : `${uid + user.currentUser.uid}`
     try {
       if (message === "") return
-      const docRef = await addDoc(collection(db, "ChatDevApp"), {
+      await addDoc(collection(db, "messages", id, "chat"), {
         from: from,
+        to: uid,
         time: Date.now(),
         message: message,
       })
@@ -68,8 +66,12 @@ export function ChatByPerson() {
   }
 
   const getChatHistory = async () => {
+    const id =
+      user.currentUser.uid > uid
+        ? `${user.currentUser.uid + uid}`
+        : `${uid + user.currentUser.uid}`
     try {
-      const querySnapshot = await getDocs(collection(db, "ChatDevApp"))
+      const querySnapshot = await getDocs(db, "messages", id, "chat")
       let tempChatData = []
       querySnapshot.forEach((doc) => {
         if (doc.exists()) {
@@ -83,7 +85,11 @@ export function ChatByPerson() {
   }
 
   const updateChatHistory = () => {
-    const q = query(collection(db, "ChatDevApp"))
+    const id =
+      user.currentUser.uid > uid
+        ? `${user.currentUser.uid + uid}`
+        : `${uid + user.currentUser.uid}`
+    const q = query(collection(db, "messages", id, "chat"))
     onSnapshot(q, (querySnapshot) => {
       let tempChatData = []
       querySnapshot.forEach((doc) => {
@@ -94,11 +100,13 @@ export function ChatByPerson() {
     })
   }
 
+  console.log("DEMOSTRACION", user.currentUser.uid)
+
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const userName = user.extrainfo.username
+    const user1 = user.currentUser.uid
     setMessageToSave("")
-    await sendMessage(userName, messageToSave)
+    await sendMessage(user1, messageToSave)
     updateChatHistory()
   }
 
@@ -191,7 +199,7 @@ export function ChatByPerson() {
                 height: "80px",
               }}
             >
-              <Link to={`/chat/${friend.user.username}`} href="#">
+              <Link to={`/chat/${friend.id}`} href="#">
                 <img
                   src={friend.user.imgProfile}
                   alt="fondo-jean-2"
@@ -229,7 +237,7 @@ export function ChatByPerson() {
             }}
           >
             {/* Usuario chat */}
-            {filteredData
+            {chatData
               .sort((a, b) => a.time - b.time)
               .map((c) =>
                 c.from === user.extrainfo.username ? (

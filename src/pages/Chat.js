@@ -9,323 +9,159 @@ import "../styles/app.css"
 import {
   addDoc,
   collection,
+  doc,
+  getDoc,
   getDocs,
   onSnapshot,
+  orderBy,
   query,
+  setDoc,
+  Timestamp,
+  updateDoc,
+  where,
 } from "firebase/firestore"
-import { db } from "../firebase"
+import { db, storage } from "../firebase"
 import { Link, useParams } from "react-router-dom"
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
+import Message from "../componentes/Chat/Message"
+import MessageForm from "../componentes/Chat/MessageForm"
+import User from "../componentes/Chat/User"
 
 const { TextArea } = Input
 
-function Chat() {
+export function Chat2() {
   const { user } = useAuth()
   const [users, setUsers] = useState([])
-  const [chatData, setChatData] = useState([])
-  const [messageToSave, setMessageToSave] = useState("")
+  const [chat, setChat] = useState("")
+  const [text, setText] = useState("")
+  const [img, setImg] = useState("")
+  const [msgs, setMsgs] = useState([])
+
   const chatRef = useRef()
+  const user1 = user.currentUser.uid
+  const { uid } = useParams()
 
-  const { username } = useParams()
-
-  const filterUsers = users.filter((u) => {
-    return u.id !== user.currentUser.uid
-  })
-  // const filteredData = chatData.filter((d) => {
-  //   return d.from === user.currentUser.uid && d.from === username
-  // })
-
-  console.log("chatData", chatData)
+  console.log("user1", user1)
+  console.log("users", users)
 
   useEffect(() => {
-    const addUsersFriends = onSnapshot(collection(db, "users"), (snapshot) =>
-      setUsers(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          user: doc.data(),
-        }))
-      )
-    )
-
-    getChatHistory()
-    return () => addUsersFriends()
+    const usersRef = collection(db, "users")
+    // create query object
+    const q = query(usersRef, where("uid", "not-in", [user1]))
+    // execute query
+    const unsub = onSnapshot(q, (querySnapshot) => {
+      console.log(querySnapshot)
+      let users = []
+      querySnapshot.forEach((doc) => {
+        users.push(doc.data())
+      })
+      setUsers(users)
+    })
+    return () => unsub()
   }, [])
 
-  // MENSAJES
-  // saving message
-  const sendMessage = async (from, message) => {
-    try {
-      if (message === "") return
-      const docRef = await addDoc(collection(db, "ChatDevApp"), {
-        from: from,
-        time: Date.now(),
-        message: message,
-      })
-    } catch (error) {
-      console.error("error sending message", error)
-    }
-  }
+  const selectUser = async (user) => {
+    setChat(user)
 
-  const getChatHistory = async () => {
-    try {
-      const querySnapshot = await getDocs(collection(db, "ChatDevApp"))
-      let tempChatData = []
-      querySnapshot.forEach((doc) => {
-        if (doc.exists()) {
-          tempChatData.push({ id: doc.id, ...doc.data() })
-        }
-      })
-      setChatData([...tempChatData])
-    } catch (error) {
-      console.log("error al obtener mensaje", error)
-    }
-  }
+    const user2 = user.uid
+    const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`
 
-  const updateChatHistory = () => {
-    const q = query(collection(db, "ChatDevApp"))
+    const msgsRef = collection(db, "messages", id, "chat")
+    const q = query(msgsRef, orderBy("createdAt", "asc"))
+
     onSnapshot(q, (querySnapshot) => {
-      let tempChatData = []
+      let msgs = []
       querySnapshot.forEach((doc) => {
-        tempChatData.push({ id: doc.id, ...doc.data() })
-        setChatData([...tempChatData])
+        msgs.push(doc.data())
       })
-      chatRef.current.scrollTop = chatRef.current.scrollHeight
+      setMsgs(msgs)
     })
+
+    // get last message b/w logged in user and selected user
+    const docSnap = await getDoc(doc(db, "lastMsg", id))
+    // if last message exists and message is from selected user
+    if (docSnap.data() && docSnap.data().from !== user1) {
+      // update last message doc, set unread to false
+      await updateDoc(doc(db, "lastMsg", id), { unread: false })
+    }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const userName = user.extrainfo.username
-    setMessageToSave("")
-    await sendMessage(userName, messageToSave)
-    updateChatHistory()
+
+    const user2 = chat.uid
+
+    const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`
+
+    let url
+    if (img) {
+      const imgRef = ref(
+        storage,
+        `images/${new Date().getTime()} - ${img.name}`
+      )
+      const snap = await uploadBytes(imgRef, img)
+      const dlUrl = await getDownloadURL(ref(storage, snap.ref.fullPath))
+      url = dlUrl
+    }
+
+    await addDoc(collection(db, "messages", id, "chat"), {
+      text,
+      from: user1,
+      to: user2,
+      createdAt: Timestamp.fromDate(new Date()),
+      media: url || "",
+    })
+
+    await setDoc(doc(db, "lastMsg", id), {
+      text,
+      from: user1,
+      to: user2,
+      createdAt: Timestamp.fromDate(new Date()),
+      media: url || "",
+      unread: true,
+    })
+
+    setText("")
+    setImg("")
   }
 
   return (
-    <div
-      style={{
-        height: "100vh",
-        width: "100vw",
-        margin: "0",
-        padding: "90px 0px 0px 0px",
-        overflowX: "hidden",
-      }}
-    >
-      <Navbar />
-
-      <div class="row justify-content-center">
-        <div
-          class="col-3"
-          style={{
-            border: "1px solid rgb(0, 0, 0, 0.2)",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "60px",
-          }}
-        >
-          <ModalChangeUser
-            name={
-              <b
-                style={{
-                  color: "black",
-                  marginRight: "5px",
-                  fontSize: "16px",
-                }}
-              >
-                {user.extrainfo
-                  ? user.extrainfo.username
-                  : user.currentUser.displayName}
-              </b>
-            }
+    <div className="home_container">
+      <div className="users_container">
+        {users.map((user) => (
+          <User
+            key={user.uid}
+            user={user}
+            selectUser={selectUser}
+            user1={user1}
+            chat={chat}
           />
-          <DownOutlined style={{ color: "black", fontSize: "16px" }} />
-        </div>
-        <div
-          class="col-5"
-          style={{
-            border: "1px solid rgb(0, 0, 0, 0.2)",
-            display: "flex",
-            justifyContent: "flex-start",
-            alignItems: "center",
-            paddingLeft: "30px",
-          }}
-        >
-          <a href="">
-            <img
-              src="https://i.ibb.co/xLTxbSC/fondo-jean-2.png"
-              alt="fondo-jean-2"
-              border="0"
-              style={{ height: "30px", width: "30px", borderRadius: "50%" }}
-            />
-          </a>
-          <a href="" style={{ color: "black", marginLeft: "10px" }}>
-            <b> Friend Name</b>
-          </a>
-        </div>
+        ))}
       </div>
-      <div class="row justify-content-center">
-        <div
-          class="col-3"
-          style={{
-            border: "1px solid rgb(0,0,0,0.2)",
-            height: "455px",
-            overflowY: "scroll",
-            padding: "0",
-            display: "flex",
-            flexDirection: "column",
-            paddingTop: "10px",
-          }}
-        >
-          {filterUsers.map((friend) => (
-            <div
-              className="amigos-chat"
-              key={friend.id}
-              style={{
-                padding: "10px",
-                paddingLeft: "20px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-start",
-                height: "80px",
-              }}
-            >
-              <Link to={`/chat/${friend.user.username}`} href="#">
-                <img
-                  src={friend.user.imgProfile}
-                  alt="fondo-jean-2"
-                  border="0"
-                  style={{ height: "60px", width: "60px", borderRadius: "50%" }}
-                />
-
-                <span href="" style={{ color: "black", marginLeft: "10px" }}>
-                  {friend.user.username}
-                </span>
-                <div
-                  className={`user_status ${
-                    friend.user.isOnline ? "online" : "offline"
-                  }`}
-                ></div>
-              </Link>
+      <div className="messages_container">
+        {chat ? (
+          <>
+            <div className="messages_user">
+              <h3>{chat.name}</h3>
             </div>
-          ))}
-        </div>
-        <div
-          class="col-5"
-          style={{
-            border: "1px solid rgb(0,0,0,0.2)",
-            height: "455px",
-            padding: "0",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-          }}
-        >
-          <div
-            ref={chatRef}
-            style={{
-              height: "auto",
-              overflowY: "scroll",
-            }}
-          >
-            {/* Usuario chat */}
-            {/* {filteredData
-              .sort((a, b) => a.time - b.time)
-              .map((c) =>
-                c.from === user.extrainfo.username ? (
-                  <div className="chat-div-user" key={c.time}>
-                    <div id="chat-info">
-                      <b>
-                        {c.from} on <span>{moment(c.time).format("lll")}</span>
-                      </b>
-                      <br />
-                    </div>
-                    {c.message}
-                  </div>
-                ) : (
-                  <div className="chat-div-sender" key={c.time}>
-                    <div id="chat-info">
-                      <b>
-                        {c.from} on <span>{moment(c.time).format("lll")}</span>
-                      </b>
-                      <br />
-                    </div>
-                    {c.message}
-                  </div>
-                )
-              )} */}
-          </div>
-          <div
-            style={{
-              minHeight: "15%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "10px",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                height: "auto",
-                width: "90%",
-                borderRadius: "1.5rem",
-                border: "1px solid rgb(0,0,0,0.5)",
-                alignItems: "center",
-                justifyContent: "center",
-                padding: "5px",
-              }}
-            >
-              <form
-                style={{
-                  width: "95%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-                onSubmit={handleSubmit}
-              >
-                {/* <TextArea
-                  placeholder="Escribe tu mensaje aqui..."
-                  autoSize
-                  rows={1}
-                  bordered={false}
-                  value={messageToSave}
-                  onChange={(e) => {
-                    setMessageToSave(e.target.value)
-                  }}
-                  style={{ width: "90%" }}
-                /> */}
-                <textarea
-                  placeholder="Escribe tu mensaje aqui..."
-                  autoSize
-                  rows={1}
-                  bordered={false}
-                  value={messageToSave}
-                  onChange={(e) => {
-                    setMessageToSave(e.target.value)
-                  }}
-                  style={{ width: "90%" }}
-                />
-                {/* <button
-                  type="submit"
-                  shape="circle"
-                  icon={
-                    <SendOutlined
-                      style={{
-                        color: "rgb(0,0,0,0.4)",
-                      }}
-                    />
-                  }
-                  htmlType="submit"
-                /> */}
-                <input type="submit" value="Submit" />
-              </form>
+            <div className="messages">
+              {msgs.length
+                ? msgs.map((msg, i) => (
+                    <Message key={i} msg={msg} user1={user1} />
+                  ))
+                : null}
             </div>
-          </div>
-        </div>
+            <MessageForm
+              handleSubmit={handleSubmit}
+              text={text}
+              setText={setText}
+              setImg={setImg}
+            />
+          </>
+        ) : (
+          <h3 className="no_conv">Select a user to start conversation</h3>
+        )}
       </div>
     </div>
   )
 }
-
-export default Chat

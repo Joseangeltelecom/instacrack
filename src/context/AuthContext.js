@@ -30,6 +30,7 @@ export function AuthProvider({ children }) {
     setDoc(
       userRef,
       {
+        uid: user.uid,
         isOnline: true,
         username: username,
         fullname: fullname,
@@ -50,6 +51,7 @@ export function AuthProvider({ children }) {
     setDoc(
       userRef,
       {
+        uid: user.uid,
         isOnline: true,
         username: user.displayName,
         fullname: null,

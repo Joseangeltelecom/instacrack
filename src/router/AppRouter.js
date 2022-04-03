@@ -1,7 +1,7 @@
 import React from "react"
 import { Route, Routes } from "react-router-dom"
 import { PostSaved } from "../pages/PostSaved"
-import Chat from "../pages/Chat"
+
 import Home from "../pages/Home"
 import Login from "../pages/Login"
 import { Profile } from "../pages/Profile"
@@ -13,6 +13,7 @@ import ProtectedRoute from "./ProtectedRoute"
 import { useAuth } from "../context/AuthContext"
 import { ProfileOthers } from "../componentes/profileOhers/ProfileOthers"
 import { ChatByPerson } from "../pages/ChatByPerson"
+import { Chat2 } from "../pages/Chat"
 
 export const AppRouter = () => {
   const { user } = useAuth()
@@ -54,7 +55,7 @@ export const AppRouter = () => {
         }
       />
       <Route
-        path="/profile/:username"
+        path="/profile/:uid"
         element={
           <ProtectedRoute>
             <ProfileOthers />
@@ -65,7 +66,7 @@ export const AppRouter = () => {
         path="/chat"
         element={
           <ProtectedRoute>
-            <Chat />
+            <Chat2 />
           </ProtectedRoute>
         }
       />
