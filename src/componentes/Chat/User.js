@@ -4,6 +4,7 @@ import { onSnapshot, doc } from "firebase/firestore"
 import { db } from "../../firebase"
 
 const User = ({ user1, user, selectUser, chat }) => {
+  console.log("user", user)
   const user2 = user?.uid
   const [data, setData] = useState("")
 
@@ -23,7 +24,7 @@ const User = ({ user1, user, selectUser, chat }) => {
       >
         <div className="user_info">
           <div className="user_detail">
-            <img src={user.avatar || Img} alt="avatar" className="avatar" />
+            <img src={user.imgProfile || Img} alt="avatar" className="avatar" />
             <h4>{user.name}</h4>
             {data?.from !== user1 && data?.unread && (
               <small className="unread">New</small>
