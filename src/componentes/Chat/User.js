@@ -4,7 +4,8 @@ import { onSnapshot, doc } from "firebase/firestore"
 import { db } from "../../firebase"
 
 const User = ({ user1, user, selectUser, chat }) => {
-  console.log("user", user)
+  console.log("user", user.username)
+  console.log("chat", chat.username)
   const user2 = user?.uid
   const [data, setData] = useState("")
 
@@ -19,13 +20,15 @@ const User = ({ user1, user, selectUser, chat }) => {
   return (
     <>
       <div
-        className={`user_wrapper ${chat.name === user.name && "selected_user"}`}
+        className={`user_wrapper ${
+          chat.username === user.username && "selected_user"
+        }`}
         onClick={() => selectUser(user)}
       >
         <div className="user_info">
           <div className="user_detail">
             <img src={user.imgProfile || Img} alt="avatar" className="avatar" />
-            <h4>{user.name}</h4>
+            <h4>{user.username}</h4>
             {data?.from !== user1 && data?.unread && (
               <small className="unread">New</small>
             )}
@@ -43,10 +46,12 @@ const User = ({ user1, user, selectUser, chat }) => {
       </div>
       <div
         onClick={() => selectUser(user)}
-        className={`sm_container ${chat.name === user.name && "selected_user"}`}
+        className={`sm_container ${
+          chat.username === user.username && "selected_user"
+        }`}
       >
         <img
-          src={user.avatar || Img}
+          src={user.imgProfile || Img}
           alt="avatar"
           className="avatar sm_screen"
         />
