@@ -10,30 +10,6 @@
   background-color: #efefef;
 }
 
-.chat-div-user {
-  max-width: 45%;
-  background-color: #efefef;
-  text-align: right;
-  margin: 5px 0 0 52%;
-  padding: 5px 8px;
-  height: auto;
-  border-radius: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  word-wrap: break-word;
-}
-
-.chat-div-sender {
-  max-width: 45%;
-  border: 1px solid rgb(0, 0, 0, 0.1);
-  text-align: left;
-  margin: 5px 0 0 3%;
-  padding: 5px 8px;
-  height: auto;
-  border-radius: 0.5rem;
-  word-wrap: break-word;
-}
-
 #chat-info {
   font-size: 10px;
 }
@@ -47,4 +23,104 @@
 }
 .offline {
   background: red;
+}
+
+/* ------------------------------------- */
+
+.chat_container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #fafafa;
+  margin: 0;
+  padding: 90px 0px 0px 0px;
+  overflow: hidden;
+}
+
+.usuario-nombre {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 515px;
+  background-color: #ffff;
+  border: 1px solid rgb(0, 0, 0, 0.1);
+  margin: 0;
+  padding: 0;
+}
+
+.usuario-nombre-contain {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.div-modal {
+  height: 60px;
+  width: 100%;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.friends-container {
+  width: 100%;
+  overflow-y: scroll;
+  height: 455px;
+}
+
+.header-chat {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.texto-mensaje {
+  color: rgb(0, 0, 0, 0.4);
+}
+
+.img-amigo {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.link-friend {
+  font-weight: bold;
+  color: black;
+}
+
+.link-friend:hover {
+  color: black;
+}
+
+.contenedor-mensajes {
+  height: 400px;
+  overflow-y: scroll;
+  background-color: rgb(0, 0, 0, 0.2);
+}
+
+/* 57 */
+.barra-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 15px;
+  height: 45px;
+  width: 90%;
+  border-radius: 2rem;
+  border: 1px solid rgb(0, 0, 0, 0.3);
+}
+
+.input-texto {
+  width: 75%;
+  outline: none;
+  border: none;
 }

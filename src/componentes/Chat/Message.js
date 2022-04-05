@@ -1,12 +1,12 @@
-import React, { useRef, useEffect } from "react"
-import Moment from "react-moment"
+import React, { useRef, useEffect } from "react";
+import Moment from "react-moment";
 
 const Message = ({ msg, user1 }) => {
-  const scrollRef = useRef()
+  const scrollRef = useRef();
 
   useEffect(() => {
-    scrollRef.current?.scrollIntoView({ behavior: "smooth" })
-  }, [msg])
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [msg]);
   return (
     <div
       className={`message_wrapper ${msg.from === user1 ? "own" : ""}`}
@@ -21,7 +21,7 @@ const Message = ({ msg, user1 }) => {
         </small>
       </p>
     </div>
-  )
-}
+  );
+};
 
-export default Message
+export default Message;
