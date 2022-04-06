@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react"
-import "../../styles/home/postpreview.css"
-import { useAuth } from "../../context/AuthContext"
-import { Link } from "react-router-dom"
-import { db } from "../../firebase"
+import React, { useEffect, useState } from "react";
+import "../../styles/home/postpreview.css";
+import { useAuth } from "../../context/AuthContext";
+import { Link } from "react-router-dom";
+import { db } from "../../firebase";
 import {
   addDoc,
   collection,
@@ -13,15 +13,15 @@ import {
   query,
   serverTimestamp,
   setDoc,
-} from "firebase/firestore"
-import { Button } from "antd"
+} from "firebase/firestore";
+import { Button } from "antd";
 
 export const PostPreview = (props) => {
-  const [comments, setComments] = useState([])
-  const [comment, setComment] = useState("")
-  const [liked, setLiked] = useState(false)
-  const [likes, setLikes] = useState([])
-  const { user } = useAuth()
+  const [comments, setComments] = useState([]);
+  const [comment, setComment] = useState("");
+  const [liked, setLiked] = useState(false);
+  const [likes, setLikes] = useState([]);
+  const { user } = useAuth();
 
   // Retriving comments:
   useEffect(() => {
@@ -29,7 +29,7 @@ export const PostPreview = (props) => {
       const recentMessagesQuery = query(
         collection(db, "postPreview", props.postId, "comments"),
         orderBy("timestamp", "desc")
-      )
+      );
       const unsubuscribe = onSnapshot(
         recentMessagesQuery,
         orderBy("timestamp", "desc"),
@@ -40,34 +40,34 @@ export const PostPreview = (props) => {
               ...doc.data(),
             }))
           )
-      )
-      return () => unsubuscribe()
+      );
+      return () => unsubuscribe();
     }
-  }, [props.postId])
+  }, [props.postId]);
 
   // Retriving Likes:
   useEffect(() => {
     if (props.postId) {
       const recentMessagesQuery = query(
         collection(db, "postPreview", props.postId, "likes")
-      )
+      );
       onSnapshot(recentMessagesQuery, (snapshot) => {
         if (snapshot.docs.some((like) => like.id === user.currentUser.uid))
-          setLiked(true)
+          setLiked(true);
         setLikes(
           snapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
           }))
-        )
-      })
+        );
+      });
     }
-  }, [props.postId])
+  }, [props.postId]);
 
   // Adding a comment:
   const postComment = (e) => {
-    e.preventDefault()
-    const commentRef = collection(db, "postPreview", props.postId, "comments")
+    e.preventDefault();
+    const commentRef = collection(db, "postPreview", props.postId, "comments");
     addDoc(
       commentRef,
       {
@@ -82,16 +82,17 @@ export const PostPreview = (props) => {
         timestamp: serverTimestamp(),
       },
       { merge: true }
-    )
-  }
+    );
+    setComment("");
+  };
 
   // Handling Like / dislike:
   const handleLike = (e) => {
     if (liked) {
       deleteDoc(
         doc(db, "postPreview", props.postId, "likes", user.currentUser.uid)
-      )
-      setLiked(false)
+      );
+      setLiked(false);
     } else {
       const likeRef = doc(
         db,
@@ -99,11 +100,13 @@ export const PostPreview = (props) => {
         props.postId,
         "likes",
         user.currentUser.uid
-      )
-      setDoc(likeRef, { like: user.currentUser.uid }, { merge: true })
-      setLiked(true)
+      );
+      setDoc(likeRef, { like: user.currentUser.uid }, { merge: true });
+      setLiked(true);
     }
-  }
+  };
+
+  console.log(comments);
 
   return (
     <>
@@ -148,14 +151,11 @@ export const PostPreview = (props) => {
         {
           <div className={comments.length > 0 ? "post__comments" : ""}>
             {comments.map((comment) => (
-              <div className="header">
-                <Link to={`/profile/${comment.username}`}>
-                  <img src={comment.imgProfile} />
-                </Link>
+              <div className="comentario">
                 <p>
                   <Link
                     style={{
-                      color: "black",
+                      color: "rgb(0,0,0,0.7)",
                     }}
                     to={`/profile/${comment.username}`}
                   >
@@ -185,5 +185,5 @@ export const PostPreview = (props) => {
         )}
       </div>
     </>
-  )
-}
+  );
+};
