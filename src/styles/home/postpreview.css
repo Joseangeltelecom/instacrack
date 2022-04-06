@@ -3,7 +3,7 @@
   margin-top: 28px;
   width: 100%;
   padding: 0;
-  border: 1px solid #d1811b;
+  border: 1px solid rgb(0, 0, 0, 0.2);
 }
 
 .header {
@@ -12,6 +12,18 @@
   display: flex;
   align-items: center;
   /* background-color: white; */
+}
+
+.comentario {
+  display: flex;
+  width: 100%;
+  word-break: break-all;
+  line-height: 11px;
+  margin-bottom: 5px;
+}
+
+.comentario p {
+  margin: 0;
 }
 
 .header a {
@@ -48,8 +60,6 @@
 }
 
 .post__comments {
-  border-top: 1px solid lightgray;
-  border-bottom: 1px solid lightgray;
   padding: 10px 20px 10px 20px;
   margin-bottom: 20px;
   display: flex;
@@ -57,26 +67,26 @@
   row-gap: 5px;
 }
 .comment__form {
-  margin: 0px 20px 20px 20px;
+  width: 100%;
 }
 .comment__wrapper {
   display: flex;
   width: inherit;
   background-color: #fafafa;
-  border-radius: 8px;
-  border: 1px solid lightgray;
+  border-top: 1px solid lightgray;
   padding: 8px;
 }
 .comment__wrapper input {
-  width: 70%;
+  width: 80%;
   border: none;
   background: transparent;
 }
 .comment__wrapper input:focus {
-  border: none;
+  outline: none;
 }
+
 .comment__wrapper button {
-  width: 30%;
+  width: 20%;
   text-align: center;
 }
 
