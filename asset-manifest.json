@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/instacrack/static/css/main.6ba6c83e.css",
-    "main.js": "/instacrack/static/js/main.6c4280b8.js",
+    "main.css": "/instacrack/static/css/main.f93b9bf9.css",
+    "main.js": "/instacrack/static/js/main.ef3861d5.js",
     "static/media/image1.jpg": "/instacrack/static/media/image1.f02b66c0b72fce9d1aea.jpg",
     "index.html": "/instacrack/index.html",
-    "main.6ba6c83e.css.map": "/instacrack/static/css/main.6ba6c83e.css.map",
-    "main.6c4280b8.js.map": "/instacrack/static/js/main.6c4280b8.js.map"
+    "main.f93b9bf9.css.map": "/instacrack/static/css/main.f93b9bf9.css.map",
+    "main.ef3861d5.js.map": "/instacrack/static/js/main.ef3861d5.js.map"
   },
   "entrypoints": [
-    "static/css/main.6ba6c83e.css",
-    "static/js/main.6c4280b8.js"
+    "static/css/main.f93b9bf9.css",
+    "static/js/main.ef3861d5.js"
   ]
 }
