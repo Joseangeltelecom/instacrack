@@ -82,7 +82,7 @@ export function PhotoPreviewPost(props) {
         style={{ background: "0597f6" }}
         className="d-flex justify-content-center"
       >
-        <Button onClick={handleClose}>Aceptar</Button>
+        <Button  disabled={props.image? false:true } onClick={handleClose}>Aceptar</Button>
       </Modal.Footer>
     </Modal>
   )
