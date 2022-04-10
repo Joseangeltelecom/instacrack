@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import "./searchBar.css"
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
+import { Link } from 'react-router-dom';
 
 const SearchBar = ({placeholder, data}) => {
   const [filteredData, setFilteredData] = useState([])
@@ -37,8 +38,23 @@ const SearchBar = ({placeholder, data}) => {
 
       {filteredData.length != 0 && 
       <div className='dataResult'>
-        {filteredData.slice(0,5).map((value) => { 
-          return <a className="dataItem"><p>{value.username}</p></a>
+        {filteredData.map((value) => { 
+return (
+<div className="header dataItem">
+<Link to={`/profile/${value.username}`} onClick={clearInput}>
+  <img src={value.imgProfile} />
+</Link>
+
+<Link
+  style={{ color: "black" }}
+  to={`/profile/${value.username}`}
+  onClick={clearInput}
+>
+  <p>{value.username}</p>
+</Link>
+</div>
+)
+          // return <a className="dataItem"><p>{value.username}</p></a>
         })}
       </div>
       }
