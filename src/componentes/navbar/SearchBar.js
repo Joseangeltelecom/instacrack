@@ -4,6 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import { Link } from 'react-router-dom';
 
+
 const SearchBar = ({placeholder, data}) => {
   const [filteredData, setFilteredData] = useState([])
   const [wordEntered, setWordEntered] = useState([])
@@ -40,19 +41,12 @@ const SearchBar = ({placeholder, data}) => {
       <div className='dataResult'>
         {filteredData.map((value) => { 
 return (
-<div className="header dataItem">
 <Link to={`/profile/${value.username}`} onClick={clearInput}>
-  <img src={value.imgProfile} />
-</Link>
-
-<Link
-  style={{ color: "black" }}
-  to={`/profile/${value.username}`}
-  onClick={clearInput}
->
+<div className="header dataItem">
+  <img className="imgProfileBar" src={value.imgProfile} />
   <p>{value.username}</p>
-</Link>
 </div>
+</Link>
 )
         })}
       </div>
