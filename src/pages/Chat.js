@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { DownOutlined, SendOutlined } from "@ant-design/icons";
-import moment from "moment";
-import { Button, Input } from "antd";
+import { DownOutlined } from "@ant-design/icons";
 import Navbar from "../componentes/Navbar";
 import { ModalChangeUser } from "../componentes/Profile/ModalChangeUser";
 import { useAuth } from "../context/AuthContext";
@@ -20,13 +18,11 @@ import {
   where,
 } from "firebase/firestore";
 import { db, storage } from "../firebase";
-import { Link, NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import Message from "../componentes/Chat/Message";
 import MessageForm from "../componentes/Chat/MessageForm";
 import User from "../componentes/Chat/User";
-
-const { TextArea } = Input;
 
 export function Chat2() {
   const { user } = useAuth();
@@ -36,14 +32,7 @@ export function Chat2() {
   const [img, setImg] = useState("");
   const [msgs, setMsgs] = useState([]);
 
-  console.log(users);
-
-  const chatRef = useRef();
   const user1 = user.currentUser.uid;
-  const { uid } = useParams();
-
-  console.log("user1", user1);
-  console.log("users", users);
 
   useEffect(() => {
     const usersRef = collection(db, "users");
@@ -60,8 +49,6 @@ export function Chat2() {
     });
     return () => unsub();
   }, []);
-
-  console.log(chat);
 
   const selectUser = async (user) => {
     setChat(user);
