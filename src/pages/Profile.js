@@ -8,12 +8,12 @@ import { useAuth } from "../context/AuthContext"
 import { db } from "../firebase"
 
 export const Profile = () => {
-  const [postPreview, setPostPreview] = useState([])
-  const { user } = useAuth()
+  const [postPreview, setPostPreview] = useState([]);
+  const { user } = useAuth();
 
   const filteredPosts = postPreview.filter((u) => {
-    return u.post.id == user.currentUser.uid
-  })
+    return u.post.id === user.currentUser.uid;
+  });
 
   useEffect(() => {
     const unsubuscribe = onSnapshot(collection(db, "postPreview"), (snapshot) =>
@@ -23,14 +23,13 @@ export const Profile = () => {
           post: doc.data(),
         }))
       )
-    )
-    return () => unsubuscribe()
-  }, [])
+    );
+    return () => unsubuscribe();
+  }, []);
 
   return (
     <div
       style={{
-        // backgroundColor: "green",
         height: "100vh",
         width: "100vw",
         margin: "0",
@@ -39,11 +38,23 @@ export const Profile = () => {
       }}
     >
       <Navbar />
-      <HeaderProfile />
+      <HeaderProfile filteredPosts={filteredPosts} />
       <NavbarProfile />
-      {filteredPosts.map(({ id, post }) => (
-        <PostProfile key={id} {...post} />
-      ))}
+
+      <div className="row justify-content-center">
+        <div
+          className="col-8"
+          style={{
+            display: "flex",
+            justifyContent: "flex-start",
+            flexWrap: "wrap",
+          }}
+        >
+          {filteredPosts.map(({ id, post }) => (
+            <PostProfile key={id} {...post} postId={id} />
+          ))}
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};

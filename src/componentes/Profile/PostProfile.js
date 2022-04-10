@@ -1,31 +1,97 @@
-import React from "react"
+import { CloseOutlined } from "@ant-design/icons";
+import {
+  collection,
+  doc,
+  onSnapshot,
+  orderBy,
+  query,
+} from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import Moment from "react-moment";
+import { db } from "../../firebase";
+import "../../styles/modalcard.css";
+import { ModalCard } from "./ModalCard";
 
 export const PostProfile = (props) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    if (props.postId) {
+      const recentMessagesQuery = query(
+        collection(db, "postPreview", props.postId, "comments"),
+        orderBy("timestamp", "desc")
+      );
+      const unsubuscribe = onSnapshot(
+        recentMessagesQuery,
+        orderBy("timestamp", "desc"),
+        (snapshot) =>
+          setComments(
+            snapshot.docs.map((doc) => ({
+              id: doc.id,
+              ...doc.data(),
+            }))
+          )
+      );
+      return () => unsubuscribe();
+    }
+  }, [props.postId]);
+
   return (
-    <div
-      class="row justify-content-center"
-      style={
-        {
-          // backgroundColor: "blue"
-        }
-      }
-    >
+    <>
       <div
-        class="col-8"
-        style={{
-          //   backgroundColor: "green",
-          display: "flex",
-          justifyContent: "flex-start",
-          flexWrap: "wrap",
+        style={{ margin: "12px", cursor: "pointer" }}
+        onClick={() => {
+          setIsVisible(!isVisible);
         }}
       >
-        <a href="" style={{ margin: "12px" }}>
-          <img
-            src={props.imagePostUrl}
-            style={{ width: "270px", height: "270px" }}
-          />
-        </a>
+        <img
+          src={props.imagePostUrl}
+          style={{ width: "270px", height: "270px" }}
+        />
       </div>
-    </div>
-  )
-}
+      <ModalCard estado={isVisible}>
+        <div className="contenedor-de-imagen">
+          <img src={props.imagePostUrl} />
+        </div>
+        <div className="contenedor-de-datos">
+          <div className="headerr-posts">
+            <img src={props.imgProfile} className="imagen-modal-post" />{" "}
+            <b>{props.username.trim()}</b>
+            <button
+              onClick={() => {
+                setIsVisible(!isVisible);
+              }}
+            >
+              <CloseOutlined style={{ fontSize: "20px" }} />
+            </button>
+          </div>
+          <div className="comments-post-moda">
+            <div className="caption-post">
+              <img src={props.imgProfile} className="imagen-modal-post" />{" "}
+              <div className="container-caption-username">
+                <b>{props.username}</b>
+                <span> {props.caption}</span>
+              </div>
+            </div>
+            {comments.map((c) => (
+              <div key={c.id} className="comentarios-container">
+                <img src={c.imgProfile} className="imagen-modal-comment" />{" "}
+                <div className="container-caption-username">
+                  <div>
+                    <b>{c.username}</b>
+                    <span> {c.text}</span>
+                  </div>
+
+                  <small>
+                    <Moment fromNow>{c.timestamp.toDate()}</Moment>
+                  </small>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </ModalCard>
+    </>
+  );
+};

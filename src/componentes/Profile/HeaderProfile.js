@@ -1,12 +1,12 @@
-import React from "react"
-import { useAuth } from "../../context/AuthContext"
+import React from "react";
+import { useAuth } from "../../context/AuthContext";
 
-export const HeaderProfile = () => {
-  const { user } = useAuth()
+export const HeaderProfile = ({ filteredPosts }) => {
+  const { user } = useAuth();
   return (
-    <div class="row justify-content-center" style={{ width: "100vw" }}>
+    <div className="row justify-content-center" style={{ width: "100vw" }}>
       <div
-        class="col-2"
+        className="col-2"
         style={{
           borderBottom: "2px solid rgba(0, 0, 0, 0.2)",
           display: "flex",
@@ -28,7 +28,7 @@ export const HeaderProfile = () => {
       </div>
 
       <div
-        class="col-6"
+        className="col-6"
         style={{ borderBottom: "2px solid rgba(0, 0, 0, 0.2)" }}
       >
         <h2 style={{ fontWeight: "lighter" }}>
@@ -36,14 +36,14 @@ export const HeaderProfile = () => {
             ? user.extrainfo.username
             : user.currentUser.displayName}
         </h2>
-        <div class="row" style={{ fontSize: "16px" }}>
-          <div class="col-3">
-            <b>10 </b> publicaciones
+        <div className="row" style={{ fontSize: "16px" }}>
+          <div className="col-3">
+            <b>{filteredPosts.length} </b> publicaciones
           </div>
-          <div class="col-3">
+          <div className="col-3">
             <b>10 </b> seguidores
           </div>
-          <div class="col-3">
+          <div className="col-3">
             <b>10 </b> seguidos
           </div>
         </div>
@@ -58,5 +58,5 @@ export const HeaderProfile = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

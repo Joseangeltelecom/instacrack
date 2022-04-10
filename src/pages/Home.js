@@ -5,19 +5,16 @@ import { UserChange } from "../componentes/home/UserChange"
 import { db } from "../firebase"
 import "../styles/home/home.css"
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore"
-import { useAuth } from "../context/AuthContext"
 import Navbar from "../componentes/navbar/Navbar"
 
 function Home() {
-  const [postPreview, setPostPreview] = useState([])
-
-  const { user } = useAuth()
+  const [postPreview, setPostPreview] = useState([]);
 
   useEffect(() => {
     const recentMessagesQuery = query(
       collection(db, "postPreview"),
       orderBy("timestamp", "desc")
-    )
+    );
     const unsubuscribe = onSnapshot(recentMessagesQuery, (snapshot) =>
       setPostPreview(
         snapshot.docs.map((doc) => ({
@@ -25,9 +22,9 @@ function Home() {
           post: doc.data(),
         }))
       )
-    )
-    return () => unsubuscribe()
-  }, [])
+    );
+    return () => unsubuscribe();
+  }, []);
 
   return (
     <div className="home-container">
@@ -42,7 +39,7 @@ function Home() {
         <UserChange />
       </div>
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;
