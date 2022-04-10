@@ -1,24 +1,25 @@
 import { collection, onSnapshot } from "firebase/firestore"
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import Navbar from "../Navbar"
 import { HeaderProfileOthers } from "./HeaderProfileOthers"
 import { db } from "../../firebase"
 import { PostProfileOthers } from "./PostProfileOthers"
 import { NavbarProfileOthers } from "./NavbarProfileOthers"
+import Navbar from "../navbar/Navbar"
 
 export const ProfileOthers = () => {
   const [postPreview, setPostPreview] = useState([])
   const [users, setUsers] = useState([])
   // const { user } = useAuth()
   const { username } = useParams()
+  console.log("username",username)
 
   const filterUsers = users.filter((u) => {
     return u.username == username
   })
 
   const filteredPosts = postPreview.filter((p) => {
-    return p.username == username
+    return p.post.username == username
   })
 
   useEffect(() => {
@@ -26,7 +27,7 @@ export const ProfileOthers = () => {
       setPostPreview(
         snapshot.docs.map((doc) => ({
           id: doc.id,
-          ...doc.data(),
+          post:doc.data(),
         }))
       )
     )
@@ -59,7 +60,9 @@ export const ProfileOthers = () => {
       <Navbar />
       <HeaderProfileOthers {...filterUsers[0]} />
       {/* <NavbarProfileOthers /> */}
-      <PostProfileOthers {...filteredPosts[0]} />
+      {filteredPosts.map(({ id, post }) => (
+        <PostProfileOthers key={id} {...post} />
+      ))}
     </div>
   )
 }

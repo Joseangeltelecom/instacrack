@@ -1,6 +1,7 @@
 import React from "react"
 
 export const PostProfileOthers = (props) => {
+
   return (
     <div
       class="row justify-content-center"

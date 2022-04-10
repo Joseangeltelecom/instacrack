@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react"
 import { PostPreview } from "../componentes/home/PostPreview"
 import SliderFriends from "../componentes/home/SliderFriends"
 import { UserChange } from "../componentes/home/UserChange"
-import Navbar from "../componentes/Navbar"
 import { db } from "../firebase"
 import "../styles/home/home.css"
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore"
 import { useAuth } from "../context/AuthContext"
+import Navbar from "../componentes/navbar/Navbar"
 
 function Home() {
   const [postPreview, setPostPreview] = useState([])

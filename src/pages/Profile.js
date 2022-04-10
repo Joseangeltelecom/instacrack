@@ -1,6 +1,6 @@
-import { collection, onSnapshot, where } from "firebase/firestore"
+import { collection, onSnapshot} from "firebase/firestore"
 import React, { useEffect, useState } from "react"
-import Navbar from "../componentes/Navbar"
+import Navbar from "../componentes/navbar/Navbar"
 import { HeaderProfile } from "../componentes/Profile/HeaderProfile"
 import { NavbarProfile } from "../componentes/Profile/NavbarProfile"
 import { PostProfile } from "../componentes/Profile/PostProfile"

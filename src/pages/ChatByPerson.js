@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react"
 import { DownOutlined, SendOutlined } from "@ant-design/icons"
 import moment from "moment"
 import { Button, Input } from "antd"
-import Navbar from "../componentes/Navbar"
 import { ModalChangeUser } from "../componentes/Profile/ModalChangeUser"
 import { useAuth } from "../context/AuthContext"
 import "../styles/app.css"
@@ -15,6 +14,7 @@ import {
 } from "firebase/firestore"
 import { db } from "../firebase"
 import { Link, useParams } from "react-router-dom"
+import Navbar from "../componentes/navbar/Navbar"
 
 const { TextArea } = Input
 

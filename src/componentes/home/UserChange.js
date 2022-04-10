@@ -6,8 +6,6 @@ import { ModalChangeUser } from "../Profile/ModalChangeUser"
 
 export const UserChange = () => {
   const { user } = useAuth()
-  console.log("user google", user)
-  console.log(user)
   return (
     <div className="container-userchange">
       <Link to="/profile">

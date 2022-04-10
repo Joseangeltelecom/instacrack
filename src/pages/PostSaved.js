@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../componentes/Navbar";
+import Navbar from "../componentes/navbar/Navbar";
 import { HeaderProfile } from "../componentes/Profile/HeaderProfile";
 import { NavbarProfile } from "../componentes/Profile/NavbarProfile";
 

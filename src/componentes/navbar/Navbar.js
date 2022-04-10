@@ -1,5 +1,5 @@
-import React from "react";
-import { useAuth } from "../context/AuthContext";
+import React, { useEffect, useState } from "react";
+
 import { Form, Input, Button, Dropdown, Menu } from "antd";
 import {
   BookOutlined,
@@ -11,14 +11,17 @@ import {
   SyncOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import "../styles/navbar/navbar.css";
-import { ModalChangeUser } from "./Profile/ModalChangeUser";
+import { ModalChangeUser } from "../Profile/ModalChangeUser";
 import { Link } from "react-router-dom";
-import { AddPostModal } from "./addPost/AddPostModal";
+import { AddPostModal } from "../addPost/AddPostModal";
+import { useAuth } from "../../context/AuthContext";
+import SearchBar from "./SearchBar";
+import { db } from "../../firebase";
+import { collection, onSnapshot } from "firebase/firestore";
 
 function Navbar() {
   const { logout, user } = useAuth();
-
+  const [users, setUsers] = useState([]);
   const handleLogout = async () => {
     try {
       await logout();
@@ -27,6 +30,18 @@ function Navbar() {
     }
   };
 
+  useEffect(() => {
+    const addUsersFriends = onSnapshot(collection(db, "users"), (snapshot) =>
+      setUsers(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+         ...doc.data(),
+        }))
+      )
+    );
+    return () => addUsersFriends();
+  }, []);
+  
   const menu = (
     <Menu style={{ width: "200px" }}>
       <Menu.Item>
@@ -66,20 +81,21 @@ function Navbar() {
           <h2 style={{ fontFamily: "Lobster" }}>Instacrack</h2>
         </div>
         <div>
-          <div className="form">
-            <div
+            {/* <div
               style={{ width: "230px", height: "35px", background: "gray" }}
               className="d-none d-sm-block rounded"
-            >
-              <Input
+            > */}
+              <SearchBar placeholder="Search a friend" data={users}/>
+              {/* <Input
                 className="w-100 h-100 rounded"
                 allowClear
                 type="text"
                 placeholder="Buscar"
                 prefix={<SearchOutlined />}
-              />
-            </div>
-          </div>
+              /> */}
+              
+            {/* </div> */}
+        
         </div>
         <div className="d-flex flex-row justify-content-evenly">
           <Link to="/home" style={{ color: "black" }}>

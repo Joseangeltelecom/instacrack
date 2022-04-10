@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { DownOutlined, SendOutlined } from "@ant-design/icons";
-import moment from "moment";
-import { Button, Input } from "antd";
-import Navbar from "../componentes/Navbar";
+import { Input } from "antd";
+
 import { ModalChangeUser } from "../componentes/Profile/ModalChangeUser";
 import { useAuth } from "../context/AuthContext";
 import "../styles/app.css";
@@ -20,11 +19,12 @@ import {
   where,
 } from "firebase/firestore";
 import { db, storage } from "../firebase";
-import { Link, NavLink, useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import Message from "../componentes/Chat/Message";
 import MessageForm from "../componentes/Chat/MessageForm";
 import User from "../componentes/Chat/User";
+import Navbar from "../componentes/navbar/Navbar";
 
 const { TextArea } = Input;
 

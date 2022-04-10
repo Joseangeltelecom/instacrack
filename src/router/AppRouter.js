@@ -55,7 +55,7 @@ export const AppRouter = () => {
         }
       />
       <Route
-        path="/profile/:uid"
+        path="/profile/:username"
         element={
           <ProtectedRoute>
             <ProfileOthers />

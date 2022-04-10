@@ -106,8 +106,6 @@ export const PostPreview = (props) => {
     }
   };
 
-  console.log(comments);
-
   return (
     <>
       <div className="container">
