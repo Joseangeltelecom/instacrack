@@ -54,7 +54,6 @@ return (
 </Link>
 </div>
 )
-          // return <a className="dataItem"><p>{value.username}</p></a>
         })}
       </div>
       }
