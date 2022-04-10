@@ -1,0 +1,111 @@
+.overley {
+  padding-top: 20px;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgb(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contenedor-modal {
+  display: flex;
+  width: 70%;
+  height: 80%;
+  background-color: #fff;
+  box-shadow: rgb(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.contenedor-de-imagen {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 60%;
+  background-color: black;
+}
+
+.contenedor-de-imagen img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+}
+
+.contenedor-de-datos {
+  height: 100%;
+  width: 40%;
+}
+
+.headerr-posts {
+  width: 100%;
+  height: 60px;
+  background-color: white;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.3);
+  margin-bottom: 5px;
+}
+
+.imagen-modal-post {
+  width: 40px;
+  height: 40px;
+  border: 1px solid red;
+  padding: 2px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.headerr-posts button {
+  position: absolute;
+  right: 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.comments-post-moda {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+}
+
+.caption-post {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  align-items: center;
+}
+
+.container-caption-username {
+  width: auto;
+  height: auto;
+  word-wrap: break-word;
+}
+
+.comentarios-container {
+  display: flex;
+  width: 100%;
+  height: 40px;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.imagen-modal-comment {
+  width: 40px;
+  height: 40px;
+  padding: 2px;
+  border-radius: 50%;
+  margin-right: 10px;
+}

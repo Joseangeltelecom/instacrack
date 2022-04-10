@@ -11,7 +11,6 @@ import {
   SyncOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import "../styles/navbar/navbar.css";
 import { ModalChangeUser } from "./Profile/ModalChangeUser";
 import { Link } from "react-router-dom";
 import { AddPostModal } from "./addPost/AddPostModal";
