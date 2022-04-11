@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { DownOutlined } from "@ant-design/icons";
-
 import { ModalChangeUser } from "../componentes/Profile/ModalChangeUser";
 import { useAuth } from "../context/AuthContext";
 import "../styles/app.css";
@@ -24,10 +23,13 @@ import Message from "../componentes/Chat/Message";
 import MessageForm from "../componentes/Chat/MessageForm";
 import User from "../componentes/Chat/User";
 import Navbar from "../componentes/navbar/Navbar";
-
+import useSound from 'use-sound';
+import boopSfx from './sounds/iphone-notificacion.mp3';
 
 export function Chat2() {
   const { user } = useAuth();
+  const [play] = useSound(boopSfx);
+
   const [users, setUsers] = useState([]);
   const [chat, setChat] = useState("");
   const [text, setText] = useState("");
@@ -115,6 +117,7 @@ export function Chat2() {
 
     setText("");
     setImg("");
+    play()
   };
 
   return (

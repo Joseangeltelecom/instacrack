@@ -38,24 +38,14 @@ export const HeaderProfile = ({ filteredPosts }) => {
         </h2>
         <div className="row" style={{ fontSize: "16px" }}>
           <div className="col-3">
-            <b>{filteredPosts.length} </b>{" "}
+            <b>{filteredPosts.length} </b>
             {filteredPosts.length == 1 ? "publicación" : "publicaciones"}
-          </div>
-          <div className="col-3">
-            <b>10 </b> seguidores
-          </div>
-          <div className="col-3">
-            <b>10 </b> seguidos
           </div>
         </div>
         <p style={{ marginTop: "15px", fontSize: "16px" }}>
           <b>{user.extrainfo ? user.extrainfo.fullname : ""}</b>
         </p>
         <div style={{ fontSize: "16px" }}>
-          <p>
-            -Cazador de Demonios.
-            <br /> -Fisicoculturista.
-          </p>
         </div>
       </div>
     </div>

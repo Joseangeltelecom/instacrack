@@ -1,7 +1,10 @@
 import React from "react";
 import Attachment from "../svg/Attachment";
+import useSound from 'use-sound';
+import boopSfx from './sounds/iphone-notificacion.mp3';
 
 const MessageForm = ({ handleSubmit, text, setText, setImg }) => {
+  const [play] = useSound(boopSfx);
   return (
     <form className="message_form" onSubmit={handleSubmit}>
       <div className="barra-form">

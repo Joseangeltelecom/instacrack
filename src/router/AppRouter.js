@@ -1,18 +1,15 @@
 import React from "react"
 import { Route, Routes } from "react-router-dom"
 import { PostSaved } from "../pages/PostSaved"
-
 import Home from "../pages/Home"
 import Login from "../pages/Login"
 import { Profile } from "../pages/Profile"
 import Register from "../pages/Register"
 import ResetPassword from "../pages/ResetPassword"
-
 import PublicRoute from "./PublicRoute"
 import ProtectedRoute from "./ProtectedRoute"
 import { useAuth } from "../context/AuthContext"
 import { ProfileOthers } from "../componentes/profileOhers/ProfileOthers"
-import { ChatByPerson } from "../pages/ChatByPerson"
 import { Chat2 } from "../pages/Chat"
 
 export const AppRouter = () => {
@@ -67,14 +64,6 @@ export const AppRouter = () => {
         element={
           <ProtectedRoute>
             <Chat2 />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/chat/:username"
-        element={
-          <ProtectedRoute>
-            <ChatByPerson />
           </ProtectedRoute>
         }
       />
