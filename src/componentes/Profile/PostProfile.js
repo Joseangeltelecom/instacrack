@@ -44,7 +44,7 @@ export const PostProfile = (props) => {
           style={{ width: "270px", height: "270px" }}
         />
       </div>
-      <ModalCard estado={isVisible}>
+      <ModalCard estado={isVisible} setIsVisible={setIsVisible}>
         <div className="contenedor-de-imagen">
           <img src={props.imagePostUrl} />
         </div>
