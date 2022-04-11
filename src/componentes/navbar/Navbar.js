@@ -85,7 +85,7 @@ function Navbar() {
               style={{ width: "230px", height: "35px", background: "gray" }}
               className="d-none d-sm-block rounded"
             > */}
-              <SearchBar placeholder="Search a friend" data={users}/>
+              <SearchBar  data={users} placeholder="Search a friend" />
               {/* <Input
                 className="w-100 h-100 rounded"
                 allowClear
