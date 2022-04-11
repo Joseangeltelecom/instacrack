@@ -1,11 +1,5 @@
 import { CloseOutlined } from "@ant-design/icons";
-import {
-  collection,
-  doc,
-  onSnapshot,
-  orderBy,
-  query,
-} from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import Moment from "react-moment";
 import { db } from "../../firebase";
