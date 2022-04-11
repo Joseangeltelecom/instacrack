@@ -9,9 +9,10 @@ import useComponentVisible from '../hooks/useComponentVisible';
 const SearchBar = ({placeholder, data}) => {
   const [filteredData, setFilteredData] = useState([])
   const [wordEntered, setWordEntered] = useState([])
-  const { ref, isComponentVisible } = useComponentVisible(true);
+  const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(true);
 
   const handleFiltered = (e) => {
+    setIsComponentVisible(true)
     const searchWord = e.target.value
     setWordEntered(searchWord)
     const newFilter = data.filter((value) => {
