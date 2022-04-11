@@ -38,7 +38,8 @@ export const HeaderProfile = ({ filteredPosts }) => {
         </h2>
         <div className="row" style={{ fontSize: "16px" }}>
           <div className="col-3">
-            <b>{filteredPosts.length} </b> publicaciones
+            <b>{filteredPosts.length} </b>{" "}
+            {filteredPosts.length == 1 ? "publicación" : "publicaciones"}
           </div>
           <div className="col-3">
             <b>10 </b> seguidores
