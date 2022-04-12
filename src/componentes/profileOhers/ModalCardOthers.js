@@ -1,5 +1,5 @@
-import React from "react";
-import "../../styles/modalcard.css";
+import React from 'react'
+import '../../styles/modalcard.css'
 
 export const ModalCardOthers = ({ children, estado, setIsVisible }) => {
   return (
@@ -8,12 +8,12 @@ export const ModalCardOthers = ({ children, estado, setIsVisible }) => {
         <div
           className="overley"
           onClick={() => {
-            setIsVisible(false);
+            setIsVisible(false)
           }}
         >
           <div className="contenedor-modal">{children}</div>
         </div>
       )}
     </>
-  );
-};
+  )
+}

@@ -1,11 +1,11 @@
-import React from "react"
-import "react-dropzone-uploader/dist/styles.css"
-import Dropzone from "react-dropzone-uploader"
-import { getDroppedOrSelectedFiles } from "html5-file-selector"
+import React from 'react'
+import 'react-dropzone-uploader/dist/styles.css'
+import Dropzone from 'react-dropzone-uploader'
+import { getDroppedOrSelectedFiles } from 'html5-file-selector'
 
 export const FileUploadComponent = () => {
   const fileParams = ({ meta }) => {
-    return { url: "https://httpbin.org/post" }
+    return { url: 'https://httpbin.org/post' }
   }
   const onFileChange = ({ meta, file }, status) => {
     console.log(status, meta, file)
@@ -22,12 +22,12 @@ export const FileUploadComponent = () => {
     })
   }
   const selectFileInput = ({ accept, onFiles, files, getFilesFromEvent }) => {
-    const textMsg = files.length > 0 ? "Upload Again" : "Select Files"
+    const textMsg = files.length > 0 ? 'Upload Again' : 'Select Files'
     return (
       <label className="btn btn-danger mt-4">
         {textMsg}
         <input
-          style={{ display: "none" }}
+          style={{ display: 'none' }}
           type="file"
           accept={accept}
           multiple
@@ -52,7 +52,7 @@ export const FileUploadComponent = () => {
       inputContent="Drop A File"
       styles={{
         dropzone: { width: 600, height: 400 },
-        dropzoneActive: { borderColor: "green" },
+        dropzoneActive: { borderColor: 'green' },
       }}
     />
   )

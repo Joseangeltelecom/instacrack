@@ -1,13 +1,13 @@
-import { Modal } from "react-bootstrap"
-import React, { useState } from "react"
-import { useAuth } from "../../context/AuthContext"
+import { Modal } from 'react-bootstrap'
+import React, { useState } from 'react'
+import { useAuth } from '../../context/AuthContext'
 import {
   CheckCircleFilled,
   LockOutlined,
   UserOutlined,
-} from "@ant-design/icons"
-import { Link, useNavigate } from "react-router-dom"
-import { Button, Form, Input } from "antd"
+} from '@ant-design/icons'
+import { Link, useNavigate } from 'react-router-dom'
+import { Button, Form, Input } from 'antd'
 
 function MyVerticallyCenteredModal(props) {
   const handleClose = () => {
@@ -34,7 +34,7 @@ function MyVerticallyCenteredModal(props) {
             <img
               src={
                 user.currentUser.photoURL ||
-                "https://elcomercio.pe/resizer/1AdR3_S-R4ZELHQ6WkNRGhkZhdc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BH5EJQD2ZZF5XGJM2AHNJW7HUI.jpg"
+                'https://elcomercio.pe/resizer/1AdR3_S-R4ZELHQ6WkNRGhkZhdc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BH5EJQD2ZZF5XGJM2AHNJW7HUI.jpg'
               }
             />
           </div>
@@ -49,10 +49,10 @@ function MyVerticallyCenteredModal(props) {
         </div>
       </Modal.Body>
       <Modal.Footer
-        style={{ background: "0597f6" }}
+        style={{ background: '0597f6' }}
         className="d-flex justify-content-center"
       >
-        <a style={{ background: "0597f6" }} onClick={handleClose}>
+        <a style={{ background: '0597f6' }} onClick={handleClose}>
           Iniciar sesión en una cuenta
         </a>
       </Modal.Footer>
@@ -61,19 +61,19 @@ function MyVerticallyCenteredModal(props) {
 }
 export function ModalChangeSession(props) {
   const [user, setUser] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   })
   const { login, loginWithGoogle } = useAuth()
-  const [error, setError] = useState("")
+  const [error, setError] = useState('')
   let navigate = useNavigate()
 
   const handleSubmit = async (e) => {
-    setError("")
+    setError('')
     try {
       await login(user.email, user.password)
       props.onHide(false)
-      navigate("/home")
+      navigate('/home')
     } catch (error) {
       setError(error.message)
     }
@@ -86,7 +86,7 @@ export function ModalChangeSession(props) {
     try {
       await loginWithGoogle()
       props.onHide(false)
-      navigate("/home")
+      navigate('/home')
     } catch (error) {
       setError(error.message)
     }
@@ -116,17 +116,17 @@ export function ModalChangeSession(props) {
         > */}
         <div
           style={{
-            width: "400px",
-            margin: "10px auto 10px",
-            background: "#FFFFFF",
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "column",
-            textAlign: "center",
-            padding: "0px 50px",
+            width: '400px',
+            margin: '10px auto 10px',
+            background: '#FFFFFF',
+            display: 'flex',
+            justifyContent: 'center',
+            flexDirection: 'column',
+            textAlign: 'center',
+            padding: '0px 50px',
           }}
         >
-          <h1 style={{ fontFamily: "Lobster" }}>Instacrack</h1>
+          <h1 style={{ fontFamily: 'Lobster' }}>Instacrack</h1>
 
           <p className="text-danger">{error}</p>
 
@@ -165,7 +165,7 @@ export function ModalChangeSession(props) {
 
             <Button
               style={{
-                width: "100%",
+                width: '100%',
               }}
               type="primary"
               htmlType="submit"
@@ -178,9 +178,9 @@ export function ModalChangeSession(props) {
             <a
               onClick={handleGoogleSignin}
               style={{
-                marginBottom: "15px",
-                color: "#385189",
-                fontWeight: "bold",
+                marginBottom: '15px',
+                color: '#385189',
+                fontWeight: 'bold',
               }}
             >
               Iniciar Sesión con Google
@@ -189,7 +189,7 @@ export function ModalChangeSession(props) {
 
             <div
               style={{
-                marginBottom: "20px",
+                marginBottom: '20px',
               }}
             >
               <Link to="/reset">¿Olvidaste tu Contraseña?</Link>

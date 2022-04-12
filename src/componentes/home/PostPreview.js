@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import "../../styles/home/postpreview.css";
-import { useAuth } from "../../context/AuthContext";
-import { Link } from "react-router-dom";
-import { db } from "../../firebase";
+import React, { useEffect, useState } from 'react'
+import '../../styles/home/postpreview.css'
+import { useAuth } from '../../context/AuthContext'
+import { Link } from 'react-router-dom'
+import { db } from '../../firebase'
 import {
   addDoc,
   collection,
@@ -13,61 +13,61 @@ import {
   query,
   serverTimestamp,
   setDoc,
-} from "firebase/firestore";
-import { Button } from "antd";
+} from 'firebase/firestore'
+import { Button } from 'antd'
 
 export const PostPreview = (props) => {
-  const [comments, setComments] = useState([]);
-  const [comment, setComment] = useState("");
-  const [liked, setLiked] = useState(false);
-  const [likes, setLikes] = useState([]);
-  const { user } = useAuth();
+  const [comments, setComments] = useState([])
+  const [comment, setComment] = useState('')
+  const [liked, setLiked] = useState(false)
+  const [likes, setLikes] = useState([])
+  const { user } = useAuth()
 
   // Retriving comments:
   useEffect(() => {
     if (props.postId) {
       const recentMessagesQuery = query(
-        collection(db, "postPreview", props.postId, "comments"),
-        orderBy("timestamp", "desc")
-      );
+        collection(db, 'postPreview', props.postId, 'comments'),
+        orderBy('timestamp', 'desc'),
+      )
       const unsubuscribe = onSnapshot(
         recentMessagesQuery,
-        orderBy("timestamp", "desc"),
+        orderBy('timestamp', 'desc'),
         (snapshot) =>
           setComments(
             snapshot.docs.map((doc) => ({
               id: doc.id,
               ...doc.data(),
-            }))
-          )
-      );
-      return () => unsubuscribe();
+            })),
+          ),
+      )
+      return () => unsubuscribe()
     }
-  }, [props.postId]);
+  }, [props.postId])
 
   // Retriving Likes:
   useEffect(() => {
     if (props.postId) {
       const recentMessagesQuery = query(
-        collection(db, "postPreview", props.postId, "likes")
-      );
+        collection(db, 'postPreview', props.postId, 'likes'),
+      )
       onSnapshot(recentMessagesQuery, (snapshot) => {
         if (snapshot.docs.some((like) => like.id === user.currentUser.uid))
-          setLiked(true);
+          setLiked(true)
         setLikes(
           snapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
-          }))
-        );
-      });
+          })),
+        )
+      })
     }
-  }, [props.postId]);
+  }, [props.postId])
 
   // Adding a comment:
   const postComment = (e) => {
-    e.preventDefault();
-    const commentRef = collection(db, "postPreview", props.postId, "comments");
+    e.preventDefault()
+    const commentRef = collection(db, 'postPreview', props.postId, 'comments')
     addDoc(
       commentRef,
       {
@@ -75,47 +75,47 @@ export const PostPreview = (props) => {
         username: user.extrainfo
           ? user.extrainfo.username
           : user.currentUser.displayName,
-        fullname: "",
+        fullname: '',
         imgProfile:
           user.currentUser.photoURL ||
-          "https://elcomercio.pe/resizer/1AdR3_S-R4ZELHQ6WkNRGhkZhdc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BH5EJQD2ZZF5XGJM2AHNJW7HUI.jpg",
+          'https://elcomercio.pe/resizer/1AdR3_S-R4ZELHQ6WkNRGhkZhdc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BH5EJQD2ZZF5XGJM2AHNJW7HUI.jpg',
         timestamp: serverTimestamp(),
       },
-      { merge: true }
-    );
-    setComment("");
-  };
+      { merge: true },
+    )
+    setComment('')
+  }
 
   // Handling Like / dislike:
   const handleLike = (e) => {
     if (liked) {
       deleteDoc(
-        doc(db, "postPreview", props.postId, "likes", user.currentUser.uid)
-      );
-      setLiked(false);
+        doc(db, 'postPreview', props.postId, 'likes', user.currentUser.uid),
+      )
+      setLiked(false)
     } else {
       const likeRef = doc(
         db,
-        "postPreview",
+        'postPreview',
         props.postId,
-        "likes",
-        user.currentUser.uid
-      );
-      setDoc(likeRef, { like: user.currentUser.uid }, { merge: true });
-      setLiked(true);
+        'likes',
+        user.currentUser.uid,
+      )
+      setDoc(likeRef, { like: user.currentUser.uid }, { merge: true })
+      setLiked(true)
     }
-  };
+  }
 
   return (
     <>
-      <div className="container">
+      <div className="container container_postPreview">
         <div className="header">
           <Link to={`/profile/${props.post.username}`}>
             <img src={props.post.imgProfile} />
           </Link>
 
           <Link
-            style={{ color: "black" }}
+            style={{ color: 'black' }}
             to={`/profile/${props.post.username}`}
           >
             <b>{props.post.username}</b>
@@ -129,7 +129,7 @@ export const PostPreview = (props) => {
             width="16"
             height="16"
             fill="currentColor"
-            className={liked ? "bi bi-heart liked" : "bi bi-heart-fill"}
+            className={liked ? 'bi bi-heart liked' : 'bi bi-heart-fill'}
             viewBox="0 0 16 16"
           >
             <path
@@ -147,13 +147,13 @@ export const PostPreview = (props) => {
           </span>
         </div>
         {
-          <div className={comments.length > 0 ? "post__comments" : ""}>
+          <div className={comments.length > 0 ? 'post__comments' : ''}>
             {comments.map((comment) => (
               <div className="comentario">
                 <p>
                   <Link
                     style={{
-                      color: "rgb(0,0,0,0.7)",
+                      color: 'rgb(0,0,0,0.7)',
                     }}
                     to={`/profile/${comment.username}`}
                   >
@@ -183,5 +183,5 @@ export const PostPreview = (props) => {
         )}
       </div>
     </>
-  );
-};
+  )
+}

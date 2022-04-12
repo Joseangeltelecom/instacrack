@@ -1,7 +1,7 @@
-import { Modal } from "react-bootstrap"
-import React, { useRef } from "react"
-import { Button } from "antd"
-import "./PhotoPreviewPost.css"
+import { Modal } from 'react-bootstrap'
+import React, { useRef } from 'react'
+import { Button } from 'antd'
+import './PhotoPreviewPost.css'
 
 export function PhotoPreviewPost(props) {
   const ref = useRef()
@@ -18,7 +18,7 @@ export function PhotoPreviewPost(props) {
 
   const handleRemoveImage = () => {
     props.setImage()
-    ref.current.value = ""
+    ref.current.value = ''
   }
 
   return (
@@ -79,10 +79,12 @@ export function PhotoPreviewPost(props) {
         </div>
       </Modal.Body>
       <Modal.Footer
-        style={{ background: "0597f6" }}
+        style={{ background: '0597f6' }}
         className="d-flex justify-content-center"
       >
-        <Button  disabled={props.image? false:true } onClick={handleClose}>Aceptar</Button>
+        <Button disabled={props.image ? false : true} onClick={handleClose}>
+          Aceptar
+        </Button>
       </Modal.Footer>
     </Modal>
   )
@@ -91,23 +93,23 @@ export function PhotoPreviewPost(props) {
 // Just some styles
 const styles = {
   container: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingTop: 50,
   },
   preview: {
     marginTop: 50,
-    display: "flex",
-    flexDirection: "column",
+    display: 'flex',
+    flexDirection: 'column',
   },
-  image: { maxWidth: "100%", maxHeight: 320 },
+  image: { maxWidth: '100%', maxHeight: 320 },
   delete: {
-    cursor: "pointer",
+    cursor: 'pointer',
     padding: 15,
-    background: "red",
-    color: "white",
-    border: "none",
+    background: 'red',
+    color: 'white',
+    border: 'none',
   },
 }

@@ -1,10 +1,10 @@
-import React from "react";
-import Attachment from "../svg/Attachment";
-import useSound from 'use-sound';
-import boopSfx from './sounds/iphone-notificacion.mp3';
+import React from 'react'
+import Attachment from '../svg/Attachment'
+import useSound from 'use-sound'
+import boopSfx from './sounds/iphone-notificacion.mp3'
 
-const MessageForm = ({ handleSubmit, text, setText, setImg, setFocus}) => {
-  const [play] = useSound(boopSfx);
+const MessageForm = ({ handleSubmit, text, setText, setImg, setFocus }) => {
+  const [play] = useSound(boopSfx)
   return (
     <form className="message_form" onSubmit={handleSubmit}>
       <div className="barra-form">
@@ -16,16 +16,17 @@ const MessageForm = ({ handleSubmit, text, setText, setImg, setFocus}) => {
           type="file"
           id="img"
           accept="image/*"
-          style={{ display: "none" }}
+          style={{ display: 'none' }}
           className="input-img"
         />
+
         <input
           type="text"
           placeholder="Enter message"
           value={text}
           onChange={(e) => setText(e.target.value)}
           onFocus={() => setFocus(true)}
-          onBlur={()=>setFocus(false)}
+          onBlur={() => setFocus(false)}
           className="input-texto"
         />
         <div>
@@ -33,7 +34,7 @@ const MessageForm = ({ handleSubmit, text, setText, setImg, setFocus}) => {
         </div>
       </div>
     </form>
-  );
-};
+  )
+}
 
-export default MessageForm;
+export default MessageForm

@@ -1,28 +1,21 @@
-import React, { useState } from "react";
-import { PlusCircleOutlined } from "@ant-design/icons";
-import { PhotoPreviewPost } from "./PhotoPreviewPost";
-import { FinalPostModal } from "./FinalPostModal";
+import React, { useState } from 'react'
+import { PlusCircleOutlined } from '@ant-design/icons'
+import { PhotoPreviewPost } from './PhotoPreviewPost'
+import { FinalPostModal } from './FinalPostModal'
 
 export function AddPostModal() {
-  const [modalShow, setModalShow] = React.useState(false);
-  const [modalShow2, setModalShow2] = React.useState(false);
-  const [image, setImage] = useState(null);
+  const [modalShow, setModalShow] = React.useState(false)
+  const [modalShow2, setModalShow2] = React.useState(false)
+  const [image, setImage] = useState(null)
   const handleClose = () => {
-    setModalShow(false);
-  };
+    setModalShow(false)
+  }
 
   return (
     <>
-      <a
-        className="ms-2"
-        variant="primary"
-        onClick={() => setModalShow(true)} //true
-      >
-        <PlusCircleOutlined
-          className="ms-4"
-          style={{ fontSize: "26px", color: "black" }}
-        />
-      </a>
+      <div onClick={() => setModalShow(true)}>
+        <PlusCircleOutlined style={{ fontSize: '26px', color: 'black' }} />
+      </div>
       <PhotoPreviewPost
         image={image}
         setImage={setImage}
@@ -37,5 +30,5 @@ export function AddPostModal() {
         onHide={setModalShow2}
       />
     </>
-  );
+  )
 }

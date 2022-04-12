@@ -38,3 +38,15 @@
   justify-content: end;
   font-weight: bold;
 }
+
+/* @media only screen and (min-width: 999px) {
+  .container-userchange {
+    display: none;
+  }
+} */
+
+@media screen and (max-width: 999px) {
+  .container-userchange {
+    display: none;
+  }
+}
