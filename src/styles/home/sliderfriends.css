@@ -12,7 +12,7 @@
   display: flex;
   flex-wrap: nowrap;
   height: 120px;
-  overflow: hidden;
+  width: 100%;
 }
 
 .slide {
@@ -21,7 +21,6 @@
   align-items: center;
   justify-content: center;
   min-width: 20%;
-  overflow: hidden;
   transition: 0.3s ease all;
   position: relative;
   z-index: 10;
