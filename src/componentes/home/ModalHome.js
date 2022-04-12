@@ -1,7 +1,7 @@
 import React from "react";
 import "../../styles/modalcard.css";
 
-export const ModalCard = ({ children, estado }) => {
+export const ModalHome = ({ children, estado }) => {
   return (
     <>
       {estado && (
