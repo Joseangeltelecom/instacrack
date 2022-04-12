@@ -1,21 +1,21 @@
-import { Modal } from "react-bootstrap"
-import React, { useState } from "react"
-import { useAuth } from "../../context/AuthContext"
+import { Modal } from 'react-bootstrap'
+import React, { useState } from 'react'
+import { useAuth } from '../../context/AuthContext'
 import {
   getDownloadURL,
   getStorage,
   ref,
   uploadBytesResumable,
-} from "firebase/storage"
-import { addDoc, collection, serverTimestamp } from "firebase/firestore"
-import { db } from "../../firebase"
-import { Button, Progress } from "antd"
-import { Editor } from "@tinymce/tinymce-react"
-import { Link } from "react-router-dom"
+} from 'firebase/storage'
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
+import { db } from '../../firebase'
+import { Button, Progress } from 'antd'
+import { Editor } from '@tinymce/tinymce-react'
+import { Link } from 'react-router-dom'
 
 export function FinalPostModal(props) {
   const [progress, setProgress] = useState(0)
-  const [caption, setCaption] = useState("")
+  const [caption, setCaption] = useState('')
   const { user } = useAuth()
 
   const handleUpload = () => {
@@ -24,10 +24,10 @@ export function FinalPostModal(props) {
     const uploadTask = uploadBytesResumable(storageRef, props.image)
 
     uploadTask.on(
-      "state_changed",
+      'state_changed',
       (snapshot) => {
         const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
         )
         setProgress(progress)
       },
@@ -39,7 +39,7 @@ export function FinalPostModal(props) {
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
           // post props.image inside db
-          addDoc(collection(db, "postPreview"), {
+          addDoc(collection(db, 'postPreview'), {
             timestamp: serverTimestamp(),
             caption: caption,
             imagePostUrl: url,
@@ -49,15 +49,15 @@ export function FinalPostModal(props) {
             id: user.currentUser.uid,
             imgProfile:
               user.currentUser.photoURL ||
-              "https://elcomercio.pe/resizer/1AdR3_S-R4ZELHQ6WkNRGhkZhdc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BH5EJQD2ZZF5XGJM2AHNJW7HUI.jpg",
+              'https://elcomercio.pe/resizer/1AdR3_S-R4ZELHQ6WkNRGhkZhdc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BH5EJQD2ZZF5XGJM2AHNJW7HUI.jpg',
           })
 
           setProgress(0)
-          setCaption("")
+          setCaption('')
           props.setImage(null)
           props.onHide(false)
         })
-      }
+      },
     )
   }
 
@@ -95,12 +95,12 @@ export function FinalPostModal(props) {
               <img
                 src={
                   user.currentUser.photoURL ||
-                  "https://elcomercio.pe/resizer/1AdR3_S-R4ZELHQ6WkNRGhkZhdc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BH5EJQD2ZZF5XGJM2AHNJW7HUI.jpg"
+                  'https://elcomercio.pe/resizer/1AdR3_S-R4ZELHQ6WkNRGhkZhdc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BH5EJQD2ZZF5XGJM2AHNJW7HUI.jpg'
                 }
               />
             </Link>
 
-            <Link style={{ color: "black" }} to="/profile">
+            <Link style={{ color: 'black' }} to="/profile">
               <b>
                 {user.extrainfo
                   ? user.extrainfo.username
@@ -110,9 +110,9 @@ export function FinalPostModal(props) {
           </div>
           <Editor
             init={{
-              plugins: "emoticons",
-              toolbar: "emoticons",
-              toolbar_location: "bottom",
+              plugins: 'emoticons',
+              toolbar: 'emoticons',
+              toolbar_location: 'bottom',
               menubar: false,
             }}
             outputFormat="text"
@@ -126,21 +126,21 @@ export function FinalPostModal(props) {
 // Just some styles
 const styles = {
   container: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   preview: {
-    display: "flex",
-    flexDirection: "column",
+    display: 'flex',
+    flexDirection: 'column',
   },
-  image: { maxWidth: "100%", maxHeight: "100%" },
+  image: { maxWidth: '100%', maxHeight: '100%' },
   delete: {
-    cursor: "pointer",
+    cursor: 'pointer',
     padding: 15,
-    background: "red",
-    color: "white",
-    border: "none",
+    background: 'red',
+    color: 'white',
+    border: 'none',
   },
 }

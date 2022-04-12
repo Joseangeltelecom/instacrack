@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { DownOutlined } from "@ant-design/icons";
-import { ModalChangeUser } from "../componentes/Profile/ModalChangeUser";
-import { useAuth } from "../context/AuthContext";
-import "../styles/app.css";
+import React, { useEffect, useState } from 'react'
+import { DownOutlined } from '@ant-design/icons'
+import { ModalChangeUser } from '../componentes/Profile/ModalChangeUser'
+import { useAuth } from '../context/AuthContext'
+import '../styles/app.css'
 import {
   addDoc,
   collection,
@@ -15,110 +15,110 @@ import {
   Timestamp,
   updateDoc,
   where,
-} from "firebase/firestore";
-import { db, storage } from "../firebase";
-import { NavLink } from "react-router-dom";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import Message from "../componentes/Chat/Message";
-import MessageForm from "../componentes/Chat/MessageForm";
-import User from "../componentes/Chat/User";
-import Navbar from "../componentes/navbar/Navbar";
-import useSound from 'use-sound';
-import boopSfx from './sounds/iphone-notificacion.mp3';
+} from 'firebase/firestore'
+import { db, storage } from '../firebase'
+import { NavLink } from 'react-router-dom'
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
+import Message from '../componentes/Chat/Message'
+import MessageForm from '../componentes/Chat/MessageForm'
+import User from '../componentes/Chat/User'
+import Navbar from '../componentes/navbar/Navbar'
 
 export function Chat2() {
-  const { user } = useAuth();
-  const [play] = useSound(boopSfx);
+  const { user } = useAuth()
+  const [users, setUsers] = useState([])
+  const [chat, setChat] = useState('')
+  const [text, setText] = useState('')
+  const [img, setImg] = useState('')
+  const [msgs, setMsgs] = useState([])
+  const [focus, setFocus] = useState(false)
 
-  const [users, setUsers] = useState([]);
-  const [chat, setChat] = useState("");
-  const [text, setText] = useState("");
-  const [img, setImg] = useState("");
-  const [msgs, setMsgs] = useState([]);
-
-  const user1 = user.currentUser.uid;
+  const user1 = user.currentUser.uid
 
   useEffect(() => {
-    const usersRef = collection(db, "users");
+    const usersRef = collection(db, 'users')
     // create query object
-    const q = query(usersRef, where("uid", "not-in", [user1]));
+    const q = query(usersRef, where('uid', 'not-in', [user1]))
     // execute query
     const unsub = onSnapshot(q, (querySnapshot) => {
-      console.log(querySnapshot);
-      let users = [];
+      console.log(querySnapshot)
+      let users = []
       querySnapshot.forEach((doc) => {
-        users.push(doc.data());
-      });
-      setUsers(users);
-    });
-    return () => unsub();
-  }, []);
+        users.push(doc.data())
+      })
+      setUsers(users)
+    })
+    return () => unsub()
+  }, [])
 
   const selectUser = async (user) => {
-    setChat(user);
+    setChat(user)
 
-    const user2 = user.uid;
-    const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`;
+    const user2 = user.uid
+    const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`
 
-    const msgsRef = collection(db, "messages", id, "chat");
-    const q = query(msgsRef, orderBy("createdAt", "asc"));
+    const msgsRef = collection(db, 'messages', id, 'chat')
+    const q = query(msgsRef, orderBy('createdAt', 'asc'))
 
     onSnapshot(q, (querySnapshot) => {
-      let msgs = [];
+      let msgs = []
       querySnapshot.forEach((doc) => {
-        msgs.push(doc.data());
-      });
-      setMsgs(msgs);
-    });
+        msgs.push(doc.data())
+      })
+      setMsgs(msgs)
+    })
 
     // get last message b/w logged in user and selected user
-    const docSnap = await getDoc(doc(db, "lastMsg", id));
+    const docSnap = await getDoc(doc(db, 'lastMsg', id))
     // if last message exists and message is from selected user
     if (docSnap.data() && docSnap.data().from !== user1) {
       // update last message doc, set unread to false
-      await updateDoc(doc(db, "lastMsg", id), { unread: false });
+      await updateDoc(doc(db, 'lastMsg', id), { unread: false })
+
+
+
+      
     }
-  };
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const user2 = chat.uid;
+    const user2 = chat.uid
 
-    const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`;
+    const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`
 
-    let url;
+    let url
     if (img) {
       const imgRef = ref(
         storage,
-        `images/${new Date().getTime()} - ${img.name}`
-      );
-      const snap = await uploadBytes(imgRef, img);
-      const dlUrl = await getDownloadURL(ref(storage, snap.ref.fullPath));
-      url = dlUrl;
+        `images/${new Date().getTime()} - ${img.name}`,
+      )
+      const snap = await uploadBytes(imgRef, img)
+      const dlUrl = await getDownloadURL(ref(storage, snap.ref.fullPath))
+      url = dlUrl
     }
 
-    await addDoc(collection(db, "messages", id, "chat"), {
+    await addDoc(collection(db, 'messages', id, 'chat'), {
       text,
       from: user1,
       to: user2,
       createdAt: Timestamp.fromDate(new Date()),
-      media: url || "",
-    });
+      media: url || '',
+    })
 
-    await setDoc(doc(db, "lastMsg", id), {
+    await setDoc(doc(db, 'lastMsg', id), {
       text,
       from: user1,
       to: user2,
       createdAt: Timestamp.fromDate(new Date()),
-      media: url || "",
+      media: url || '',
       unread: true,
-    });
+    })
 
-    setText("");
-    setImg("");
-    play()
-  };
+    setText('')
+    setImg('')
+  }
 
   return (
     <div className="chat_container">
@@ -131,9 +131,9 @@ export function Chat2() {
               name={
                 <b
                   style={{
-                    color: "black",
-                    marginRight: "5px",
-                    fontSize: "16px",
+                    color: 'black',
+                    marginRight: '5px',
+                    fontSize: '16px',
                   }}
                 >
                   {user.extrainfo
@@ -142,7 +142,7 @@ export function Chat2() {
                 </b>
               }
             />
-            <DownOutlined style={{ color: "black", fontSize: "16px" }} />
+            <DownOutlined style={{ color: 'black', fontSize: '16px' }} />
           </div>
           <div className="friends-container" class="col-3 friends-container">
             {users.map((user) => (
@@ -152,6 +152,8 @@ export function Chat2() {
                 selectUser={selectUser}
                 user1={user1}
                 chat={chat}
+                text={text}
+                focus={focus}
               />
             ))}
           </div>
@@ -186,6 +188,7 @@ export function Chat2() {
                 text={text}
                 setText={setText}
                 setImg={setImg}
+                setFocus={setFocus}
               />
             </div>
           ) : (
@@ -205,5 +208,5 @@ export function Chat2() {
         </div>
       </div>
     </div>
-  );
+  )
 }

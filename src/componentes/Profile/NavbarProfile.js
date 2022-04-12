@@ -1,24 +1,24 @@
-import { FolderOutlined, TableOutlined } from "@ant-design/icons";
-import React from "react";
-import { NavLink } from "react-router-dom";
-import "../../styles/navbarprofile.css";
+import { FolderOutlined, TableOutlined } from '@ant-design/icons'
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import '../../styles/navbarprofile.css'
 
 export const NavbarProfile = () => {
   return (
     <>
       <div
         className="row justify-content-center"
-        style={{ fontSize: "14px", padding: "10px 0" }}
+        style={{ fontSize: '14px', padding: '10px 0' }}
       >
         <div
           className="col-2"
           style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
         >
-          <TableOutlined style={{ color: "gray" }} />
+          <TableOutlined style={{ color: 'gray' }} />
           <NavLink to="/profile" className="navlink">
             PUBLICACIONES
           </NavLink>
@@ -26,9 +26,9 @@ export const NavbarProfile = () => {
         <div
           className="col-2"
           style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
         >
           <FolderOutlined />
@@ -38,5 +38,5 @@ export const NavbarProfile = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}

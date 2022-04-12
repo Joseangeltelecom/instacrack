@@ -1,13 +1,13 @@
-import React, { useState } from "react"
-import { Form, Input, Button } from "antd"
-import { useAuth } from "../context/AuthContext"
-import { Link } from "react-router-dom"
+import React, { useState } from 'react'
+import { Form, Input, Button } from 'antd'
+import { useAuth } from '../context/AuthContext'
+import { Link } from 'react-router-dom'
 
 function ResetPassword() {
-  const [email, setEmail] = useState("")
-  const [success, setSuccess] = useState("")
+  const [email, setEmail] = useState('')
+  const [success, setSuccess] = useState('')
   const { resetPassword } = useAuth()
-  const [error, setError] = useState("")
+  const [error, setError] = useState('')
 
   const onFinishFailed = (errorInfo) => {
     console.log(errorInfo)
@@ -19,14 +19,14 @@ function ResetPassword() {
   }
 
   const handleResetPassword = async (e) => {
-    if (!email) return setError("Write an email to reset password")
+    if (!email) return setError('Write an email to reset password')
     try {
       await resetPassword(email)
-      setSuccess("We sent you an email. Check your inbox")
-      setEmail("")
+      setSuccess('We sent you an email. Check your inbox')
+      setEmail('')
     } catch (error) {
       console.log(error)
-      if (error.message === "auth/invalid-email") {
+      if (error.message === 'auth/invalid-email') {
         setError("That email doesn't exit, Please enter a registered email")
       }
 
@@ -37,31 +37,31 @@ function ResetPassword() {
   return (
     <div
       style={{
-        display: "flex",
-        justifyContent: "center",
-        textAlign: "center",
-        flexDirection: "column",
+        display: 'flex',
+        justifyContent: 'center',
+        textAlign: 'center',
+        flexDirection: 'column',
       }}
     >
       <div
         style={{
-          width: "400px",
-          margin: "100px auto 10px",
-          background: "#FFFFFF",
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "column",
-          textAlign: "center",
-          padding: "0px 50px",
-          border: "1px solid #DDDDDD",
+          width: '400px',
+          margin: '100px auto 10px',
+          background: '#FFFFFF',
+          display: 'flex',
+          justifyContent: 'center',
+          flexDirection: 'column',
+          textAlign: 'center',
+          padding: '0px 50px',
+          border: '1px solid #DDDDDD',
         }}
       >
         <div
           style={{
-            margin: "30px 0px 0px",
+            margin: '30px 0px 0px',
           }}
         >
-          <h1 style={{ fontFamily: "Lobster" }}>Instacrack</h1>
+          <h1 style={{ fontFamily: 'Lobster' }}>Instacrack</h1>
         </div>
 
         <p className="text-danger">{error}</p>
@@ -93,8 +93,8 @@ function ResetPassword() {
 
           <Button
             style={{
-              width: "100%",
-              marginBottom: "10px",
+              width: '100%',
+              marginBottom: '10px',
             }}
             type="primary"
             htmlType="submit"
@@ -104,7 +104,7 @@ function ResetPassword() {
         </Form>
         <div
           style={{
-            marginBottom: "20px",
+            marginBottom: '20px',
           }}
         >
           <Link to="/">Volver al inicio de sesión</Link>

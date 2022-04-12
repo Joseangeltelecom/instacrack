@@ -1,5 +1,5 @@
-import React from "react"
-import { createContext, useContext, useEffect, useState } from "react"
+import React from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -8,15 +8,15 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   sendPasswordResetEmail,
-} from "firebase/auth"
-import { auth, db } from "../firebase"
-import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore"
+} from 'firebase/auth'
+import { auth, db } from '../firebase'
+import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
 
 const authContext = createContext()
 
 export const useAuth = () => {
   const context = useContext(authContext)
-  if (!context) throw new Error("There is no Auth provider")
+  if (!context) throw new Error('There is no Auth provider')
   return context
 }
 
@@ -26,7 +26,7 @@ export function AuthProvider({ children }) {
 
   const signup = async (email, password, username, fullname) => {
     const { user } = await createUserWithEmailAndPassword(auth, email, password)
-    const userRef = doc(db, "users", user.uid)
+    const userRef = doc(db, 'users', user.uid)
     setDoc(
       userRef,
       {
@@ -35,9 +35,9 @@ export function AuthProvider({ children }) {
         username: username,
         fullname: fullname,
         imgProfile:
-          "https://elcomercio.pe/resizer/1AdR3_S-R4ZELHQ6WkNRGhkZhdc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BH5EJQD2ZZF5XGJM2AHNJW7HUI.jpg",
+          'https://elcomercio.pe/resizer/1AdR3_S-R4ZELHQ6WkNRGhkZhdc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BH5EJQD2ZZF5XGJM2AHNJW7HUI.jpg',
       },
-      { merge: true }
+      { merge: true },
     )
   }
   const login = (email, password) => {
@@ -47,7 +47,7 @@ export function AuthProvider({ children }) {
   const loginWithGoogle = async () => {
     const googleProvider = new GoogleAuthProvider()
     const { user } = await signInWithPopup(auth, googleProvider)
-    const userRef = doc(db, "users", user.uid)
+    const userRef = doc(db, 'users', user.uid)
     setDoc(
       userRef,
       {
@@ -57,12 +57,12 @@ export function AuthProvider({ children }) {
         fullname: null,
         imgProfile: user.photoURL,
       },
-      { merge: true }
+      { merge: true },
     )
   }
 
   const logout = async () => {
-    await updateDoc(doc(db, "users", user.currentUser.uid), {
+    await updateDoc(doc(db, 'users', user.currentUser.uid), {
       isOnline: false,
     })
     signOut(auth)
@@ -74,7 +74,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const unsubuscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
-        const docRef = doc(db, "users", currentUser.uid)
+        const docRef = doc(db, 'users', currentUser.uid)
         const docSnap = await getDoc(docRef)
         setUser({ currentUser, extrainfo: docSnap.data() })
         setLoading(false)

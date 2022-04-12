@@ -1,25 +1,25 @@
 import React, { useState } from 'react'
-import "./searchBar.css"
-import SearchIcon from '@mui/icons-material/Search';
-import CloseIcon from '@mui/icons-material/Close';
-import { Link } from 'react-router-dom';
-import useComponentVisible from '../hooks/useComponentVisible';
+import './searchBar.css'
+import SearchIcon from '@mui/icons-material/Search'
+import CloseIcon from '@mui/icons-material/Close'
+import { Link } from 'react-router-dom'
+import useComponentVisible from '../hooks/useComponentVisible'
 
-
-const SearchBar = ({placeholder, data}) => {
+const SearchBar = ({ placeholder, data }) => {
   const [filteredData, setFilteredData] = useState([])
   const [wordEntered, setWordEntered] = useState([])
-  const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(true);
+  const { ref, isComponentVisible, setIsComponentVisible } =
+    useComponentVisible(true)
 
   const handleFiltered = (e) => {
     setIsComponentVisible(true)
     const searchWord = e.target.value
     setWordEntered(searchWord)
     const newFilter = data.filter((value) => {
-        return value.username.toLowerCase().includes(searchWord.toLowerCase())
+      return value.username.toLowerCase().includes(searchWord.toLowerCase())
     })
 
-    if(searchWord === ""){
+    if (searchWord === '') {
       setFilteredData([])
     } else {
       setFilteredData(newFilter)
@@ -28,36 +28,46 @@ const SearchBar = ({placeholder, data}) => {
 
   const clearInput = () => {
     setFilteredData([])
-    setWordEntered("")
+    setWordEntered('')
   }
- 
+
   return (
-    <div className='search'>
-      <div className='searchInputs'>
-        <input  ref={ref} type="text" placeholder={placeholder} onChange={handleFiltered} value={wordEntered}/>
-        <div className='searchIcon'>
-          {filteredData.length === 0 ? <SearchIcon /> : <CloseIcon id="clearBtn" onClick={clearInput}/>}
-          </div>
+    <div className="search">
+      <div className="searchInputs">
+        <input
+          ref={ref}
+          type="text"
+          placeholder={placeholder}
+          onChange={handleFiltered}
+          value={wordEntered}
+        />
+        <div className="searchIcon">
+          {filteredData.length === 0 ? (
+            <SearchIcon />
+          ) : (
+            <CloseIcon id="clearBtn" onClick={clearInput} />
+          )}
+        </div>
       </div>
 
-      {isComponentVisible && filteredData.length != 0 &&  
-      <div   className='dataResult'>
-        {filteredData.map((value) => { 
-return (
-<Link to={`/profile/${value.username}`} onClick={clearInput}>
-<div  className="header dataItem">
-  <img className="imgProfileBar" src={value.imgProfile} />
-  <p>{value.username}</p>
-</div>
-</Link>
-)
-        })}
-      </div>
-      }
+      {isComponentVisible && filteredData.length != 0 && (
+        <div className="dataResult">
+          {filteredData.map((value) => {
+            return (
+              <Link to={`/profile/${value.username}`} onClick={clearInput}>
+                <div className="header dataItem">
+                  <img className="imgProfileBar" src={value.imgProfile} />
+                  <p>{value.username}</p>
+                </div>
+              </Link>
+            )
+          })}
+        </div>
+      )}
     </div>
-  );
+  )
 }
- 
+
 export default SearchBar
 
 // import { Autocomplete } from '@mui/material'

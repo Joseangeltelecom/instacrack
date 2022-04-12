@@ -1,25 +1,25 @@
-import React, { useState } from "react"
-import { Form, Input, Button } from "antd"
-import { Link, useNavigate } from "react-router-dom"
-import { useAuth } from "../context/AuthContext"
+import React, { useState } from 'react'
+import { Form, Input, Button } from 'antd'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
 function Register() {
-  const [error, setError] = useState("")
+  const [error, setError] = useState('')
   const [user, setUser] = useState({
-    email: "",
-    password: "",
-    username: "",
-    fullname: "",
+    email: '',
+    password: '',
+    username: '',
+    fullname: '',
   })
   const { signup, loginWithGoogle, resetPassword } = useAuth()
 
   let navigate = useNavigate()
 
   const handleSubmit = async (e) => {
-    setError("")
+    setError('')
     try {
       await signup(user.email, user.password, user.username, user.fullname)
-      navigate("/home")
+      navigate('/home')
     } catch (error) {
       setError(error.message)
     }
@@ -32,7 +32,7 @@ function Register() {
   const handleGoogleSignin = async () => {
     try {
       await loginWithGoogle()
-      navigate("/home")
+      navigate('/home')
     } catch (error) {
       setError(error.message)
     }
@@ -41,36 +41,36 @@ function Register() {
   return (
     <div
       style={{
-        display: "flex",
-        justifyContent: "center",
-        textAlign: "center",
-        flexDirection: "column",
-        marginBottom: "30px",
+        display: 'flex',
+        justifyContent: 'center',
+        textAlign: 'center',
+        flexDirection: 'column',
+        marginBottom: '30px',
       }}
     >
       <div
         style={{
-          width: "400px",
-          margin: "30px auto 10px",
-          background: "#FFFFFF",
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "column",
-          textAlign: "center",
-          padding: "0px 50px",
-          border: "1px solid #DDDDDD",
+          width: '400px',
+          margin: '30px auto 10px',
+          background: '#FFFFFF',
+          display: 'flex',
+          justifyContent: 'center',
+          flexDirection: 'column',
+          textAlign: 'center',
+          padding: '0px 50px',
+          border: '1px solid #DDDDDD',
         }}
       >
         <div
           style={{
-            margin: "30px 0px 0px 0px",
+            margin: '30px 0px 0px 0px',
           }}
         >
-          <h1 style={{ fontFamily: "Lobster" }}>Instacrack</h1>
+          <h1 style={{ fontFamily: 'Lobster' }}>Instacrack</h1>
           <p
             style={{
-              color: "#8E8E8E",
-              fontSize: "18px",
+              color: '#8E8E8E',
+              fontSize: '18px',
             }}
           >
             Regístrate para ver fotos y videos de tus amigos.
@@ -86,8 +86,8 @@ function Register() {
           <Button
             onClick={handleGoogleSignin}
             style={{
-              width: "100%",
-              fontWeight: "bold",
+              width: '100%',
+              fontWeight: 'bold',
             }}
             type="primary"
             htmlType="submit"
@@ -148,7 +148,7 @@ function Register() {
           />
           <Button
             style={{
-              width: "100%",
+              width: '100%',
             }}
             type="primary"
             htmlType="submit"
@@ -157,8 +157,8 @@ function Register() {
           </Button>
           <p
             style={{
-              color: "#8E8E8E",
-              fontSize: "13px",
+              color: '#8E8E8E',
+              fontSize: '13px',
             }}
           >
             Al registrarte, aceptas nuestras Condiciones, la Política de datos y
@@ -168,15 +168,15 @@ function Register() {
       </div>
       <div
         style={{
-          width: "400px",
-          margin: "0px auto",
-          background: "#FFFFFF",
-          display: "flex",
-          justifyContent: "center",
-          textAlign: "center",
-          padding: "15px 20px",
-          border: "1px solid #DDDDDD",
-          marginBottom: "30px",
+          width: '400px',
+          margin: '0px auto',
+          background: '#FFFFFF',
+          display: 'flex',
+          justifyContent: 'center',
+          textAlign: 'center',
+          padding: '15px 20px',
+          border: '1px solid #DDDDDD',
+          marginBottom: '30px',
         }}
       >
         <p
@@ -191,8 +191,8 @@ function Register() {
         <Link
           to="/"
           style={{
-            fontWeight: "bold",
-            color: "#00A2F8",
+            fontWeight: 'bold',
+            color: '#00A2F8',
           }}
         >
           Inicia sesión

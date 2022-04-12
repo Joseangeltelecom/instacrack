@@ -1,27 +1,34 @@
-import React, { useEffect, useState } from "react";
-import Img from "../assets/image1.jpg";
-import { onSnapshot, doc } from "firebase/firestore";
-import { db } from "../../firebase";
+import React, { useEffect, useState } from 'react'
+import Img from '../assets/image1.jpg'
+import { onSnapshot, doc } from 'firebase/firestore'
+import { db } from '../../firebase'
+import useSound from 'use-sound'
+import boopSfx from './sounds/iphone-notificacion.mp3'
 
-const User = ({ user1, user, selectUser, chat }) => {
-  console.log("user", user.username);
-  console.log("chat", chat.username);
-  const user2 = user?.uid;
-  const [data, setData] = useState("");
+const User = ({ user1, user, selectUser, chat, focus }) => {
+  console.log('FOCUS!!', focus)
+  const [play] = useSound(boopSfx)
+  console.log('user', user.username)
+  console.log('chat', chat.username)
+  const user2 = user?.uid
+  const [data, setData] = useState('')
 
   useEffect(() => {
-    const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`;
-    let unsub = onSnapshot(doc(db, "lastMsg", id), (doc) => {
-      setData(doc.data());
-    });
-    return () => unsub();
-  }, []);
+    const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`
+    let unsub = onSnapshot(doc(db, 'lastMsg', id), (doc) => {
+      setData(doc.data())
+    })
+    // if (data?.from === user2 && data?.unread){
+    //   play()
+    // }
+    return () => unsub()
+  }, [data?.from, user1, data?.unread, focus])
 
   return (
     <>
       <div
         className={`user_wrapper ${
-          chat.username === user.username && "selected_user"
+          chat.username === user.username && 'selected_user'
         }`}
         onClick={() => selectUser(user)}
       >
@@ -29,17 +36,17 @@ const User = ({ user1, user, selectUser, chat }) => {
           <div className="user_detail">
             <img src={user.imgProfile || Img} alt="avatar" className="avatar" />
             <p>{user.username}</p>
-            {data?.from !== user1 && data?.unread && (
+            {data?.from !== user1 && data?.unread && !focus && (
               <small className="unread">New</small>
             )}
           </div>
           <div
-            className={`user_status ${user.isOnline ? "online" : "offline"}`}
+            className={`user_status ${user.isOnline ? 'online' : 'offline'}`}
           ></div>
         </div>
         {data && (
           <p className="truncate">
-            <strong>{data.from === user1 ? "Me:" : null}</strong>
+            <strong>{data.from === user1 ? 'Me:' : null}</strong>
             {data.text}
           </p>
         )}
@@ -47,7 +54,7 @@ const User = ({ user1, user, selectUser, chat }) => {
       <div
         onClick={() => selectUser(user)}
         className={`sm_container ${
-          chat.username === user.username && "selected_user"
+          chat.username === user.username && 'selected_user'
         }`}
       >
         <img
@@ -57,7 +64,7 @@ const User = ({ user1, user, selectUser, chat }) => {
         />
       </div>
     </>
-  );
-};
+  )
+}
 
-export default User;
+export default User

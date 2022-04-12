@@ -1,60 +1,54 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react'
 
-import { Form, Input, Button, Dropdown, Menu } from "antd";
+import { Dropdown, Menu } from 'antd'
 import {
   BookOutlined,
   HeartOutlined,
   HomeFilled,
-  PlusCircleOutlined,
-  SearchOutlined,
   SendOutlined,
   SyncOutlined,
   UserOutlined,
-} from "@ant-design/icons";
-import { ModalChangeUser } from "../Profile/ModalChangeUser";
-import { Link } from "react-router-dom";
-import { AddPostModal } from "../addPost/AddPostModal";
-import { useAuth } from "../../context/AuthContext";
-import SearchBar from "./SearchBar";
-import { db } from "../../firebase";
-import { collection, onSnapshot } from "firebase/firestore";
+} from '@ant-design/icons'
+import { ModalChangeUser } from '../Profile/ModalChangeUser'
+import { Link } from 'react-router-dom'
+import { AddPostModal } from '../addPost/AddPostModal'
+import { useAuth } from '../../context/AuthContext'
+import SearchBar from './SearchBar'
+import { db } from '../../firebase'
+import { collection, onSnapshot } from 'firebase/firestore'
 
 function Navbar() {
-  const { logout, user } = useAuth();
-  const [users, setUsers] = useState([]);
+  const { logout, user } = useAuth()
+  const [users, setUsers] = useState([])
   const handleLogout = async () => {
     try {
-      await logout();
+      await logout()
     } catch (error) {
-      console.error(error.message);
+      console.error(error.message)
     }
-  };
+  }
 
   useEffect(() => {
-    const addUsersFriends = onSnapshot(collection(db, "users"), (snapshot) =>
+    const addUsersFriends = onSnapshot(collection(db, 'users'), (snapshot) =>
       setUsers(
         snapshot.docs.map((doc) => ({
           id: doc.id,
-         ...doc.data(),
-        }))
-      )
-    );
-    return () => addUsersFriends();
-  }, []);
-  
+          ...doc.data(),
+        })),
+      ),
+    )
+    return () => addUsersFriends()
+  }, [])
+
   const menu = (
-    <Menu style={{ width: "200px" }}>
+    <Menu style={{ width: '200px' }}>
       <Menu.Item>
         <UserOutlined />
-        <Link to="/profile" className="ms-2">
-          Perfil
-        </Link>
+        <Link to="/profile">Perfil</Link>
       </Menu.Item>
       <Menu.Item>
         <BookOutlined />
-        <Link to="/postsaved" className="ms-2">
-          Guardado
-        </Link>
+        <Link to="/postsaved">Guardado</Link>
       </Menu.Item>
       <Menu.Item>
         <SyncOutlined />
@@ -64,10 +58,10 @@ function Navbar() {
         <a onClick={handleLogout}>Salir</a>
       </Menu.Item>
     </Menu>
-  );
+  )
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark fixed-top bg-white border-bottom">
+    <nav className="navbar navbar-expand-lg navbar-dark fixed-top bg-white border-bottom p-0 m-0">
       <div className="container-fluid d-flex justify-content-evenly">
         {/* <Button
           onClick={handleLogout}
@@ -78,41 +72,40 @@ function Navbar() {
         </Button> */}
 
         <div>
-          <h2 style={{ fontFamily: "Lobster" }}>Instacrack</h2>
+          <Link
+            to="/home"
+            style={{ fontFamily: 'Lobster', color: 'black', fontSize: '35px' }}
+          >
+            Instacrack
+          </Link>
         </div>
         <div>
-            {/* <div
+          {/* <div
               style={{ width: "230px", height: "35px", background: "gray" }}
               className="d-none d-sm-block rounded"
             > */}
-              <SearchBar  data={users} placeholder="Search a friend" />
-              {/* <Input
+          <SearchBar data={users} placeholder="Search a friend" />
+          {/* <Input
                 className="w-100 h-100 rounded"
                 allowClear
                 type="text"
                 placeholder="Buscar"
                 prefix={<SearchOutlined />}
               /> */}
-              
-            {/* </div> */}
-        
+
+          {/* </div> */}
         </div>
-        <div className="d-flex flex-row justify-content-evenly">
-          <Link to="/home" style={{ color: "black" }}>
-            <HomeFilled style={{ fontSize: "26px" }} />
+        <div className="d-flex justify-content-center align-items-center">
+          <Link to="/home" style={{ color: 'black' }}>
+            <HomeFilled style={{ fontSize: '26px' }} />
           </Link>
 
-          <Link to="/chat" style={{ color: "black" }}>
-            <SendOutlined
-              className="ms-4"
-              style={{ fontSize: "26px" }}
-              rotate={-25}
-            />
+          <Link to="/chat" style={{ color: 'black' }}>
+            <SendOutlined style={{ fontSize: '26px' }} rotate={-25} />
           </Link>
           <a>
             <AddPostModal />
           </a>
-          <HeartOutlined className="ms-4" style={{ fontSize: "26px" }} />
           <a>
             <Dropdown
               trigger="click"
@@ -122,15 +115,14 @@ function Navbar() {
             >
               <img
                 style={{
-                  height: "35px",
-                  width: "35px",
-                  borderRadius: "50%",
-                  padding: "2px",
-                  marginLeft: "25px",
+                  height: '35px',
+                  width: '35px',
+                  borderRadius: '50%',
+                  padding: '2px',
                 }}
                 src={
                   user.currentUser.photoURL ||
-                  "https://elcomercio.pe/resizer/1AdR3_S-R4ZELHQ6WkNRGhkZhdc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BH5EJQD2ZZF5XGJM2AHNJW7HUI.jpg"
+                  'https://elcomercio.pe/resizer/1AdR3_S-R4ZELHQ6WkNRGhkZhdc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BH5EJQD2ZZF5XGJM2AHNJW7HUI.jpg'
                 }
               />
             </Dropdown>
@@ -138,7 +130,7 @@ function Navbar() {
         </div>
       </div>
     </nav>
-  );
+  )
 }
 
-export default Navbar;
+export default Navbar
