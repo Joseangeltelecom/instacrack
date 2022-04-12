@@ -3,7 +3,7 @@ import Attachment from "../svg/Attachment";
 import useSound from 'use-sound';
 import boopSfx from './sounds/iphone-notificacion.mp3';
 
-const MessageForm = ({ handleSubmit, text, setText, setImg }) => {
+const MessageForm = ({ handleSubmit, text, setText, setImg, setFocus}) => {
   const [play] = useSound(boopSfx);
   return (
     <form className="message_form" onSubmit={handleSubmit}>
@@ -24,6 +24,8 @@ const MessageForm = ({ handleSubmit, text, setText, setImg }) => {
           placeholder="Enter message"
           value={text}
           onChange={(e) => setText(e.target.value)}
+          onFocus={() => setFocus(true)}
+          onBlur={()=>setFocus(false)}
           className="input-texto"
         />
         <div>

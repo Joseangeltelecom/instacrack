@@ -2,8 +2,12 @@ import React, { useEffect, useState } from "react";
 import Img from "../assets/image1.jpg";
 import { onSnapshot, doc } from "firebase/firestore";
 import { db } from "../../firebase";
+import useSound from 'use-sound';
+import boopSfx from './sounds/iphone-notificacion.mp3';
 
-const User = ({ user1, user, selectUser, chat }) => {
+const User = ({ user1, user, selectUser, chat, focus }) => {
+  console.log("FOCUS!!", focus)
+  const [play] = useSound(boopSfx);
   console.log("user", user.username);
   console.log("chat", chat.username);
   const user2 = user?.uid;
@@ -29,7 +33,7 @@ const User = ({ user1, user, selectUser, chat }) => {
           <div className="user_detail">
             <img src={user.imgProfile || Img} alt="avatar" className="avatar" />
             <p>{user.username}</p>
-            {data?.from !== user1 && data?.unread && (
+            {data?.from !== user1 && data?.unread && !focus && play(
               <small className="unread">New</small>
             )}
           </div>

@@ -23,18 +23,16 @@ import Message from "../componentes/Chat/Message";
 import MessageForm from "../componentes/Chat/MessageForm";
 import User from "../componentes/Chat/User";
 import Navbar from "../componentes/navbar/Navbar";
-import useSound from 'use-sound';
-import boopSfx from './sounds/iphone-notificacion.mp3';
+
 
 export function Chat2() {
   const { user } = useAuth();
-  const [play] = useSound(boopSfx);
-
   const [users, setUsers] = useState([]);
   const [chat, setChat] = useState("");
   const [text, setText] = useState("");
   const [img, setImg] = useState("");
   const [msgs, setMsgs] = useState([]);
+  const [focus,setFocus] = useState(false)
 
   const user1 = user.currentUser.uid;
 
@@ -117,7 +115,6 @@ export function Chat2() {
 
     setText("");
     setImg("");
-    play()
   };
 
   return (
@@ -152,6 +149,8 @@ export function Chat2() {
                 selectUser={selectUser}
                 user1={user1}
                 chat={chat}
+                text={text}
+                focus={focus}
               />
             ))}
           </div>
@@ -186,6 +185,7 @@ export function Chat2() {
                 text={text}
                 setText={setText}
                 setImg={setImg}
+                setFocus={setFocus}
               />
             </div>
           ) : (
