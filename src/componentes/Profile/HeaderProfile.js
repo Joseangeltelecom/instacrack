@@ -28,7 +28,7 @@ export const HeaderProfile = ({ filteredPosts }) => {
       </div>
 
       <div
-        className="col-6"
+        className="col-6 headerProfile2"
         style={{ borderBottom: '2px solid rgba(0, 0, 0, 0.2)' }}
       >
         <h2 style={{ fontWeight: 'lighter' }}>
