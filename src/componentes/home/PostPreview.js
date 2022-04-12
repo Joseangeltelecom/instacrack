@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import '../../styles/home/postpreview.css'
-import { useAuth } from '../../context/AuthContext'
-import { Link } from 'react-router-dom'
-import { db } from '../../firebase'
+
+import React, { useEffect, useState } from "react";
+import "../../styles/home/postpreview.css";
+import "../../styles/modalcard.css";
+import { useAuth } from "../../context/AuthContext";
+import { Link } from "react-router-dom";
+import { db } from "../../firebase";
+
 import {
   addDoc,
   collection,
@@ -13,15 +16,21 @@ import {
   query,
   serverTimestamp,
   setDoc,
-} from 'firebase/firestore'
-import { Button } from 'antd'
+
+} from "firebase/firestore";
+import { Button } from "antd";
+import { ModalHome } from "./ModalHome";
+import Moment from "react-moment";
+import { CloseOutlined } from "@ant-design/icons";
 
 export const PostPreview = (props) => {
-  const [comments, setComments] = useState([])
-  const [comment, setComment] = useState('')
-  const [liked, setLiked] = useState(false)
-  const [likes, setLikes] = useState([])
-  const { user } = useAuth()
+  const [isVisible, setIsVisible] = useState(false);
+  const [comments, setComments] = useState([]);
+  const [comment, setComment] = useState("");
+  const [liked, setLiked] = useState(false);
+  const [likes, setLikes] = useState([]);
+  const { user } = useAuth();
+
 
   // Retriving comments:
   useEffect(() => {
@@ -121,7 +130,13 @@ export const PostPreview = (props) => {
             <b>{props.post.username}</b>
           </Link>
         </div>
-        <img className="post-photo" src={props.post.imagePostUrl} />
+        <img
+          className="post-photo"
+          src={props.post.imagePostUrl}
+          onClick={() => {
+            setIsVisible(!isVisible);
+          }}
+        />
 
         <button className="like" onClick={handleLike}>
           <svg
@@ -133,7 +148,7 @@ export const PostPreview = (props) => {
             viewBox="0 0 16 16"
           >
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
             />
           </svg>
@@ -181,6 +196,51 @@ export const PostPreview = (props) => {
             </div>
           </form>
         )}
+        <ModalHome estado={isVisible} setIsVisible={setIsVisible}>
+          <div className="contenedor-de-imagen">
+            <img src={props.post.imagePostUrl} />
+          </div>
+          <div className="contenedor-de-datos">
+            <div className="headerr-posts">
+              <img src={props.post.imgProfile} className="imagen-modal-post" />{" "}
+              <b>{props.post.username}</b>
+              <button
+                onClick={() => {
+                  setIsVisible(!isVisible);
+                }}
+              >
+                <CloseOutlined style={{ fontSize: "20px" }} />
+              </button>
+            </div>
+            <div className="comments-post-moda">
+              <div className="caption-post">
+                <img
+                  src={props.post.imgProfile}
+                  className="imagen-modal-post"
+                />{" "}
+                <div className="container-caption-username">
+                  <b>{props.post.username}</b>
+                  <span> {props.post.caption}</span>
+                </div>
+              </div>
+              {comments.map((c) => (
+                <div key={c.id} className="comentarios-container">
+                  <img src={c.imgProfile} className="imagen-modal-comment" />{" "}
+                  <div className="container-caption-username">
+                    <div>
+                      <b>{c.username}</b>
+                      <span> {c.text}</span>
+                    </div>
+
+                    <small>
+                      <Moment fromNow>{c.timestamp.toDate()}</Moment>
+                    </small>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </ModalHome>
       </div>
     </>
   )
