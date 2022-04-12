@@ -61,7 +61,7 @@ function Navbar() {
   )
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark fixed-top bg-white border-bottom">
+    <nav className="navbar navbar-expand-lg navbar-dark fixed-top bg-white border-bottom p-0 m-0">
       <div className="container-fluid d-flex justify-content-evenly">
         {/* <Button
           onClick={handleLogout}
