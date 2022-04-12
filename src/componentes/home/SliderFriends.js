@@ -112,24 +112,25 @@ function SliderFriends() {
     <>
       <div className="carrusel">
         <div className="slides-container" ref={slideshow}>
-          {filterUsers.map((friend) => (
-            <div className="slide" key={friend.user.username}>
-              <NavLink
-                className="navlink"
-                to={`/profile/${friend.user.username}`}
-              >
-                <img
-                  src={friend.user.imgProfile}
-                  alt="Imagen de Perfil"
-                  className="imagen"
-                />
-                <span className="spanuser">{`${friend.user.username
-                  .split(' ')
-                  .join('')
-                  .slice(0, 10)}...`}</span>
-              </NavLink>
-            </div>
-          ))}
+          {filterUsers &&
+            filterUsers.map((friend) => (
+              <div className="slide" key={friend.user.username}>
+                <NavLink
+                  className="navlink"
+                  to={`/profile/${friend.user.username}`}
+                >
+                  <img
+                    src={friend.user.imgProfile}
+                    alt="Imagen de Perfil"
+                    className="imagen"
+                  />
+                  <span className="spanuser">{`${friend.user.username
+                    .split(' ')
+                    .join('')
+                    .slice(0, 10)}...`}</span>
+                </NavLink>
+              </div>
+            ))}
         </div>
         <div className="controles">
           <button onClick={prev} className="leftbutton">

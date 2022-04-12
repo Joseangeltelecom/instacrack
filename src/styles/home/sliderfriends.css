@@ -10,9 +10,9 @@
 
 .slides-container {
   display: flex;
-  flex-wrap: nowrap;
   height: 120px;
   width: 100%;
+  overflow-x: hidden;
 }
 
 .slide {
