@@ -14,7 +14,9 @@
 
 .contenedor-modal {
   display: flex;
+  max-width: 1000px;
   width: 70%;
+  max-height: 600px;
   height: 80%;
   background-color: #fff;
   box-shadow: rgb(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -39,6 +41,16 @@
 .contenedor-de-datos {
   height: 100%;
   width: 40%;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-post-modal-form{
+  height: 87%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .headerr-posts {
@@ -75,14 +87,13 @@
 }
 
 .comments-post-moda {
+  padding: 5px 0;
   width: 100%;
-  max-height: 75%;
-  height: auto;
+  max-height: 88%;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   padding-left: 10px;
-  /* background-color: blueviolet; */
 }
 
 .caption-post {
@@ -112,4 +123,58 @@
   padding: 2px;
   border-radius: 50%;
   margin-right: 10px;
+}
+
+
+@media(max-width: 1049px){
+  .contenedor-modal {
+    height: 70%;
+    width: 85%;
+  }
+}
+
+@media(max-width: 845px){
+  .contenedor-de-imagen {
+    width: 50%;
+  }
+
+  .contenedor-de-datos {
+    width: 50%;
+  }
+}
+
+@media(max-width: 600px){
+
+  .headerr-posts {
+    padding: 5px;
+  }
+
+  .overley {
+    padding-top: 40px;
+  }
+
+  .contenedor-modal {
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .contenedor-de-imagen {
+    width: 100%;
+    height: 50%;
+  }
+
+  .contenedor-de-datos {
+    width: 100%;
+    overflow: hidden;
+    padding-bottom: 15px;
+  }
+
+  @media(max-width: 450px){
+    .contenedor-de-imagen {
+      height: 50%;
+    }
+    .contenedor-de-datos {
+      height: 50%;
+    }
+  }
 }

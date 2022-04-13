@@ -1,14 +1,18 @@
 import { CloseOutlined } from '@ant-design/icons'
-import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
+import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp } from 'firebase/firestore'
 import React, { useEffect, useState } from 'react'
 import { db } from '../../firebase'
 import { ModalCardOthers } from './ModalCardOthers'
 import '../../styles/modalcard.css'
 import Moment from 'react-moment'
+import { useAuth } from '../../context/AuthContext'
+import { Button } from 'antd'
 
 export const PostProfileOthers = (props) => {
   const [isVisible, setIsVisible] = useState(false)
   const [comments, setComments] = useState([])
+  const [comment, setComment] = useState('')
+  const { user } = useAuth()
 
   useEffect(() => {
     if (props.postId) {
@@ -30,6 +34,28 @@ export const PostProfileOthers = (props) => {
       return () => unsubuscribe()
     }
   }, [props.postId])
+
+  // Agregando Comentario
+  const postComment = (e) => {
+    e.preventDefault()
+    const commentRef = collection(db, 'postPreview', props.postId, 'comments')
+    addDoc(
+      commentRef,
+      {
+        text: comment,
+        username: user.extrainfo
+          ? user.extrainfo.username
+          : user.currentUser.displayName,
+        fullname: '',
+        imgProfile:
+          user.currentUser.photoURL ||
+          'https://elcomercio.pe/resizer/1AdR3_S-R4ZELHQ6WkNRGhkZhdc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BH5EJQD2ZZF5XGJM2AHNJW7HUI.jpg',
+        timestamp: serverTimestamp(),
+      },
+      { merge: true },
+    )
+    setComment('')
+  }
 
   return (
     <>
@@ -60,30 +86,46 @@ export const PostProfileOthers = (props) => {
               <CloseOutlined style={{ fontSize: '20px' }} />
             </button>
           </div>
-          <div className="comments-post-moda">
-            <div className="caption-post">
-              <img src={props.imgProfile} className="imagen-modal-post" />{' '}
-              <div className="container-caption-username">
-                <b>{props.username}</b>
-                <span> {props.caption}</span>
-              </div>
-            </div>
-            {comments.map((c) => (
-              <div key={c.id} className="comentarios-container">
-                <img src={c.imgProfile} className="imagen-modal-comment" />{' '}
+          <div className="content-post-modal-form">
+            <div className="comments-post-moda">
+              <div className="caption-post">
+                <img src={props.imgProfile} className="imagen-modal-post" />{' '}
                 <div className="container-caption-username">
-                  <div>
-                    <b>{c.username}</b>
-                    <span> {c.text}</span>
-                  </div>
-
-                  <small>
-                    <Moment fromNow>{c.timestamp.toDate()}</Moment>
-                  </small>
+                  <b>{props.username}</b>
+                  <span> {props.caption}</span>
                 </div>
               </div>
-            ))}
-          </div>
+              {comments.map((c) => (
+                <div key={c.id} className="comentarios-container">
+                  <img src={c.imgProfile} className="imagen-modal-comment" />{' '}
+                  <div className="container-caption-username">
+                    <div>
+                      <b>{c.username}</b>
+                      <span> {c.text}</span>
+                    </div>
+
+                    <small>
+                      <Moment fromNow>{c.timestamp?.toDate()}</Moment>
+                    </small>
+                  </div>
+                </div>
+              ))}
+              </div>
+              <form className="comment__form">
+                <div className="comment__wrapper">
+                  <input
+                    className="comment__Input"
+                    type="text"
+                    placeholder="Add a comment..."
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                  />
+                  <Button disabled={!comment} onClick={postComment} type="submit">
+                    Publicar
+                  </Button>
+                </div>
+              </form>
+            </div>
         </div>
       </ModalCardOthers>
     </>
