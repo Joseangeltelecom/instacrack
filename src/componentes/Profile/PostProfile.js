@@ -23,8 +23,6 @@ export const PostProfile = (props) => {
   const [comment, setComment] = useState('')
   const { user } = useAuth()
 
-  console.log(comments)
-
   useEffect(() => {
     if (props.postId) {
       const recentMessagesQuery = query(
@@ -84,6 +82,13 @@ export const PostProfile = (props) => {
       </div>
       <ModalCard estado={isVisible} setIsVisible={setIsVisible}>
         <div className="contenedor-de-imagen">
+          <button
+              onClick={() => {
+                setIsVisible(!isVisible)
+              }}
+            >
+              <CloseOutlined style={{ fontSize: '20px', color:'white' }} />
+          </button>
           <img src={props.imagePostUrl} />
         </div>
         <div className="contenedor-de-datos">
@@ -98,44 +103,47 @@ export const PostProfile = (props) => {
               <CloseOutlined style={{ fontSize: '20px' }} />
             </button>
           </div>
-          <div className="comments-post-moda">
-            <div className="caption-post">
-              <img src={props.imgProfile} className="imagen-modal-post" />{' '}
-              <div className="container-caption-username">
-                <b>{props.username}</b>
-                <span> {props.caption}</span>
-              </div>
-            </div>
-            {comments.map((c) => (
-              <div key={c.id} className="comentarios-container">
-                <img src={c.imgProfile} className="imagen-modal-comment" />{' '}
-                <div className="container-caption-username">
-                  <div>
-                    <b>{c.username}</b>
-                    <span> {c.text}</span>
-                  </div>
 
-                  <small>
-                    <Moment fromNow>{c.timestamp?.toDate()}</Moment>
-                  </small>
+          <div className='content-post-modal-form'>
+            <div className="comments-post-moda">
+              <div className="caption-post">
+                <img src={props.imgProfile} className="imagen-modal-post" />{' '}
+                <div className="container-caption-username">
+                  <b>{props.username}</b>
+                  <span> {props.caption}</span>
                 </div>
               </div>
-            ))}
-          </div>
-          <form className="comment__form">
-            <div className="comment__wrapper">
-              <input
-                className="comment__Input"
-                type="text"
-                placeholder="Add a comment..."
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-              />
-              <Button disabled={!comment} onClick={postComment} type="submit">
-                Publicar
-              </Button>
+              {comments.map((c) => (
+                <div key={c.id} className="comentarios-container">
+                  <img src={c.imgProfile} className="imagen-modal-comment" />{' '}
+                  <div className="container-caption-username">
+                    <div>
+                      <b>{c.username}</b>
+                      <span> {c.text}</span>
+                    </div>
+
+                    <small>
+                      <Moment fromNow>{c.timestamp?.toDate()}</Moment>
+                    </small>
+                  </div>
+                </div>
+              ))}
             </div>
-          </form>
+            <form className="comment__form">
+              <div className="comment__wrapper">
+                <input
+                  className="comment__Input"
+                  type="text"
+                  placeholder="Add a comment..."
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                />
+                <Button disabled={!comment} onClick={postComment} type="submit" size='small'>
+                  Publicar
+                </Button>
+              </div>
+            </form>
+          </div>
         </div>
       </ModalCard>
     </>
