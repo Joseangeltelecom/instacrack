@@ -80,6 +80,13 @@ export const PostProfile = (props) => {
       </div>
       <ModalCard estado={isVisible} setIsVisible={setIsVisible}>
         <div className="contenedor-de-imagen">
+          <button
+              onClick={() => {
+                setIsVisible(!isVisible)
+              }}
+            >
+              <CloseOutlined style={{ fontSize: '20px', color:'white' }} />
+          </button>
           <img src={props.imagePostUrl} />
         </div>
         <div className="contenedor-de-datos">

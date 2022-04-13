@@ -29,6 +29,22 @@
   height: 100%;
   width: 60%;
   background-color: black;
+  position: relative;
+}
+
+.contenedor-de-imagen button{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 30;
+  display: none;
 }
 
 .contenedor-de-imagen img {
@@ -145,8 +161,13 @@
 
 @media(max-width: 600px){
 
+  .contenedor-de-imagen button{
+    display:block;
+  }
+
   .headerr-posts {
     padding: 5px;
+    display: none;
   }
 
   .overley {
@@ -167,6 +188,11 @@
     width: 100%;
     overflow: hidden;
     padding-bottom: 15px;
+  }
+
+  .content-post-modal-form{
+    justify-content: space-between;
+    height: 100%;
   }
 
   @media(max-width: 450px){
