@@ -1,0 +1,21 @@
+.headerProfile2 {
+  margin-left: 50px;
+}
+
+/* @media only screen and (min-width: 999px) {
+  .container-userchange {
+    display: none;
+  }
+} */
+
+#imgHeader {
+  min-width: 150px;
+}
+
+/* borderBottom: '2px solid rgba(0, 0, 0, 0.2)' */
+
+@media screen and (max-width: 500px) {
+  #imgHeader {
+    min-width: 120px;
+  }
+}

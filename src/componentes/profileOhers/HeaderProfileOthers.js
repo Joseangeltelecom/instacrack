@@ -5,34 +5,23 @@ export const HeaderProfileOthers = (props) => {
   const { username } = useParams()
 
   return (
-    <div className="row justify-content-center" style={{ width: '100vw' }}>
+    <div className="row justify-content-center">
       <div
         className="col-2"
         style={{
-          borderBottom: '2px solid rgba(0, 0, 0, 0.2)',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'flex-start',
         }}
       >
-        <img
-          src={props.imgProfile}
-          style={{
-            width: '155px',
-            height: '155px',
-            borderRadius: '50%',
-          }}
-        />
+        <img id="imgHeader" className="rounded-circle" src={props.imgProfile} />
       </div>
 
-      <div
-        className="col-6 headerProfile2"
-        style={{ borderBottom: '2px solid rgba(0, 0, 0, 0.2)' }}
-      >
+      <div className="col-6 headerProfile2">
         <h2 style={{ fontWeight: 'lighter' }}>{username}</h2>
         <div className="row" style={{ fontSize: '16px' }}>
-          <div className="col-3">
-            <b>{props.filteredPosts.length}</b>
+          <div>
+            <b className="me-1">{props.filteredPosts.length}</b>
             {props.filteredPosts.length == 1 ? 'publicación' : 'publicaciones'}
           </div>
         </div>

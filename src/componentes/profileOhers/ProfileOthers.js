@@ -5,6 +5,7 @@ import { HeaderProfileOthers } from './HeaderProfileOthers'
 import { db } from '../../firebase'
 import { PostProfileOthers } from './PostProfileOthers'
 import Navbar from '../navbar/Navbar'
+import { NavbarProfile } from '../Profile/NavbarProfile'
 
 export const ProfileOthers = () => {
   const [postPreview, setPostPreview] = useState([])
@@ -54,19 +55,30 @@ export const ProfileOthers = () => {
       }}
     >
       <Navbar />
-      <HeaderProfileOthers {...filterUsers[0]} filteredPosts={filteredPosts} />
-      <div className="row justify-content-center">
-        <div
-          className="col-8"
-          style={{
-            display: 'flex',
-            justifyContent: 'flex-start',
-            flexWrap: 'wrap',
-          }}
-        >
-          {filteredPosts.map(({ id, post }) => (
-            <PostProfileOthers key={id} {...post} postId={id} />
-          ))}
+      <div
+        style={{
+          width: '70%',
+          margin: 'auto',
+        }}
+      >
+        <HeaderProfileOthers
+          {...filterUsers[0]}
+          filteredPosts={filteredPosts}
+        />
+        <NavbarProfile />
+        <div className="row justify-content-center">
+          <div
+            className="border-top mt-2"
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              flexWrap: 'wrap',
+            }}
+          >
+            {filteredPosts.map(({ id, post }) => (
+              <PostProfileOthers key={id} {...post} postId={id} />
+            ))}
+          </div>
         </div>
       </div>
     </div>

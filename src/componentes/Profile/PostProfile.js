@@ -12,6 +12,7 @@ import Moment from 'react-moment'
 import { db } from '../../firebase'
 import '../../styles/modalcard.css'
 import '../../styles/home/postpreview.css'
+import '../../styles/profile.css'
 import { ModalCard } from './ModalCard'
 import { Button } from 'antd'
 import { useAuth } from '../../context/AuthContext'
@@ -76,6 +77,7 @@ export const PostProfile = (props) => {
         }}
       >
         <img
+          id="imgPostProfile"
           src={props.imagePostUrl}
           style={{ width: '270px', height: '270px' }}
         />
