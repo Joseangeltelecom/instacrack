@@ -31,7 +31,6 @@ export const PostPreview = (props) => {
   const [likes, setLikes] = useState([]);
   const { user } = useAuth();
 
-
   // Retriving comments:
   useEffect(() => {
     if (props.postId) {
@@ -164,7 +163,7 @@ export const PostPreview = (props) => {
         {
           <div className={comments.length > 0 ? 'post__comments' : ''}>
             {comments.map((comment) => (
-              <div className="comentario">
+              <div className="comentario" key={comment.id}>
                 <p>
                   <Link
                     style={{
@@ -212,32 +211,48 @@ export const PostPreview = (props) => {
                 <CloseOutlined style={{ fontSize: "20px" }} />
               </button>
             </div>
-            <div className="comments-post-moda">
-              <div className="caption-post">
-                <img
-                  src={props.post.imgProfile}
-                  className="imagen-modal-post"
-                />{" "}
-                <div className="container-caption-username">
-                  <b>{props.post.username}</b>
-                  <span> {props.post.caption}</span>
-                </div>
-              </div>
-              {comments.map((c) => (
-                <div key={c.id} className="comentarios-container">
-                  <img src={c.imgProfile} className="imagen-modal-comment" />{" "}
+            <div className='content-post-modal-form'>
+              <div className="comments-post-moda">
+                <div className="caption-post">
+                  <img
+                    src={props.post.imgProfile}
+                    className="imagen-modal-post"
+                  />{" "}
                   <div className="container-caption-username">
-                    <div>
-                      <b>{c.username}</b>
-                      <span> {c.text}</span>
-                    </div>
-
-                    <small>
-                      <Moment fromNow>{c.timestamp.toDate()}</Moment>
-                    </small>
+                    <b>{props.post.username}</b>
+                    <span> {props.post.caption}</span>
                   </div>
                 </div>
-              ))}
+                {comments.map((c) => (
+                  <div key={c.id} className="comentarios-container">
+                    <img src={c.imgProfile} className="imagen-modal-comment" />{" "}
+                    <div className="container-caption-username">
+                      <div>
+                        <b>{c.username}</b>
+                        <span> {c.text}</span>
+                      </div>
+
+                      <small>
+                        <Moment fromNow>{c.timestamp?.toDate()}</Moment>
+                      </small>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <form className="comment__form">
+                <div className="comment__wrapper">
+                  <input
+                    className="comment__Input"
+                    type="text"
+                    placeholder="Add a comment..."
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                  />
+                  <Button disabled={!comment} onClick={postComment} type="submit">
+                    Publicar
+                  </Button>
+                </div>
+              </form>
             </div>
           </div>
         </ModalHome>
