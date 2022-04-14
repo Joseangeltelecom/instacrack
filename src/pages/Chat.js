@@ -74,10 +74,6 @@ export function Chat2() {
     if (docSnap.data() && docSnap.data().from !== user1) {
       // update last message doc, set unread to false
       await updateDoc(doc(db, 'lastMsg', id), { unread: false })
-
-
-
-      
     }
   }
 
@@ -158,23 +154,22 @@ export function Chat2() {
             ))}
           </div>
         </div>
-        <div className="usuario-nombre" class="col-5 usuario-nombre">
-          {chat ? (
-            <div className="usuario-nombre-contain">
-              <div className="messages_user">
-                <img
-                  src={chat.imgProfile}
-                  alt="Imagen de perfil"
-                  className="img-amigo"
-                />
-                <NavLink
-                  to={`/profile/${chat.username}`}
-                  className="link-friend"
-                >
-                  {chat.username}
-                </NavLink>
-              </div>
+        <div className="chat-container col-5">
+          <div className="usuario-nombre-container">
+            <div className="messages_user">
+              <img
+                src={chat.imgProfile}
+                alt="Imagen de perfil"
+                className="img-amigo"
+              />
+              <NavLink to={`/profile/${chat.username}`} className="link-friend">
+                {chat.username}
+              </NavLink>
+            </div>
+          </div>
 
+          {chat ? (
+            <div className="chat-container-inner">
               <div className="messages">
                 {msgs.length
                   ? msgs.map((msg, i) => (

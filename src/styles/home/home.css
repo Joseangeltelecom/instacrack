@@ -155,6 +155,7 @@ section .form {
   overflow-y: auto;
 }
 .user_wrapper {
+  min-width: 210px;
   margin-top: 10px;
   padding: 10px;
   cursor: pointer;
@@ -196,7 +197,7 @@ section .form {
 }
 .messages_container {
   position: relative;
-  width: 100%;
+  min-width: 265px;
 }
 .messages_user {
   display: flex;
@@ -204,8 +205,7 @@ section .form {
   justify-content: flex-start;
   padding: 10px;
   padding-left: 30px;
-  border-bottom: 1px solid rgb(0, 0, 0, 0.1);
-  width: 100%;
+  width: 100%!;
   height: 58px;
 }
 .no_conv {
@@ -322,7 +322,7 @@ section .form {
   }
 }
 
-@media screen and (max-width: 576px) {
+/* @media screen and (max-width: 576px) {
   .home_container {
     grid-template-columns: 1fr 5fr;
   }
@@ -330,6 +330,7 @@ section .form {
     display: none;
   }
   .sm_container {
+    min-width: 210px;
     padding: 10px 0px;
     text-align: center;
     cursor: pointer;
@@ -348,4 +349,4 @@ section .form {
   .message_wrapper p {
     max-width: 100%;
   }
-}
+} */
