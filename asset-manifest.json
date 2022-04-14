@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/instacrack/static/css/main.76969b4d.css",
-    "main.js": "/instacrack/static/js/main.2b4f7d55.js",
+    "main.css": "/instacrack/static/css/main.3493dac9.css",
+    "main.js": "/instacrack/static/js/main.854f12be.js",
     "static/js/845.f3bce0c0.chunk.js": "/instacrack/static/js/845.f3bce0c0.chunk.js",
     "static/media/image1.jpg": "/instacrack/static/media/image1.f02b66c0b72fce9d1aea.jpg",
     "static/media/iphone-notificacion.mp3": "/instacrack/static/media/iphone-notificacion.343869f4f5f512305fd7.mp3",
     "index.html": "/instacrack/index.html",
-    "main.76969b4d.css.map": "/instacrack/static/css/main.76969b4d.css.map",
-    "main.2b4f7d55.js.map": "/instacrack/static/js/main.2b4f7d55.js.map",
+    "main.3493dac9.css.map": "/instacrack/static/css/main.3493dac9.css.map",
+    "main.854f12be.js.map": "/instacrack/static/js/main.854f12be.js.map",
     "845.f3bce0c0.chunk.js.map": "/instacrack/static/js/845.f3bce0c0.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.76969b4d.css",
-    "static/js/main.2b4f7d55.js"
+    "static/css/main.3493dac9.css",
+    "static/js/main.854f12be.js"
   ]
 }
