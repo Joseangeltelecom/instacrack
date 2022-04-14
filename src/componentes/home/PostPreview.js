@@ -197,6 +197,13 @@ export const PostPreview = (props) => {
         )}
         <ModalHome estado={isVisible} setIsVisible={setIsVisible}>
           <div className="contenedor-de-imagen">
+            <button
+              onClick={() => {
+                setIsVisible(!isVisible)
+              }}
+            >
+              <CloseOutlined style={{ fontSize: '20px', color:'white' }} />
+          </button>
             <img src={props.post.imagePostUrl} />
           </div>
           <div className="contenedor-de-datos">
