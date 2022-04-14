@@ -155,37 +155,41 @@ export function Chat2() {
           </div>
         </div>
         <div className="chat-container col-5">
-          <div className="usuario-nombre-container">
-            <div className="messages_user">
-              <img
-                src={chat.imgProfile}
-                alt="Imagen de perfil"
-                className="img-amigo"
-              />
-              <NavLink to={`/profile/${chat.username}`} className="link-friend">
-                {chat.username}
-              </NavLink>
-            </div>
-          </div>
-
           {chat ? (
-            <div className="chat-container-inner">
-              <div className="messages">
-                {msgs.length
-                  ? msgs.map((msg, i) => (
-                      <Message key={i} msg={msg} user1={user1} />
-                    ))
-                  : null}
+            <>
+              <div className="usuario-nombre-container">
+                <div className="messages_user">
+                  <img
+                    src={chat.imgProfile}
+                    alt="Imagen de perfil"
+                    className="img-amigo"
+                  />
+                  <NavLink
+                    to={`/profile/${chat.username}`}
+                    className="link-friend"
+                  >
+                    {chat.username}
+                  </NavLink>
+                </div>
               </div>
+              <div className="chat-container-inner">
+                <div className="messages">
+                  {msgs.length
+                    ? msgs.map((msg, i) => (
+                        <Message key={i} msg={msg} user1={user1} />
+                      ))
+                    : null}
+                </div>
 
-              <MessageForm
-                handleSubmit={handleSubmit}
-                text={text}
-                setText={setText}
-                setImg={setImg}
-                setFocus={setFocus}
-              />
-            </div>
+                <MessageForm
+                  handleSubmit={handleSubmit}
+                  text={text}
+                  setText={setText}
+                  setImg={setImg}
+                  setFocus={setFocus}
+                />
+              </div>
+            </>
           ) : (
             <>
               <div className="header-chat">
