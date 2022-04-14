@@ -6,7 +6,7 @@
 }
 
 .header {
-  width: 100%;
+  min-width: 150px;
   height: 65px;
   display: flex;
   align-items: center;

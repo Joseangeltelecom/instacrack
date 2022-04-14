@@ -74,10 +74,6 @@ export function Chat2() {
     if (docSnap.data() && docSnap.data().from !== user1) {
       // update last message doc, set unread to false
       await updateDoc(doc(db, 'lastMsg', id), { unread: false })
-
-
-
-      
     }
   }
 
@@ -158,39 +154,42 @@ export function Chat2() {
             ))}
           </div>
         </div>
-        <div className="usuario-nombre" class="col-5 usuario-nombre">
+        <div className="chat-container col-5">
           {chat ? (
-            <div className="usuario-nombre-contain">
-              <div className="messages_user">
-                <img
-                  src={chat.imgProfile}
-                  alt="Imagen de perfil"
-                  className="img-amigo"
+            <>
+              <div className="usuario-nombre-container">
+                <div className="messages_user">
+                  <img
+                    src={chat.imgProfile}
+                    alt="Imagen de perfil"
+                    className="img-amigo"
+                  />
+                  <NavLink
+                    to={`/profile/${chat.username}`}
+                    className="link-friend"
+                  >
+                    {chat.username}
+                  </NavLink>
+                </div>
+              </div>
+              <div className="chat-container-inner">
+                <div className="messages">
+                  {msgs.length
+                    ? msgs.map((msg, i) => (
+                        <Message key={i} msg={msg} user1={user1} />
+                      ))
+                    : null}
+                </div>
+
+                <MessageForm
+                  handleSubmit={handleSubmit}
+                  text={text}
+                  setText={setText}
+                  setImg={setImg}
+                  setFocus={setFocus}
                 />
-                <NavLink
-                  to={`/profile/${chat.username}`}
-                  className="link-friend"
-                >
-                  {chat.username}
-                </NavLink>
               </div>
-
-              <div className="messages">
-                {msgs.length
-                  ? msgs.map((msg, i) => (
-                      <Message key={i} msg={msg} user1={user1} />
-                    ))
-                  : null}
-              </div>
-
-              <MessageForm
-                handleSubmit={handleSubmit}
-                text={text}
-                setText={setText}
-                setImg={setImg}
-                setFocus={setFocus}
-              />
-            </div>
+            </>
           ) : (
             <>
               <div className="header-chat">

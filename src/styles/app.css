@@ -28,7 +28,7 @@
 /* ------------------------------------- */
 
 .chat_container {
-  width: 100vw;
+  min-width: 265px;
   height: 100vh;
   background-color: #fafafa;
   margin: 0;
@@ -36,25 +36,40 @@
   overflow: hidden;
 }
 
-.usuario-nombre {
+.chat-container {
+  min-width: 265px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 515px;
   background-color: #ffff;
   border: 1px solid rgb(0, 0, 0, 0.1);
   margin: 0;
   padding: 0;
 }
 
-.usuario-nombre-contain {
+.usuario-nombre-container {
   height: 100%;
-  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  width: 100%;
+  border: 1px solid rgb(0, 0, 0, 0.1);
+}
+
+.usuario-nombre {
+  min-width: 140px;
+}
+
+.friends-container {
+  width: 100%;
+  overflow-y: scroll;
+  height: 455px;
+}
+
+.chat-container-inner {
+  width: 100%;
 }
 
 .div-modal {
@@ -64,12 +79,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.friends-container {
-  width: 100%;
-  overflow-y: scroll;
-  height: 455px;
 }
 
 .header-chat {

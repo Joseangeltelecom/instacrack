@@ -23,19 +23,6 @@ export const NavbarProfile = () => {
             PUBLICACIONES
           </NavLink>
         </div>
-        <div
-          className="col-2"
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <FolderOutlined />
-          <NavLink to="/postsaved" className="navlink">
-            GUARDADO
-          </NavLink>
-        </div>
       </div>
     </>
   )

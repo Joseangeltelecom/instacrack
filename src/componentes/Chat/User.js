@@ -35,14 +35,18 @@ const User = ({ user1, user, selectUser, chat, focus }) => {
         <div className="user_info">
           <div className="user_detail">
             <img src={user.imgProfile || Img} alt="avatar" className="avatar" />
-            <p>{user.username}</p>
+            <div>
+              <p>{user.username}</p>
+              <div
+                className={`user_status ${
+                  user.isOnline ? 'online' : 'offline'
+                }`}
+              ></div>
+            </div>
             {data?.from !== user1 && data?.unread && !focus && (
               <small className="unread">New</small>
             )}
           </div>
-          <div
-            className={`user_status ${user.isOnline ? 'online' : 'offline'}`}
-          ></div>
         </div>
         {data && (
           <p className="truncate">

@@ -38,21 +38,28 @@ export const Profile = () => {
       }}
     >
       <Navbar />
-      <HeaderProfile filteredPosts={filteredPosts} />
-      <NavbarProfile />
+      <div
+        style={{
+          width: '70%',
+          margin: 'auto',
+        }}
+      >
+        <HeaderProfile filteredPosts={filteredPosts} />
+        <NavbarProfile />
 
-      <div className="row justify-content-center">
-        <div
-          className="col-8"
-          style={{
-            display: 'flex',
-            justifyContent: 'flex-start',
-            flexWrap: 'wrap',
-          }}
-        >
-          {filteredPosts.map(({ id, post }) => (
-            <PostProfile key={id} {...post} postId={id} />
-          ))}
+        <div className="row justify-content-center">
+          <div
+            className="border-top mt-2"
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              flexWrap: 'wrap',
+            }}
+          >
+            {filteredPosts.map(({ id, post }) => (
+              <PostProfile key={id} {...post} postId={id} />
+            ))}
+          </div>
         </div>
       </div>
     </div>
