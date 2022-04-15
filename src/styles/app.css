@@ -37,7 +37,7 @@
 }
 
 .chat-container {
-  min-width: 265px;
+  min-width: 240px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -59,7 +59,7 @@
 }
 
 .usuario-nombre {
-  min-width: 140px;
+  min-width: 130px;
 }
 
 .friends-container {
@@ -132,4 +132,28 @@
   width: 75%;
   outline: none;
   border: none;
+}
+
+@media screen and (max-width: 1000px) {
+  .chat-container {
+    min-width: 400px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .chat-container {
+    min-width: 300px;
+  }
+}
+
+@media screen and (max-width: 405px) {
+  .chat-container {
+    min-width: 250px;
+  }
+}
+
+@media screen and (max-width: 356px) {
+  .chat-container {
+    min-width: 220px;
+  }
 }

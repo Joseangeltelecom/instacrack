@@ -62,19 +62,16 @@ function Navbar() {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark fixed-top bg-white border-bottom p-0 m-0">
-      <div className="container-fluid d-flex justify-content-evenly">
-        {/* <Button
-          onClick={handleLogout}
-          className="btn btn-light fw-bold rounded-pill m-2"
-          hidden={user ? false : false}
-        >
-          Log out
-        </Button> */}
-
+      <div className="container-fluid d-flex justify-content-sm-evenly justify-content-between  m-0 p-0">
         <div>
           <Link
             to="/home"
-            style={{ fontFamily: 'Lobster', color: 'black', fontSize: '35px' }}
+            style={{
+              fontFamily: 'Lobster',
+              color: 'black',
+              fontSize: '35px',
+              marginRight: '10px',
+            }}
           >
             Instacrack
           </Link>
@@ -106,7 +103,7 @@ function Navbar() {
           <a>
             <AddPostModal />
           </a>
-          <a>
+          <a className="m-0">
             <Dropdown
               trigger="click"
               overlay={menu}
@@ -118,7 +115,7 @@ function Navbar() {
                   height: '35px',
                   width: '35px',
                   borderRadius: '50%',
-                  padding: '2px',
+                  marginRight: '0px',
                 }}
                 src={
                   user.currentUser.photoURL ||

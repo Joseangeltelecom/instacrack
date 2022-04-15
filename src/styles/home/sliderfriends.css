@@ -20,10 +20,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-width: 20%;
+  min-width: 21%;
   transition: 0.3s ease all;
   position: relative;
   z-index: 10;
+  margin-right: 10px;
 }
 
 .controles {
