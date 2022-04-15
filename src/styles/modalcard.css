@@ -204,3 +204,9 @@
     }
   }
 }
+
+@media(max-width: 320px){
+  .contenedor-modal {
+    height: 80%;
+  }
+}

@@ -35,8 +35,13 @@ function Home() {
           <PostPreview key={id} post={post} postId={id} />
         ))}
       </div>
-      <div>
+      <div className='user-info-container'>
         <UserChange />
+        <div className='created-by-container'>
+          <h6>Created By</h6>
+          <a href='https://github.com/JeanM-Pro' target='_blank'>JeanM-Pro</a>
+          <a href='https://github.com/Joseangeltelecom' target='_blank'>Joseangeltelecom</a>
+        </div>
       </div>
     </div>
   )
