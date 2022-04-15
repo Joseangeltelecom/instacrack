@@ -6,6 +6,7 @@ import { db } from '../firebase'
 import '../styles/home/home.css'
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import Navbar from '../componentes/navbar/Navbar'
+import { GithubOutlined } from '@ant-design/icons'
 
 function Home() {
   const [postPreview, setPostPreview] = useState([])
@@ -39,8 +40,10 @@ function Home() {
         <UserChange />
         <div className='created-by-container'>
           <h6>Created By</h6>
-          <a href='https://github.com/JeanM-Pro' target='_blank'>JeanM-Pro</a>
-          <a href='https://github.com/Joseangeltelecom' target='_blank'>Joseangeltelecom</a>
+          <div className='links-container'>
+            <a href='https://github.com/JeanM-Pro' target='_blank'><GithubOutlined style={{fontSize:'20px'}} /> JeanM-Pro</a>
+            <a href='https://github.com/Joseangeltelecom' target='_blank'><GithubOutlined style={{fontSize:'20px'}}/> Joseangeltelecom</a>
+          </div>
         </div>
       </div>
     </div>
