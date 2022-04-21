@@ -44,11 +44,15 @@ function Navbar() {
     <Menu style={{ width: '200px' }}>
       <Menu.Item>
         <UserOutlined />
-        <Link to="/profile">Perfil</Link>
+        <Link className="ms-2" to="/profile">
+          Perfil
+        </Link>
       </Menu.Item>
       <Menu.Item>
         <BookOutlined />
-        <Link to="/postsaved">Guardado</Link>
+        <Link className="ms-2" to="/postsaved">
+          Guardado
+        </Link>
       </Menu.Item>
       <Menu.Item>
         <SyncOutlined />
@@ -77,20 +81,7 @@ function Navbar() {
           </Link>
         </div>
         <div>
-          {/* <div
-              style={{ width: "230px", height: "35px", background: "gray" }}
-              className="d-none d-sm-block rounded"
-            > */}
           <SearchBar data={users} placeholder="Search a friend" />
-          {/* <Input
-                className="w-100 h-100 rounded"
-                allowClear
-                type="text"
-                placeholder="Buscar"
-                prefix={<SearchOutlined />}
-              /> */}
-
-          {/* </div> */}
         </div>
         <div className="d-flex justify-content-center align-items-center">
           <Link to="/home" style={{ color: 'black' }}>

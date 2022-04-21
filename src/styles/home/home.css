@@ -323,20 +323,20 @@ section .form {
   padding: 2px;
 }
 
-.links-container a{
+.links-container a {
   color: rgb(0, 0, 0, 0.3);
   margin: 2px;
 }
 
-.links-container a:hover{
-color: black;
+.links-container a:hover {
+  color: black;
 }
 
-.links-container{
+.links-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items:flex-start;
+  align-items: flex-start;
 }
 
 @media screen and (max-width: 999px) {
