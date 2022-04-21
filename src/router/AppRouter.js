@@ -42,7 +42,14 @@ export const AppRouter = () => {
         }
       />
       )
-      <Route path="/postsaved" element={<PostSaved />} />
+      <Route
+        path="/postsaved"
+        element={
+          <ProtectedRoute>
+            <PostSaved />
+          </ProtectedRoute>
+        }
+      />
       <Route
         path="/profile"
         element={
